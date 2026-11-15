@@ -1,0 +1,26 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "pattern": [
+  "GDG",
+  "OBO",
+  "OOO"
+ ],
+ "key": {
+  "G": {
+   "item": "minecraft:gold_ingot"
+  },
+  "D": {
+   "item": "minecraft:diamond"
+  },
+  "O": {
+   "item": "minecraft:obsidian"
+  },
+  "B": {
+   "item": "minecraft:book"
+  }
+ },
+ "result": {
+  "item": "jjk_spells:divine_skill_learner",
+  "count": 1
+ }
+}

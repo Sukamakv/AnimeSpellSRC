@@ -1,0 +1,98 @@
+{
+ "ph_charge": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_charge",
+    "stream": false
+   }
+  ]
+ },
+ "ph_lance": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_lance",
+    "stream": false
+   }
+  ]
+ },
+ "ph_dash": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_dash",
+    "stream": false
+   }
+  ]
+ },
+ "ph_feather": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_feather",
+    "stream": false
+   }
+  ]
+ },
+ "ph_impact": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_impact",
+    "stream": false
+   }
+  ]
+ },
+ "ph_sunfall": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_sunfall",
+    "stream": false
+   }
+  ]
+ },
+ "ph_halo": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_halo",
+    "stream": false
+   }
+  ]
+ },
+ "ph_sweep": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_sweep",
+    "stream": false
+   }
+  ]
+ },
+ "ph_wing": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_wing",
+    "stream": false
+   }
+  ]
+ },
+ "ph_roar": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_roar",
+    "stream": false
+   }
+  ]
+ },
+ "ph_death": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_death",
+    "stream": false
+   }
+  ]
+ },
+ "ph_judgment": {
+  "sounds": [
+   {
+    "name": "jjk_phainon:ph_judgment",
+    "stream": false
+   }
+  ]
+ }
+}

@@ -1,0 +1,98 @@
+{
+ "tomb_charge": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_charge",
+    "stream": false
+   }
+  ]
+ },
+ "tomb_impact": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_impact",
+    "stream": false
+   }
+  ]
+ },
+ "tomb_slash": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_slash",
+    "stream": false
+   }
+  ]
+ },
+ "tomb_bell": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_bell",
+    "stream": false
+   }
+  ]
+ },
+ "tomb_shatter": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_shatter",
+    "stream": false
+   }
+  ]
+ },
+ "tomb_roar": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_roar",
+    "stream": false
+   }
+  ]
+ },
+ "tomb_genesis": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_genesis",
+    "stream": true
+   }
+  ]
+ },
+ "tomb_bolt": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_bolt",
+    "stream": false
+   }
+  ]
+ },
+ "tomb_grave": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_grave",
+    "stream": false
+   }
+  ]
+ },
+ "tomb_lock": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_lock",
+    "stream": false
+   }
+  ]
+ },
+ "tomb_suck": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_suck",
+    "stream": true
+   }
+  ]
+ },
+ "tomb_erase": {
+  "sounds": [
+   {
+    "name": "jjk_irontomb:tomb_erase",
+    "stream": true
+   }
+  ]
+ }
+}

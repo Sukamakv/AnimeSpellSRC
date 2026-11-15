@@ -1,0 +1,23 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "pattern": [
+  "SNS",
+  "NLN",
+  "SNS"
+ ],
+ "key": {
+  "S": {
+   "item": "minecraft:nether_star"
+  },
+  "N": {
+   "item": "minecraft:netherite_block"
+  },
+  "L": {
+   "item": "jjk_spells:divine_skill_learner"
+  }
+ },
+ "result": {
+  "item": "jjk_spells:prime_divinity_skill_learner",
+  "count": 1
+ }
+}

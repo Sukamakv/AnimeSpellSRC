@@ -1,0 +1,1332 @@
+{
+  "lapse_blue_charge": {
+    "sounds": [
+      "jjk_spells:lapse_blue_charge"
+    ]
+  },
+  "lapse_blue_cast": {
+    "sounds": [
+      "jjk_spells:lapse_blue_cast"
+    ]
+  },
+  "lapse_blue_hum": {
+    "sounds": [
+      "jjk_spells:lapse_blue_hum"
+    ]
+  },
+  "reversal_red_charge": {
+    "sounds": [
+      "jjk_spells:reversal_red_charge"
+    ]
+  },
+  "reversal_red_cast": {
+    "sounds": [
+      "jjk_spells:reversal_red_cast"
+    ]
+  },
+  "reversal_red_impact": {
+    "sounds": [
+      "jjk_spells:reversal_red_impact"
+    ]
+  },
+  "time_tick": {
+    "sounds": [
+      "jjk_spells:time_tick"
+    ]
+  },
+  "time_charge": {
+    "sounds": [
+      "jjk_spells:time_charge"
+    ]
+  },
+  "time_stop": {
+    "sounds": [
+      "jjk_spells:time_stop"
+    ]
+  },
+  "time_resume": {
+    "sounds": [
+      "jjk_spells:time_resume"
+    ]
+  },
+  "time_bell": {
+    "sounds": [
+      "jjk_spells:time_bell"
+    ]
+  },
+  "time_throb": {
+    "sounds": [
+      "jjk_spells:time_throb"
+    ]
+  },
+  "storm_charge": {
+    "sounds": [
+      "jjk_spells:storm_charge"
+    ]
+  },
+  "storm_summon": {
+    "sounds": [
+      "jjk_spells:storm_summon"
+    ]
+  },
+  "storm_loop": {
+    "sounds": [
+      {
+        "name": "jjk_spells:storm_loop",
+        "stream": false
+      }
+    ]
+  },
+  "thunder_crack": {
+    "sounds": [
+      "jjk_spells:thunder_crack"
+    ]
+  },
+  "storm_end": {
+    "sounds": [
+      "jjk_spells:storm_end"
+    ]
+  },
+  "barrage_start": {
+    "sounds": [
+      "jjk_spells:barrage_start"
+    ]
+  },
+  "sword_swing": {
+    "sounds": [
+      "jjk_spells:sword_swing_1",
+      "jjk_spells:sword_swing_2",
+      "jjk_spells:sword_swing_3"
+    ]
+  },
+  "slash_hit": {
+    "sounds": [
+      "jjk_spells:slash_hit"
+    ]
+  },
+  "barrage_end": {
+    "sounds": [
+      "jjk_spells:barrage_end"
+    ]
+  },
+  "gate_open": {
+    "sounds": [
+      "jjk_spells:gate_open"
+    ]
+  },
+  "gate_fire": {
+    "sounds": [
+      "jjk_spells:gate_fire"
+    ]
+  },
+  "weapon_impact": {
+    "sounds": [
+      "jjk_spells:weapon_impact"
+    ]
+  },
+  "chain_burst": {
+    "sounds": [
+      "jjk_spells:chain_burst"
+    ]
+  },
+  "chain_shatter": {
+    "sounds": [
+      "jjk_spells:chain_shatter"
+    ]
+  },
+  "authority": {
+    "sounds": [
+      "jjk_spells:authority"
+    ]
+  },
+  "ea_spin": {
+    "sounds": [
+      "jjk_spells:ea_spin"
+    ]
+  },
+  "ea_fire": {
+    "sounds": [
+      "jjk_spells:ea_fire"
+    ]
+  },
+  "ea_rumble": {
+    "sounds": [
+      "jjk_spells:ea_rumble"
+    ]
+  },
+  "sun_slash": {
+    "sounds": [
+      "jjk_spells:sun_slash"
+    ]
+  },
+  "sun_thrust": {
+    "sounds": [
+      "jjk_spells:sun_thrust"
+    ]
+  },
+  "sun_eruption": {
+    "sounds": [
+      "jjk_spells:sun_eruption"
+    ]
+  },
+  "dio_summon": {
+    "sounds": [
+      "jjk_spells:dio_summon"
+    ]
+  },
+  "dio_barrage": {
+    "sounds": [
+      "jjk_spells:dio_barrage"
+    ]
+  },
+  "dio_beam": {
+    "sounds": [
+      "jjk_spells:dio_beam"
+    ]
+  },
+  "dio_impact": {
+    "sounds": [
+      "jjk_spells:dio_impact"
+    ]
+  },
+  "roller_crash": {
+    "sounds": [
+      "jjk_spells:roller_crash"
+    ]
+  },
+  "dark_cast": {
+    "sounds": [
+      "jjk_spells:dark_cast"
+    ]
+  },
+  "bone_rise": {
+    "sounds": [
+      "jjk_spells:bone_rise"
+    ]
+  },
+  "banshee_cry": {
+    "sounds": [
+      "jjk_spells:banshee_cry"
+    ]
+  },
+  "hole_charge": {
+    "sounds": [
+      "jjk_spells:hole_charge"
+    ]
+  },
+  "hole_collapse": {
+    "sounds": [
+      "jjk_spells:hole_collapse"
+    ]
+  },
+  "death_hum": {
+    "sounds": [
+      "jjk_spells:death_hum"
+    ]
+  },
+  "death_pulse": {
+    "sounds": [
+      "jjk_spells:death_pulse"
+    ]
+  },
+  "death_wave": {
+    "sounds": [
+      "jjk_spells:death_wave"
+    ]
+  },
+  "holy_charge": {
+    "sounds": [
+      "jjk_spells:holy_charge"
+    ]
+  },
+  "holy_blast": {
+    "sounds": [
+      "jjk_spells:holy_blast"
+    ]
+  },
+  "slash_line": {
+    "sounds": [
+      "jjk_spells:slash_line"
+    ]
+  },
+  "slash_tear": {
+    "sounds": [
+      "jjk_spells:slash_tear"
+    ]
+  },
+  "goat_roar": {
+    "sounds": [
+      "jjk_spells:goat_roar"
+    ]
+  },
+  "heart_crush": {
+    "sounds": [
+      "jjk_spells:heart_crush"
+    ]
+  },
+  "sp_summon": {
+    "sounds": [
+      "jjk_spells:sp_summon"
+    ]
+  },
+  "sp_dash": {
+    "sounds": [
+      "jjk_spells:sp_dash"
+    ]
+  },
+  "sp_guard": {
+    "sounds": [
+      "jjk_spells:sp_guard"
+    ]
+  },
+  "sp_smash": {
+    "sounds": [
+      "jjk_spells:sp_smash"
+    ]
+  },
+  "dragon_ascend": {
+    "sounds": [
+      "jjk_spells:dragon_ascend"
+    ]
+  },
+  "dragon_beam": {
+    "sounds": [
+      "jjk_spells:dragon_beam"
+    ]
+  },
+  "dragon_authority": {
+    "sounds": [
+      "jjk_spells:dragon_authority"
+    ]
+  },
+  "al_ignite": {
+    "sounds": [
+      "jjk_spells:al_ignite"
+    ]
+  },
+  "al_dash": {
+    "sounds": [
+      "jjk_spells:al_dash"
+    ]
+  },
+  "al_strike": {
+    "sounds": [
+      "jjk_spells:al_strike"
+    ]
+  },
+  "al_ghost_summon": {
+    "sounds": [
+      "jjk_spells:al_ghost_summon"
+    ]
+  },
+  "al_ghost_rush": {
+    "sounds": [
+      "jjk_spells:al_ghost_rush"
+    ]
+  },
+  "al_ghost_boom": {
+    "sounds": [
+      "jjk_spells:al_ghost_boom"
+    ]
+  },
+  "al_heal": {
+    "sounds": [
+      "jjk_spells:al_heal"
+    ]
+  },
+  "al_portal": {
+    "sounds": [
+      "jjk_spells:al_portal"
+    ]
+  },
+  "al_ghost_cry": {
+    "sounds": [
+      "jjk_spells:al_ghost_cry"
+    ]
+  },
+  "al_ult_boom": {
+    "sounds": [
+      "jjk_spells:al_ult_boom"
+    ]
+  },
+  "pan_charge": {
+    "sounds": [
+      "jjk_spells:pan_charge"
+    ]
+  },
+  "pan_throw": {
+    "sounds": [
+      "jjk_spells:pan_throw"
+    ]
+  },
+  "pan_pierce": {
+    "sounds": [
+      "jjk_spells:pan_pierce"
+    ]
+  },
+  "pan_clang": {
+    "sounds": [
+      "jjk_spells:pan_clang"
+    ]
+  },
+  "pan_leap": {
+    "sounds": [
+      "jjk_spells:pan_leap"
+    ]
+  },
+  "pan_thrust": {
+    "sounds": [
+      "jjk_spells:pan_thrust"
+    ]
+  },
+  "pan_bash": {
+    "sounds": [
+      "jjk_spells:pan_bash"
+    ]
+  },
+  "pan_aegis": {
+    "sounds": [
+      "jjk_spells:pan_aegis"
+    ]
+  },
+  "pan_dive": {
+    "sounds": [
+      "jjk_spells:pan_dive"
+    ]
+  },
+  "pan_boom": {
+    "sounds": [
+      "jjk_spells:pan_boom"
+    ]
+  },
+  "pan_divine": {
+    "sounds": [
+      "jjk_spells:pan_divine"
+    ]
+  },
+  "pan_beam": {
+    "sounds": [
+      "jjk_spells:pan_beam"
+    ]
+  },
+  "pan_flame": {
+    "sounds": [
+      "jjk_spells:pan_flame"
+    ]
+  },
+  "pan_star": {
+    "sounds": [
+      "jjk_spells:pan_star"
+    ]
+  },
+  "mal_grind": {
+    "sounds": [
+      "jjk_spells:mal_grind"
+    ]
+  },
+  "mal_throw": {
+    "sounds": [
+      "jjk_spells:mal_throw"
+    ]
+  },
+  "mal_crack": {
+    "sounds": [
+      "jjk_spells:mal_crack"
+    ]
+  },
+  "mal_slam": {
+    "sounds": [
+      "jjk_spells:mal_slam"
+    ]
+  },
+  "mal_rumble": {
+    "sounds": [
+      "jjk_spells:mal_rumble"
+    ]
+  },
+  "mal_punch": {
+    "sounds": [
+      "jjk_spells:mal_punch"
+    ]
+  },
+  "mal_gravel": {
+    "sounds": [
+      "jjk_spells:mal_gravel"
+    ]
+  },
+  "mal_armor": {
+    "sounds": [
+      "jjk_spells:mal_armor"
+    ]
+  },
+  "mal_charge": {
+    "sounds": [
+      "jjk_spells:mal_charge"
+    ]
+  },
+  "mal_boom": {
+    "sounds": [
+      "jjk_spells:mal_boom"
+    ]
+  },
+  "mal_spike": {
+    "sounds": [
+      "jjk_spells:mal_spike"
+    ]
+  },
+  "mel_slash": {
+    "sounds": [
+      "jjk_spells:mel_slash"
+    ]
+  },
+  "mel_flurry": {
+    "sounds": [
+      "jjk_spells:mel_flurry"
+    ]
+  },
+  "mel_ring": {
+    "sounds": [
+      "jjk_spells:mel_ring"
+    ]
+  },
+  "mel_dash": {
+    "sounds": [
+      "jjk_spells:mel_dash"
+    ]
+  },
+  "mel_hum": {
+    "sounds": [
+      "jjk_spells:mel_hum"
+    ]
+  },
+  "mel_bloom": {
+    "sounds": [
+      "jjk_spells:mel_bloom"
+    ]
+  },
+  "mel_wings": {
+    "sounds": [
+      "jjk_spells:mel_wings"
+    ]
+  },
+  "mel_boom": {
+    "sounds": [
+      "jjk_spells:mel_boom"
+    ]
+  },
+  "mel_transform": {
+    "sounds": [
+      "jjk_spells:mel_transform"
+    ]
+  },
+  "mel_stab": {
+    "sounds": [
+      "jjk_spells:mel_stab"
+    ]
+  },
+  "mel_phantom": {
+    "sounds": [
+      "jjk_spells:mel_phantom"
+    ]
+  },
+  "mel_rot": {
+    "sounds": [
+      "jjk_spells:mel_rot"
+    ]
+  },
+  "rim_slime": {
+    "sounds": [
+      "jjk_spells:rim_slime"
+    ]
+  },
+  "rim_suction": {
+    "sounds": [
+      "jjk_spells:rim_suction"
+    ]
+  },
+  "rim_crackle": {
+    "sounds": [
+      "jjk_spells:rim_crackle"
+    ]
+  },
+  "rim_thunder": {
+    "sounds": [
+      "jjk_spells:rim_thunder"
+    ]
+  },
+  "rim_laser": {
+    "sounds": [
+      "jjk_spells:rim_laser"
+    ]
+  },
+  "rim_barrier": {
+    "sounds": [
+      "jjk_spells:rim_barrier"
+    ]
+  },
+  "rim_ping": {
+    "sounds": [
+      "jjk_spells:rim_ping"
+    ]
+  },
+  "rim_tear": {
+    "sounds": [
+      "jjk_spells:rim_tear"
+    ]
+  },
+  "rim_vortex": {
+    "sounds": [
+      "jjk_spells:rim_vortex"
+    ]
+  },
+  "rim_charge": {
+    "sounds": [
+      "jjk_spells:rim_charge"
+    ]
+  },
+  "rim_collapse": {
+    "sounds": [
+      "jjk_spells:rim_collapse"
+    ]
+  },
+  "rim_void": {
+    "sounds": [
+      "jjk_spells:rim_void"
+    ]
+  },
+  "rim_hum": {
+    "sounds": [
+      "jjk_spells:rim_hum"
+    ]
+  },
+  "rim_boom": {
+    "sounds": [
+      "jjk_spells:rim_boom"
+    ]
+  },
+  "dia_hum": {
+    "sounds": [
+      "jjk_spells:dia_hum"
+    ]
+  },
+  "dia_heartbeat": {
+    "sounds": [
+      "jjk_spells:dia_heartbeat"
+    ]
+  },
+  "dia_snap": {
+    "sounds": [
+      "jjk_spells:dia_snap"
+    ]
+  },
+  "dia_tick": {
+    "sounds": [
+      "jjk_spells:dia_tick"
+    ]
+  },
+  "dia_boom": {
+    "sounds": [
+      "jjk_spells:dia_boom"
+    ]
+  },
+  "dia_roar": {
+    "sounds": [
+      "jjk_spells:dia_roar"
+    ]
+  },
+  "dia_tear": {
+    "sounds": [
+      "jjk_spells:dia_tear"
+    ]
+  },
+  "dia_crackle": {
+    "sounds": [
+      "jjk_spells:dia_crackle"
+    ]
+  },
+  "dia_collapse": {
+    "sounds": [
+      "jjk_spells:dia_collapse"
+    ]
+  },
+  "dia_charge": {
+    "sounds": [
+      "jjk_spells:dia_charge"
+    ]
+  },
+  "dia_pulse": {
+    "sounds": [
+      "jjk_spells:dia_pulse"
+    ]
+  },
+  "dia_vortex": {
+    "sounds": [
+      "jjk_spells:dia_vortex"
+    ]
+  },
+  "dia_chain": {
+    "sounds": [
+      "jjk_spells:dia_chain"
+    ]
+  },
+  "dia_bell": {
+    "sounds": [
+      "jjk_spells:dia_bell"
+    ]
+  },
+  "tem_barrier": {
+    "sounds": [
+      "jjk_spells:tem_barrier"
+    ]
+  },
+  "tem_boom": {
+    "sounds": [
+      "jjk_spells:tem_boom"
+    ]
+  },
+  "tem_charge": {
+    "sounds": [
+      "jjk_spells:tem_charge"
+    ]
+  },
+  "tem_collapse": {
+    "sounds": [
+      "jjk_spells:tem_collapse"
+    ]
+  },
+  "tem_crackle": {
+    "sounds": [
+      "jjk_spells:tem_crackle"
+    ]
+  },
+  "tem_hum": {
+    "sounds": [
+      "jjk_spells:tem_hum"
+    ]
+  },
+  "tem_laser": {
+    "sounds": [
+      "jjk_spells:tem_laser"
+    ]
+  },
+  "tem_ping": {
+    "sounds": [
+      "jjk_spells:tem_ping"
+    ]
+  },
+  "tem_slime": {
+    "sounds": [
+      "jjk_spells:tem_slime"
+    ]
+  },
+  "tem_suction": {
+    "sounds": [
+      "jjk_spells:tem_suction"
+    ]
+  },
+  "tem_tear": {
+    "sounds": [
+      "jjk_spells:tem_tear"
+    ]
+  },
+  "tem_thunder": {
+    "sounds": [
+      "jjk_spells:tem_thunder"
+    ]
+  },
+  "tem_void": {
+    "sounds": [
+      "jjk_spells:tem_void"
+    ]
+  },
+  "tem_vortex": {
+    "sounds": [
+      "jjk_spells:tem_vortex"
+    ]
+  },
+  "vel_barrier": {
+    "sounds": [
+      "jjk_spells:vel_barrier"
+    ]
+  },
+  "vel_boom": {
+    "sounds": [
+      "jjk_spells:vel_boom"
+    ]
+  },
+  "vel_charge": {
+    "sounds": [
+      "jjk_spells:vel_charge"
+    ]
+  },
+  "vel_collapse": {
+    "sounds": [
+      "jjk_spells:vel_collapse"
+    ]
+  },
+  "vel_crackle": {
+    "sounds": [
+      "jjk_spells:vel_crackle"
+    ]
+  },
+  "vel_hum": {
+    "sounds": [
+      "jjk_spells:vel_hum"
+    ]
+  },
+  "vel_laser": {
+    "sounds": [
+      "jjk_spells:vel_laser"
+    ]
+  },
+  "vel_ping": {
+    "sounds": [
+      "jjk_spells:vel_ping"
+    ]
+  },
+  "vel_slime": {
+    "sounds": [
+      "jjk_spells:vel_slime"
+    ]
+  },
+  "vel_suction": {
+    "sounds": [
+      "jjk_spells:vel_suction"
+    ]
+  },
+  "vel_tear": {
+    "sounds": [
+      "jjk_spells:vel_tear"
+    ]
+  },
+  "vel_thunder": {
+    "sounds": [
+      "jjk_spells:vel_thunder"
+    ]
+  },
+  "vel_void": {
+    "sounds": [
+      "jjk_spells:vel_void"
+    ]
+  },
+  "vel_vortex": {
+    "sounds": [
+      "jjk_spells:vel_vortex"
+    ]
+  },
+  "vgr_barrier": {
+    "sounds": [
+      "jjk_spells:vgr_barrier"
+    ]
+  },
+  "vgr_boom": {
+    "sounds": [
+      "jjk_spells:vgr_boom"
+    ]
+  },
+  "vgr_charge": {
+    "sounds": [
+      "jjk_spells:vgr_charge"
+    ]
+  },
+  "vgr_collapse": {
+    "sounds": [
+      "jjk_spells:vgr_collapse"
+    ]
+  },
+  "vgr_crackle": {
+    "sounds": [
+      "jjk_spells:vgr_crackle"
+    ]
+  },
+  "vgr_hum": {
+    "sounds": [
+      "jjk_spells:vgr_hum"
+    ]
+  },
+  "vgr_laser": {
+    "sounds": [
+      "jjk_spells:vgr_laser"
+    ]
+  },
+  "vgr_ping": {
+    "sounds": [
+      "jjk_spells:vgr_ping"
+    ]
+  },
+  "vgr_slime": {
+    "sounds": [
+      "jjk_spells:vgr_slime"
+    ]
+  },
+  "vgr_suction": {
+    "sounds": [
+      "jjk_spells:vgr_suction"
+    ]
+  },
+  "vgr_tear": {
+    "sounds": [
+      "jjk_spells:vgr_tear"
+    ]
+  },
+  "vgr_thunder": {
+    "sounds": [
+      "jjk_spells:vgr_thunder"
+    ]
+  },
+  "vgr_void": {
+    "sounds": [
+      "jjk_spells:vgr_void"
+    ]
+  },
+  "vgr_vortex": {
+    "sounds": [
+      "jjk_spells:vgr_vortex"
+    ]
+  },
+  "zeg_hum": {
+    "sounds": [
+      "jjk_spells:zeg_hum"
+    ]
+  },
+  "zeg_charge": {
+    "sounds": [
+      "jjk_spells:zeg_charge"
+    ]
+  },
+  "zeg_blink": {
+    "sounds": [
+      "jjk_spells:zeg_blink"
+    ]
+  },
+  "zeg_punch": {
+    "sounds": [
+      "jjk_spells:zeg_punch"
+    ]
+  },
+  "zeg_shatter": {
+    "sounds": [
+      "jjk_spells:zeg_shatter"
+    ]
+  },
+  "zeg_boom": {
+    "sounds": [
+      "jjk_spells:zeg_boom"
+    ]
+  },
+  "zeg_whoosh": {
+    "sounds": [
+      "jjk_spells:zeg_whoosh"
+    ]
+  },
+  "zeg_mist": {
+    "sounds": [
+      "jjk_spells:zeg_mist"
+    ]
+  },
+  "zeg_chime": {
+    "sounds": [
+      "jjk_spells:zeg_chime"
+    ]
+  },
+  "zeg_slash": {
+    "sounds": [
+      "jjk_spells:zeg_slash"
+    ]
+  },
+  "zeg_void": {
+    "sounds": [
+      "jjk_spells:zeg_void"
+    ]
+  },
+  "zeg_armor": {
+    "sounds": [
+      "jjk_spells:zeg_armor"
+    ]
+  },
+  "zeg_wing": {
+    "sounds": [
+      "jjk_spells:zeg_wing"
+    ]
+  },
+  "zeg_toll": {
+    "sounds": [
+      "jjk_spells:zeg_toll"
+    ]
+  },
+  "zeg_rift": {
+    "sounds": [
+      "jjk_spells:zeg_rift"
+    ]
+  },
+  "shd_disappear": {
+    "sounds": [
+      "jjk_spells:shd_disappear"
+    ]
+  },
+  "shd_sword_draw": {
+    "sounds": [
+      "jjk_spells:shd_sword_draw"
+    ]
+  },
+  "shd_sword_slice": {
+    "sounds": [
+      "jjk_spells:shd_sword_slice"
+    ]
+  },
+  "shd_sheath_click": {
+    "sounds": [
+      "jjk_spells:shd_sheath_click"
+    ]
+  },
+  "shd_delayed_execution": {
+    "sounds": [
+      "jjk_spells:shd_delayed_execution"
+    ]
+  },
+  "shd_throne_manifest": {
+    "sounds": [
+      "jjk_spells:shd_throne_manifest"
+    ]
+  },
+  "shd_illusion_whisper": {
+    "sounds": [
+      "jjk_spells:shd_illusion_whisper"
+    ]
+  },
+  "shd_counterattack": {
+    "sounds": [
+      "jjk_spells:shd_counterattack"
+    ]
+  },
+  "shd_royal_ambience": {
+    "sounds": [
+      "jjk_spells:shd_royal_ambience"
+    ]
+  },
+  "shd_final_judgment": {
+    "sounds": [
+      "jjk_spells:shd_final_judgment"
+    ]
+  },
+  "shd_slime_morph": {
+    "sounds": [
+      "jjk_spells:shd_slime_morph"
+    ]
+  },
+  "shd_slime_serpent_screech": {
+    "sounds": [
+      "jjk_spells:shd_slime_serpent_screech"
+    ]
+  },
+  "shd_slime_spear_pierce": {
+    "sounds": [
+      "jjk_spells:shd_slime_spear_pierce"
+    ]
+  },
+  "shd_slime_tendril_whip": {
+    "sounds": [
+      "jjk_spells:shd_slime_tendril_whip"
+    ]
+  },
+  "shd_slime_constriction": {
+    "sounds": [
+      "jjk_spells:shd_slime_constriction"
+    ]
+  },
+  "shd_slime_reformation": {
+    "sounds": [
+      "jjk_spells:shd_slime_reformation"
+    ]
+  },
+  "shd_heartbeat": {
+    "sounds": [
+      "jjk_spells:shd_heartbeat"
+    ]
+  },
+  "shd_counter_ready": {
+    "sounds": [
+      "jjk_spells:shd_counter_ready"
+    ]
+  },
+  "shd_perfect_dodge": {
+    "sounds": [
+      "jjk_spells:shd_perfect_dodge"
+    ]
+  },
+  "shd_counter_slash": {
+    "sounds": [
+      "jjk_spells:shd_counter_slash"
+    ]
+  },
+  "shd_sword_lower": {
+    "sounds": [
+      "jjk_spells:shd_sword_lower"
+    ]
+  },
+  "shd_atomic_charge_start": {
+    "sounds": [
+      "jjk_spells:shd_atomic_charge_start"
+    ]
+  },
+  "shd_atomic_compression_loop": {
+    "sounds": [
+      "jjk_spells:shd_atomic_compression_loop"
+    ]
+  },
+  "shd_atomic_heartbeat": {
+    "sounds": [
+      "jjk_spells:shd_atomic_heartbeat"
+    ]
+  },
+  "shd_atomic_declaration": {
+    "sounds": [
+      "jjk_spells:shd_atomic_declaration"
+    ]
+  },
+  "shd_atomic_release": {
+    "sounds": [
+      "jjk_spells:shd_atomic_release"
+    ]
+  },
+  "shd_atomic_explosion": {
+    "sounds": [
+      "jjk_spells:shd_atomic_explosion"
+    ]
+  },
+  "shd_atomic_shockwave": {
+    "sounds": [
+      "jjk_spells:shd_atomic_shockwave"
+    ]
+  },
+  "shd_atomic_aftermath": {
+    "sounds": [
+      "jjk_spells:shd_atomic_aftermath"
+    ]
+  },
+  "capri_boot": {
+    "sounds": [
+      "jjk_spells:capri_boot"
+    ]
+  },
+  "capri_scan": {
+    "sounds": [
+      "jjk_spells:capri_scan"
+    ]
+  },
+  "capri_lock": {
+    "sounds": [
+      "jjk_spells:capri_lock"
+    ]
+  },
+  "capri_lost": {
+    "sounds": [
+      "jjk_spells:capri_lost"
+    ]
+  },
+  "capri_notify": {
+    "sounds": [
+      "jjk_spells:capri_notify"
+    ]
+  },
+  "capri_warning": {
+    "sounds": [
+      "jjk_spells:capri_warning"
+    ]
+  },
+  "capri_on": {
+    "sounds": [
+      "jjk_spells:capri_on"
+    ]
+  },
+  "capri_off": {
+    "sounds": [
+      "jjk_spells:capri_off"
+    ]
+  },
+  "capri_cast": {
+    "sounds": [
+      "jjk_spells:capri_cast"
+    ]
+  },
+  "capri_blip_0": {
+    "sounds": [
+      "jjk_spells:capri_blip_0"
+    ]
+  },
+  "capri_blip_1": {
+    "sounds": [
+      "jjk_spells:capri_blip_1"
+    ]
+  },
+  "capri_blip_2": {
+    "sounds": [
+      "jjk_spells:capri_blip_2"
+    ]
+  },
+  "capri_blip_3": {
+    "sounds": [
+      "jjk_spells:capri_blip_3"
+    ]
+  },
+  "ach_acheron_weapon_swing_01": {
+    "sounds": [
+      "jjk_spells:ach_acheron_weapon_swing_01"
+    ]
+  },
+  "ach_acheron_weapon_swing_02": {
+    "sounds": [
+      "jjk_spells:ach_acheron_weapon_swing_02"
+    ]
+  },
+  "ach_acheron_violet_impact": {
+    "sounds": [
+      "jjk_spells:ach_acheron_violet_impact"
+    ]
+  },
+  "ach_acheron_sheath": {
+    "sounds": [
+      "jjk_spells:ach_acheron_sheath"
+    ]
+  },
+  "ach_wiltcross_cross": {
+    "sounds": [
+      "jjk_spells:ach_wiltcross_cross"
+    ]
+  },
+  "ach_octobolt_dash": {
+    "sounds": [
+      "jjk_spells:ach_octobolt_dash"
+    ]
+  },
+  "ach_octobolt_slash": {
+    "sounds": [
+      "jjk_spells:ach_octobolt_slash"
+    ]
+  },
+  "ach_octobolt_lightning": {
+    "sounds": [
+      "jjk_spells:ach_octobolt_lightning"
+    ]
+  },
+  "ach_octobolt_final": {
+    "sounds": [
+      "jjk_spells:ach_octobolt_final"
+    ]
+  },
+  "ach_crimson_knot_apply": {
+    "sounds": [
+      "jjk_spells:ach_crimson_knot_apply"
+    ]
+  },
+  "ach_crimson_knot_shatter": {
+    "sounds": [
+      "jjk_spells:ach_crimson_knot_shatter"
+    ]
+  },
+  "ach_quadrivalent_dash": {
+    "sounds": [
+      "jjk_spells:ach_quadrivalent_dash"
+    ]
+  },
+  "ach_quadrivalent_execution": {
+    "sounds": [
+      "jjk_spells:ach_quadrivalent_execution"
+    ]
+  },
+  "ach_quadrivalent_impact": {
+    "sounds": [
+      "jjk_spells:ach_quadrivalent_impact"
+    ]
+  },
+  "ach_rainleaf_cast": {
+    "sounds": [
+      "jjk_spells:ach_rainleaf_cast"
+    ]
+  },
+  "ach_rainleaf_tick": {
+    "sounds": [
+      "jjk_spells:ach_rainleaf_tick"
+    ]
+  },
+  "ach_rainleaf_transfer": {
+    "sounds": [
+      "jjk_spells:ach_rainleaf_transfer"
+    ]
+  },
+  "ach_rainblade_charge": {
+    "sounds": [
+      "jjk_spells:ach_rainblade_charge"
+    ]
+  },
+  "ach_rainblade_cut": {
+    "sounds": [
+      "jjk_spells:ach_rainblade_cut"
+    ]
+  },
+  "ach_rainblade_fracture": {
+    "sounds": [
+      "jjk_spells:ach_rainblade_fracture"
+    ]
+  },
+  "ach_rainblade_final": {
+    "sounds": [
+      "jjk_spells:ach_rainblade_final"
+    ]
+  },
+  "ach_stygian_charge": {
+    "sounds": [
+      "jjk_spells:ach_stygian_charge"
+    ]
+  },
+  "ach_stygian_descent": {
+    "sounds": [
+      "jjk_spells:ach_stygian_descent"
+    ]
+  },
+  "ach_stygian_impact": {
+    "sounds": [
+      "jjk_spells:ach_stygian_impact"
+    ]
+  },
+  "ach_stygian_shockwave": {
+    "sounds": [
+      "jjk_spells:ach_stygian_shockwave"
+    ]
+  },
+  "ach_acheron_ultimate_silence": {
+    "sounds": [
+      "jjk_spells:ach_acheron_ultimate_silence"
+    ]
+  },
+  "ach_acheron_ultimate_sun": {
+    "sounds": [
+      "jjk_spells:ach_acheron_ultimate_sun"
+    ]
+  },
+  "ach_acheron_ultimate_flower": {
+    "sounds": [
+      "jjk_spells:ach_acheron_ultimate_flower"
+    ]
+  },
+  "ach_acheron_ultimate_rainblade": {
+    "sounds": [
+      "jjk_spells:ach_acheron_ultimate_rainblade"
+    ]
+  },
+  "ach_acheron_ultimate_charge": {
+    "sounds": [
+      "jjk_spells:ach_acheron_ultimate_charge"
+    ]
+  },
+  "ach_acheron_ultimate_flash": {
+    "sounds": [
+      "jjk_spells:ach_acheron_ultimate_flash"
+    ]
+  },
+  "ach_acheron_ultimate_aftermath": {
+    "sounds": [
+      "jjk_spells:ach_acheron_ultimate_aftermath"
+    ]
+  }
+}

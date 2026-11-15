@@ -1,0 +1,18 @@
+{
+  "type": "jjk_spells:irontomb_arena",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "jjk_spells:irontomb_void",
+      "features": false,
+      "lakes": false,
+      "structure_overrides": [],
+      "layers": [
+        { "block": "minecraft:bedrock", "height": 1 },
+        { "block": "minecraft:deepslate", "height": 3 },
+        { "block": "minecraft:blackstone", "height": 1 },
+        { "block": "minecraft:polished_blackstone", "height": 1 }
+      ]
+    }
+  }
+}

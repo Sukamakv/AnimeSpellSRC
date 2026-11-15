@@ -1,0 +1,6 @@
+{
+ "parent": "item/handheld",
+ "textures": {
+  "layer0": "jjk_spells:item/pantheon_spear"
+ }
+}

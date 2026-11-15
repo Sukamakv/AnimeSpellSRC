@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "jjk_spells:ward_ring",
+    "jjk_spells:ward_amulet",
+    "jjk_spells:ward_belt",
+    "jjk_spells:ward_bracelet",
+    "jjk_spells:ward_charm",
+    "jjk_spells:aegis_sigil",
+    "jjk_spells:aegis_seal",
+    "jjk_spells:aegis_heart"
+  ]
+}
