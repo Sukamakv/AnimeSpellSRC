@@ -220,6 +220,9 @@ public class DimensionSeverEntity extends Entity {
             level().playSound(null, x, y + 2, z, SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.PLAYERS, 4.0f, 0.8f);
             level().playSound(null, x, y + 2, z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 3.0f, 0.5f);
         }
+        if (tickCount == 1) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 7.0), SLASH - 1);
+        }
         if (tickCount > 4 && tickCount < SLASH + 30 && tickCount % 5 == 0) {
             level().playSound(null, x, y + 20, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 4.0f, 0.5f + 0.02f * tickCount);
         }
@@ -235,6 +238,7 @@ public class DimensionSeverEntity extends Entity {
             }
         }
         if (tickCount == VOID) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 3f, FINAL - VOID);
             level().playSound(null, x, y + 10, z, SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 5.0f, 0.6f);
             level().playSound(null, x, y + 10, z, SoundEvents.WARDEN_EMERGE, SoundSource.PLAYERS, 3.0f, 0.6f);
         }
@@ -250,6 +254,7 @@ public class DimensionSeverEntity extends Entity {
             for (int i = 0; i < ids.length; i++) {
                 LivingEntity t = in.get(i);
                 ids[i] = t.getId();
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, k == 0 || k > PULSES ? 3f : 1.5f);
                 if (k == 0) {
                     hit(t, owner, DimensionSeverSpell.SLASH_FLAT, DimensionSeverSpell.SLASH_PERCENT);
                     t.setDeltaMovement(t.getDeltaMovement().add(0, 0.5, 0));
@@ -270,14 +275,21 @@ public class DimensionSeverEntity extends Entity {
             log.putInt("n", k + 1);
             this.entityData.set(LOG, log.copy());
             if (k == 0) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, new Vec3(x, y + 4, z), new Vec3(0, 0, 1), 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 12f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 6.0));
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, (float) (R * 2.0 / 7.0), FINAL - SLASH);
                 level().playSound(null, x, y + 4, z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 6.0f, 1.2f);
                 level().playSound(null, x, y + 4, z, SoundEvents.TRIDENT_THUNDER, SoundSource.PLAYERS, 5.0f, 0.7f);
                 level().playSound(null, x, y + 4, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 6.0f, 0.5f);
             } else if (k <= PULSES) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, (float) (R * 2.0 / 6.0) * (0.3f + 0.08f * k));
+                com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, new Vec3(x, y + 8, z), new Vec3(0, 0, 1), 40f * k, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 8f);
                 level().playSound(null, x, y + 4, z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 4.0f, 0.8f);
                 level().playSound(null, x, y + 4, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 5.0f, 0.7f + 0.05f * k);
                 level().playSound(null, x, y + 4, z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 4.0f, 1.0f);
             } else {
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, new Vec3(x, y + 6, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 12f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 6.0));
                 level().playSound(null, x, y + 4, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 8.0f, 0.5f);
                 level().playSound(null, x, y + 4, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 8.0f, 1.0f);
                 level().playSound(null, x, y + 4, z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 6.0f, 0.5f);

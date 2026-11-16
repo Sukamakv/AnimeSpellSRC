@@ -1,0 +1,14 @@
+{
+  "texture": "jjk_spells:textures/sprite_vfx/smoke_puff_ash.png",
+  "cols": 8,
+  "rows": 4,
+  "frames": 32,
+  "blend": "alpha",
+  "fullbright": false,
+  "playback": "once",
+  "lifetime": 50,
+  "size": 3.0,
+  "orientation": "billboard",
+  "scale_end": 1.3,
+  "fade_out": 0
+}

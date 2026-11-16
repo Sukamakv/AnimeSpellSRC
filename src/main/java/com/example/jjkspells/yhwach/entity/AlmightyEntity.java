@@ -288,6 +288,9 @@ public class AlmightyEntity extends Entity {
         owner.heal((float) (owner.getMaxHealth() * AlmightySpell.CONSUME_HEAL));
         level().playSound(null, dead.getX(), dead.getY(), dead.getZ(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 3.0f, 0.5f);
         level().playSound(null, dead.getX(), dead.getY(), dead.getZ(), SoundEvents.WARDEN_AGITATED, SoundSource.PLAYERS, 2.0f, 0.6f);
+        if (level() instanceof ServerLevel asl) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(asl, dead.position().add(0, dead.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f);   // devoured
+        }
     }
 
     private void serverTick() {
@@ -306,6 +309,11 @@ public class AlmightyEntity extends Entity {
             ACTIVE.add(this);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.WARDEN_EMERGE, SoundSource.PLAYERS, 6.0f, 0.5f);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.WITHER_SPAWN, SoundSource.PLAYERS, 3.0f, 0.5f);
+            if (level() instanceof ServerLevel asl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(asl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (AlmightySpell.ZONE_RADIUS / 3.5), ZONE_TICKS);   // cast: zone
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(asl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) (AlmightySpell.ZONE_RADIUS / 3.0));
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(asl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f);
+            }
         }
         if (tickCount % 50 == 0 && tickCount < ZONE_TICKS) {
             level().playSound(null, c.x, c.y, c.z, SoundEvents.WARDEN_HEARTBEAT, SoundSource.PLAYERS, 5.0f, 0.7f);
@@ -334,10 +342,20 @@ public class AlmightyEntity extends Entity {
             zonePhase(owner, c, R);
         } else if (tickCount == ZONE_TICKS) {
             level().playSound(null, c.x, c.y, c.z, SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.PLAYERS, 6.0f, 0.6f);
+            if (level() instanceof ServerLevel asl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(asl, owner, 1.6f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.0f, BEAM_START - ZONE_TICKS);   // darkness gathers into the orb
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(asl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.5f, BEAM_START - ZONE_TICKS);
+            }
         }
         if (tickCount == BEAM_START) {
             level().playSound(null, c.x, c.y, c.z, SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 8.0f, 0.5f);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 6.0f, 0.5f);
+            if (level() instanceof ServerLevel asl) {
+                Vec3 bo = owner.getEyePosition().add(0, -0.5, 0).add(dir.scale(2.8));
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(asl, bo, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 5.0f);   // beam released
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(asl, bo, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 4.0f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(asl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3.0f);
+            }
         }
         if (tickCount >= BEAM_START && tickCount < BEAM_END) {
             if (tickCount % 30 == 0) {
@@ -393,6 +411,9 @@ public class AlmightyEntity extends Entity {
             int id = nextPillarId++;
             addEvent(0, id, new Vec3(x, y, z), new Vec3(x, y, z));
             level().playSound(null, x, y, z, SoundEvents.WARDEN_DIG, SoundSource.PLAYERS, 3.0f, 0.6f);
+            if (level() instanceof ServerLevel asl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(asl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.2f, 14);   // telegraph: pillar before its lasers fire
+            }
             int beams = AlmightySpell.PILLAR_MIN_BEAMS + random.nextInt(AlmightySpell.PILLAR_MAX_BEAMS - AlmightySpell.PILLAR_MIN_BEAMS + 1);
             Vec3 eye = new Vec3(x, y + PILLAR_H + 1.5, z);
             for (int j = 0; j < beams; j++) {
@@ -414,6 +435,10 @@ public class AlmightyEntity extends Entity {
         addEvent(1, p.pillar, p.from, tp);
         level().playSound(null, p.from.x, p.from.y, p.from.z, SoundEvents.WARDEN_ATTACK_IMPACT, SoundSource.PLAYERS, 3.0f, 0.7f);
         level().playSound(null, tp.x, tp.y, tp.z, SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 1.5f, 1.2f);
+        if (level() instanceof ServerLevel asl) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.beam(asl, p.from, tp, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.0f, BEAM_LIFE);   // pillar laser
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(asl, tp, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.0f);
+        }
     }
 
     private void beamDamage(LivingEntity owner) {

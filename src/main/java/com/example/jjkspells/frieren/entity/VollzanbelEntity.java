@@ -128,7 +128,9 @@ public class VollzanbelEntity extends Entity {
         entityData.set(OWNER_ID, owner.getId());
 
         if (t == 1) sl.playSound(null, owner.getX(), owner.getY(), owner.getZ(), SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 2.0f, 0.5f);
+        if (t == 1) com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, owner.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 1.0f, START);
         if (t == START) sl.playSound(null, owner.getX(), owner.getY(), owner.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 3.0f, 0.5f);
+        if (t == START) com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, origin(owner.getEyePosition(), owner.getLookAngle()), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 1.2f);
         if (t >= START && t < FLAME_END && t % 10 == 0) {
             sl.playSound(null, owner.getX(), owner.getY(), owner.getZ(), SoundEvents.FIRE_AMBIENT, SoundSource.PLAYERS, 3.0f, 0.6f);
         }
@@ -157,6 +159,9 @@ public class VollzanbelEntity extends Entity {
             entityData.set(POINT, p);
             entityData.set(PHASE, 1);
             sl.playSound(null, point.x, point.y, point.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 4.0f, 0.5f);
+            // telegraph: explosion zone, shown for the whole convergence
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, point, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, (float) (EXPLOSION_RADIUS * 2.0 / 7.0), CONVERGE);
+            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, point, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 2.0f);
         }
 
         // 3. explosion
@@ -209,6 +214,9 @@ public class VollzanbelEntity extends Entity {
         sl.playSound(null, point.x, point.y, point.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 8.0f, 0.5f);
         sl.playSound(null, point.x, point.y, point.z, SoundEvents.DRAGON_FIREBALL_EXPLODE, SoundSource.PLAYERS, 8.0f, 0.6f);
         sl.playSound(null, point.x, point.y, point.z, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 6.0f, 0.5f);
+        com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, point, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 9.0f);
+        com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, point, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 6.0f);
+        com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, point, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 11.0f);
         double r = EXPLOSION_RADIUS;
         AABB box = new AABB(point.x - r, point.y - r, point.z - r, point.x + r, point.y + r, point.z + r);
         for (LivingEntity t : sl.getEntitiesOfClass(LivingEntity.class, box, e -> isValidTarget(owner, e))) {

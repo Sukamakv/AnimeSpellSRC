@@ -158,6 +158,11 @@ public class ThousandWindsEntity extends Entity {
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 5.0f, 0.5f);
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.TRIDENT_RIPTIDE_3, SoundSource.PLAYERS, 4.0f, 0.8f);
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 4.0f, 1.2f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6.3f, FIN - 1);
+            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 3f, CHARGE);
+            if (owner != null) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f, FIN);
+            }
         }
         if (tickCount < FIN && owner != null) {
             owner.setDeltaMovement(0, Math.min(0, owner.getDeltaMovement().y), 0);
@@ -167,6 +172,10 @@ public class ThousandWindsEntity extends Entity {
         }
         if (tickCount == CHARGE) {
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.4f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f);
+        }
+        if (tickCount == FIN - 16) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6.3f, 16);
         }
         AABB box = new AABB(c.x - R, c.y - 12, c.z - R, c.x + R, c.y + 24, c.z + R);
         if (tickCount >= CHARGE && tickCount < CHARGE + ThousandWindsSpell.BARRAGE_TICKS && (tickCount - CHARGE) % ThousandWindsSpell.VOLLEY_INTERVAL == 0) {
@@ -190,6 +199,8 @@ public class ThousandWindsEntity extends Entity {
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 5.0f, 1.6f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 4.0f, 1.0f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 4.0f, 0.8f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 7.3f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 5f);
         }
     }
 
@@ -236,6 +247,8 @@ public class ThousandWindsEntity extends Entity {
         if (random.nextInt(3) == 0) {
             level().playSound(null, x, y + 4, z, SoundEvents.TRIDENT_THUNDER, SoundSource.PLAYERS, 1.5f, 1.8f);
         }
+        com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, new Vec3(x, y + 1.5, z), new Vec3(1, 0, 0), 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);
+        com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, new Vec3(x, y + 0.3, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f);
         strikeLog.add((int) Math.round(x * 10));
         strikeLog.add((int) Math.round(y * 10));
         strikeLog.add((int) Math.round(z * 10));

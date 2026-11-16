@@ -204,6 +204,7 @@ public class SpiritCleaveEntity extends Entity {
             }
             t.hurtMarked = true;
             caught.add(t.getId());
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact((ServerLevel) level(), t.position().add(0, t.getBbHeight() * 0.5, 0), phase == 0 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.8f);
             level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.0f, phase == 0 ? 1.4f : 1.0f);
             hitLog.add((int) Math.round(t.getX() * 10));
             hitLog.add((int) Math.round((t.getY() + t.getBbHeight() * 0.5) * 10));
@@ -213,6 +214,18 @@ public class SpiritCleaveEntity extends Entity {
             while (hitLog.size() > 150) {
                 hitLog.subList(0, 5).clear();
             }
+        }
+        ServerLevel cutSl = (ServerLevel) level();
+        Vec3 cutAt = o.add(0, 1.2, 0).add(dir.scale(2.5));
+        if (phase == 0) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.slash(cutSl, cutAt, dir, 55f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.slash(cutSl, cutAt, dir, -55f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(cutSl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (radius * 2.0 / 6.0));
+        } else {
+            com.example.jjkspells.vfx.sprite.SpriteFx.slash(cutSl, cutAt, dir, 35f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.slash(cutSl, cutAt, dir, -35f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(cutSl, o.add(0, 1.2, 0).add(dir.scale(3.0)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(cutSl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (radius * 2.0 / 6.0));
         }
         float shield = Math.min(SpiritCleaveSpell.SHIELD_MAX, SpiritCleaveSpell.SHIELD_BASE + SpiritCleaveSpell.SHIELD_PER_HIT * caught.size());
         if (shield > owner.getAbsorptionAmount()) {
@@ -238,6 +251,8 @@ public class SpiritCleaveEntity extends Entity {
             prevAbsorb = owner.getAbsorptionAmount();
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 2.5f, 1.6f);
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.0f, 1.8f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (SpiritCleaveSpell.RADIUS * 2.0 / 7.0), T2);
+            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.8f, T1);
         }
         if (tickCount <= T2 + 2) {
             owner.setDeltaMovement(0, Math.min(0.0, owner.getDeltaMovement().y), 0);
@@ -259,6 +274,8 @@ public class SpiritCleaveEntity extends Entity {
                 owner.setAbsorptionAmount(prevAbsorb);
             }
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 2.0f, 0.9f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.2f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, o.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);
             sync();
         }
     }

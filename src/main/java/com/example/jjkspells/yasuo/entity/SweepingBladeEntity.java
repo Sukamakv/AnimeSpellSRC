@@ -171,6 +171,8 @@ public class SweepingBladeEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, owner.getX(), owner.getY() + 1, owner.getZ(), SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 3.0f, 1.6f);
             level().playSound(null, owner.getX(), owner.getY() + 1, owner.getZ(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.5f, 1.9f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, owner.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.2f, T0 + 6);
+            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.8f, 12);
         }
         if (finished || tickCount < T0) {
             return;
@@ -260,6 +262,7 @@ public class SweepingBladeEntity extends Entity {
             any = true;
             level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 2.5f, 1.5f);
             level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.0f, 1.3f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.8f);
         }
         // move Yasuo
         float yaw = (float) (Math.toDegrees(Math.atan2(-sd.x, sd.z)));
@@ -274,6 +277,10 @@ public class SweepingBladeEntity extends Entity {
         owner.invulnerableTime = Math.max(owner.invulnerableTime, STEP + 4);
         level().playSound(null, end.x, end.y + 1, end.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 2.0f, 1.7f);
         level().playSound(null, start.x, start.y + 1, start.z, SoundEvents.TRIDENT_RIPTIDE_1, SoundSource.PLAYERS, 2.0f, 1.5f);
+        Vec3 slashN = new Vec3(-sd.z, 0, sd.x);
+        com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, start.add(end).scale(0.5).add(0, 1.0, 0), slashN, 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) Math.max(2.5, len * 0.8));
+        com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, start.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f);
+        com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, end.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f);
 
         dashLog.add((int) Math.round(start.x * 10));
         dashLog.add((int) Math.round(start.y * 10));

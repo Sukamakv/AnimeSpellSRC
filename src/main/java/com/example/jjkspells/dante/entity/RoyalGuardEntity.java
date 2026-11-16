@@ -106,6 +106,11 @@ public class RoyalGuardEntity extends Entity {
             dir = new Vec3(Math.cos(tickCount * 2.4), 0.2, Math.sin(tickCount * 2.4)).normalize();
         }
         this.entityData.set(HIT_DIR, new Vector3f((float) dir.x, (float) dir.y, (float) dir.z));
+        if (level() instanceof ServerLevel bsl) {
+            Vec3 hp = position().add(dir.x * 1.6, 1.2 + dir.y * 1.6, dir.z * 1.6);
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(bsl, hp, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.4f);   // hit absorbed
+            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(bsl, hp, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.0f);
+        }
         level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.SHIELD_BLOCK, SoundSource.PLAYERS, 3.0f, 0.7f);
         level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 1.0f, 1.7f);
         level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.0f, 0.6f + (float) (stored / RoyalGuardSpell.MAX_STORED));
@@ -117,6 +122,10 @@ public class RoyalGuardEntity extends Entity {
             this.entityData.set(PHASE_TICK, tickCount);
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 4.0f, 0.5f);
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.PLAYERS, 3.0f, 0.6f);
+            if (level() instanceof ServerLevel rsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(rsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (RoyalGuardSpell.RADIUS / 3.5), CHARGE);   // telegraph: release zone
+                com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(rsl, this, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.5f, CHARGE);
+            }
         }
     }
 
@@ -232,12 +241,16 @@ public class RoyalGuardEntity extends Entity {
             if (tickCount == 1) {
                 level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 2.0f, 0.7f);
                 level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2.0f, 1.3f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.0f, 24);   // guard raised
+                com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, position().add(0, 1.2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.2f);
             }
             if (age >= RoyalGuardSpell.GUARD_TICKS) {
                 release();
                 if (phase() == PH_GUARD) {
                     this.entityData.set(PHASE, PH_RELEASE);
                     this.entityData.set(PHASE_TICK, tickCount);
+                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (RoyalGuardSpell.RADIUS / 3.5), CHARGE);   // telegraph: release zone
+                    com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, this, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.5f, CHARGE);
                 }
             }
             return;
@@ -266,6 +279,11 @@ public class RoyalGuardEntity extends Entity {
         level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 6.0f, 0.7f);
         level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.DRAGON_FIREBALL_EXPLODE, SoundSource.PLAYERS, 5.0f, 0.6f);
         level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 3.0f, 0.5f);
+        if (level() instanceof ServerLevel bsl) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(bsl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4.0f);   // release shockwave
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(bsl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 4.5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(bsl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (r / 3.0));
+        }
         AABB box = new AABB(c.x - r, c.y - 6, c.z - r, c.x + r, c.y + 14, c.z + r);
         for (LivingEntity t : level().getEntitiesOfClass(LivingEntity.class, box)) {
             double dx = t.getX() - c.x;
@@ -288,6 +306,9 @@ public class RoyalGuardEntity extends Entity {
             t.hurtMarked = true;
             t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 50, 2, false, true, true));
             t.setSecondsOnFire(4);
+            if (level() instanceof ServerLevel esl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(esl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.8f);
+            }
         }
     }
 

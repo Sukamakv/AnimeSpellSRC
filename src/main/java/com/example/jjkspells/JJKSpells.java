@@ -43,6 +43,7 @@ public class JJKSpells {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BalanceConfig.SPEC, MODID + "-balance.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.capri.CapriConfig.SERVER_SPEC, MODID + "-capri.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, com.example.jjkspells.capri.CapriConfig.CLIENT_SPEC, MODID + "-capri-client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, com.example.jjkspells.vfx.sprite.SpriteVfxConfig.SPEC, MODID + "-vfx-client.toml");
         com.example.jjkspells.capri.CapriRegistry.register(bus);
         ModAttributes.register(bus);
         ModNetwork.register();

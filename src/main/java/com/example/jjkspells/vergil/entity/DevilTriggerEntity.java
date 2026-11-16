@@ -247,11 +247,15 @@ public class DevilTriggerEntity extends Entity {
             owner.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, d, 1, false, false, true));
             owner.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, d, 0, false, false, true));
             owner.addEffect(new MobEffectInstance(MobEffects.REGENERATION, d, 0, false, false, true));
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (DevilTriggerSpell.RADIUS * 2.0 / 7.0), RISE - 1);
+            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 3f, DURATION - 1);
             level().playSound(null, x, y + 2, z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 4.0f, 1.6f);
             level().playSound(null, x, y + 2, z, SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.PLAYERS, 2.5f, 1.2f);
             level().playSound(null, x, y + 2, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 3.0f, 0.6f);
         }
         if (tickCount == RISE) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, new Vec3(x, y + 1.5, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 4f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f);
             level().playSound(null, x, y + 4, z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.6f);
             level().playSound(null, x, y + 4, z, SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 2.0f, 2.0f);
         }
@@ -264,6 +268,8 @@ public class DevilTriggerEntity extends Entity {
             for (int i = 0; i < n; i++) {
                 ids[i] = pool.get(i).getId();
                 hit(pool.get(i), owner, DevilTriggerSpell.SLASH_FLAT, DevilTriggerSpell.SLASH_PERCENT);
+                com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, pool.get(i).position().add(0, pool.get(i).getBbHeight() * 0.5, 0), new Vec3(0, 0, 1), 37f * (k + i), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, pool.get(i).position().add(0, pool.get(i).getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);
             }
             log.putIntArray("c" + k, ids);
             log.putInt("n", k + 1);
@@ -280,8 +286,11 @@ public class DevilTriggerEntity extends Entity {
             level().playSound(null, x, y + 3, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 5.0f, 1.1f);
             level().playSound(null, x, y + 3, z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 3.0f, 1.2f);
             level().playSound(null, x, y + 3, z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, new Vec3(x, y + 2, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, (float) (DevilTriggerSpell.RADIUS * 2.0 / 6.0));
             for (LivingEntity t : enemies(owner, DevilTriggerSpell.RADIUS)) {
                 hit(t, owner, DevilTriggerSpell.FINAL_FLAT, DevilTriggerSpell.FINAL_PERCENT);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.5f);
                 Vec3 out = new Vec3(t.getX() - x, 0, t.getZ() - z);
                 out = out.lengthSqr() < 0.01 ? Vec3.ZERO : out.normalize().scale(0.7);
                 t.setDeltaMovement(t.getDeltaMovement().add(out.x, 0.5, out.z));

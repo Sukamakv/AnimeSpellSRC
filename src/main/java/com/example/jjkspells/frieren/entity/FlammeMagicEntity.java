@@ -179,9 +179,12 @@ public class FlammeMagicEntity extends Entity {
         this.entityData.set(OWNER_ID, owner.getId());
         if (tickCount == 1) {
             sl.playSound(null, owner.getX(), owner.getY(), owner.getZ(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 1.6f, 1.5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, owner.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 1.6f, WINDUP);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 0.8f, WINDUP);
         }
         if (tickCount == WINDUP - 10) {
             sl.playSound(null, getX(), getY() + SPHERE_HEIGHT, getZ(), SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 3.0f, 1.8f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, this, SPHERE_HEIGHT, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 6.0f, 10 + 10);
         }
         for (int k = 0; k < LANCES; k++) {
             if (tickCount == launchTick(k)) launch(sl, k);
@@ -204,6 +207,9 @@ public class FlammeMagicEntity extends Entity {
         all.put("ev", events.copy());
         entityData.set(EVENTS, all);
         sl.playSound(null, getX(), getY() + SPHERE_HEIGHT, getZ(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 4.0f, 0.6f);
+        // telegraph: danger zone of this lance (life = flight time until damage)
+        com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, k >= LANCES - 1 ? (float) (AREA_RADIUS * 2.0 / 7.0) : (float) (LANCE_RADIUS * 2.0 / 7.0), FLIGHT);
+        com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, new Vec3(getX(), getY() + SPHERE_HEIGHT, getZ()), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 1.5f);
     }
 
     private void land(ServerLevel sl, LivingEntity owner, int k) {
@@ -213,6 +219,9 @@ public class FlammeMagicEntity extends Entity {
         sl.playSound(null, at.x, at.y, at.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, last ? 5.0f : 2.2f, last ? 0.7f : 1.5f);
         sl.playSound(null, at.x, at.y, at.z, SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.PLAYERS, last ? 5.0f : 2.5f, last ? 0.5f : 1.2f);
         if (last) sl.playSound(null, at.x, at.y, at.z, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 4.0f, 0.55f);
+        com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, at, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, last ? 8.0f : 2.5f);
+        com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, at, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, last ? 6.0f : 2.0f);
+        com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, at, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, last ? 4.5f : 1.3f);
         try {
             strike(sl, owner, at, last ? AREA_RADIUS : LANCE_RADIUS, last ? 12 : 8, last ? 28 : 16,
                     last ? FINAL_FLAT : LANCE_FLAT, last ? FINAL_PERCENT : LANCE_PERCENT);

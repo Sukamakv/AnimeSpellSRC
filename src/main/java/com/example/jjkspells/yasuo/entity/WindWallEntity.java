@@ -160,6 +160,12 @@ public class WindWallEntity extends Entity {
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 4.0f, 0.7f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.TRIDENT_RIPTIDE_3, SoundSource.PLAYERS, 3.0f, 1.3f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.8f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f, RISE + 12);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, c.add(0, WindWallSpell.HEIGHT * 0.5, 0), d, 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6f);
+        }
+        if (tickCount == DURATION) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f);
         }
         if (tickCount < RISE || tickCount > DURATION) {
             return;
@@ -204,6 +210,8 @@ public class WindWallEntity extends Entity {
                 this.entityData.set(LOG, tag);
                 level().playSound(null, hitPt.x, hitPt.y, hitPt.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 2.5f, 1.4f);
                 level().playSound(null, hitPt.x, hitPt.y, hitPt.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 1.5f, 1.6f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, hitPt, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, hitPt, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1f);
                 pr.discard();
             }
         }
@@ -229,6 +237,7 @@ public class WindWallEntity extends Entity {
                 if (side == 0) {
                     side = 1;
                 }
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, centre, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1f);
                 t.setDeltaMovement(d.x * side * 0.9, 0.3, d.z * side * 0.9);
                 t.hurtMarked = true;
             }

@@ -202,6 +202,9 @@ public class WindboundDuelEntity extends Entity {
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.6f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 1.5f, 1.8f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (R * 2.0 / 7.0), DURATION);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 6.0));
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);
         }
         boolean over = tickCount >= DURATION || target == null || !target.isAlive();
         if (over) {
@@ -212,6 +215,8 @@ public class WindboundDuelEntity extends Entity {
             DuelEvents.DUELS.remove(targetUuid);
             level().playSound(null, c.x, c.y + 3, c.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 3.0f, 1.2f);
             level().playSound(null, c.x, c.y + 3, c.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 3.0f, 1.2f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (R * 2.0 / 6.0));
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 3.5f);
             return;
         }
         if (tickCount % 40 == 0) {
@@ -285,6 +290,8 @@ public class WindboundDuelEntity extends Entity {
             target.setDeltaMovement(keep);
             target.hurtMarked = true;
             level().playSound(null, target.getX(), target.getY() + 1, target.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 2.0f, 1.6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, target.position().add(0, target.getBbHeight() * 0.5, 0), new Vec3(random.nextDouble() - 0.5, random.nextDouble() - 0.5, 1.0), random.nextFloat() * 360f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, target.position().add(0, target.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);
         }
     }
 

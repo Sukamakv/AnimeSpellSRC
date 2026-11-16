@@ -199,6 +199,7 @@ public class TwinCrescentsEntity extends Entity {
         LivingEntity owner = oe instanceof LivingEntity le ? le : null;
         if (tickCount == 1 && owner != null) {
             level().playSound(null, owner.getX(), owner.getY() + 1, owner.getZ(), SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 2.5f, 1.7f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.6f, 14);
         }
         if (owner != null) {
             int k = (tickCount - T0) / STEP;
@@ -213,6 +214,13 @@ public class TwinCrescentsEntity extends Entity {
                 } else {
                     launch(owner, dir, 0, true, 62);
                     launch(owner, dir, 1, true, -62);
+                }
+                com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, owner.position().add(0, 1.2, 0).add(dir.scale(1.6)), dir, k == 1 ? -52f : 52f,
+                        k == 0 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE : k == 1 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE,
+                        k == 2 ? 5f : 3.5f);
+                if (k == 2) {
+                    com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, owner.position().add(0, 1.2, 0).add(dir.scale(1.6)), dir, -62f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 5f);
+                    com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, owner.position().add(0, 1.2, 0).add(dir.scale(2.0)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f);
                 }
                 owner.setDeltaMovement(dir.x * 0.55, Math.min(0.0, owner.getDeltaMovement().y), dir.z * 0.55);
                 owner.hurtMarked = true;
@@ -257,6 +265,7 @@ public class TwinCrescentsEntity extends Entity {
                 t.hurtMarked = true;
                 level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.0f, c.colour == 0 ? 1.4f : 1.0f);
                 level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.5f, 1.5f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), c.colour == 0 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, c.big ? 2.2f : 1.5f);
                 hitLog.add((int) Math.round(t.getX() * 10));
                 hitLog.add((int) Math.round((t.getY() + t.getBbHeight() * 0.5) * 10));
                 hitLog.add((int) Math.round(t.getZ() * 10));

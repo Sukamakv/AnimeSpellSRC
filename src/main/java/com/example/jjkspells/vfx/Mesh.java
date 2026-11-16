@@ -12,12 +12,42 @@ import java.util.function.DoubleUnaryOperator;
 public final class Mesh {
     public final float[] pos, nrm, uv;
     public final int[] idx;
+    /**
+     * The same surface as {@link #idx}, regrouped as quads (4 vertex indices each) for Minecraft's QUADS render types.
+     * Two consecutive triangles (a,b,c) (a,c,d), which is what {@link B#quad} writes, become one quad (a,b,c,d); a lone triangle
+     * becomes a quad that repeats its last vertex. Half the vertices to submit for quad-built meshes (spheres, tubes, rings).
+     */
+    public final int[] quads;
 
     private Mesh(float[] p, float[] n, float[] u, int[] i) {
         pos = p;
         nrm = n;
         uv = u;
         idx = i;
+        quads = toQuads(i);
+    }
+
+    private static int[] toQuads(int[] i) {
+        int tris = i.length / 3;
+        int[] q = new int[tris * 4];
+        int qc = 0;
+        for (int t = 0; t < tris; ) {
+            int a = i[t * 3], b = i[t * 3 + 1], c = i[t * 3 + 2];
+            if (t + 1 < tris && i[(t + 1) * 3] == a && i[(t + 1) * 3 + 1] == c) {
+                q[qc++] = a;
+                q[qc++] = b;
+                q[qc++] = c;
+                q[qc++] = i[(t + 1) * 3 + 2];
+                t += 2;
+            } else {
+                q[qc++] = a;
+                q[qc++] = b;
+                q[qc++] = c;
+                q[qc++] = c;
+                t++;
+            }
+        }
+        return java.util.Arrays.copyOf(q, qc);
     }
 
     public int vertexCount() {

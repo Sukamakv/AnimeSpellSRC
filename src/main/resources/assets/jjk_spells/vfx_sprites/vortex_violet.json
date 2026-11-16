@@ -1,0 +1,16 @@
+{
+  "texture": "jjk_spells:textures/sprite_vfx/vortex_violet.png",
+  "cols": 8,
+  "rows": 4,
+  "frames": 32,
+  "blend": "additive",
+  "fullbright": true,
+  "playback": "loop",
+  "fps": 24,
+  "lifetime": 50,
+  "size": 4.5,
+  "orientation": "flat",
+  "scale_end": 1.0,
+  "fade_in": 6,
+  "fade_out": 8
+}

@@ -167,20 +167,35 @@ public class VollstreckungEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, x, y + 6, z, SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 3.0f, 1.8f);
             level().playSound(null, x, y + 6, z, SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 2.0f, 1.6f);
+            if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 0.8f, APPEAR + 10);   // cast: sword materialises
+                com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, this, (float) (VollstreckungSpell.HOVER_HEIGHT + targetHeight()), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 3f, STRIKE);   // sword glow follows the target
+            }
         }
         if (tickCount == STRIKE - 14) {
             level().playSound(null, x, y + 6, z, SoundEvents.TRIDENT_RETURN, SoundSource.PLAYERS, 3.0f, 0.6f);
         }
         if (tickCount == STRIKE) {
             level().playSound(null, x, y + 8, z, SoundEvents.TRIDENT_THUNDER, SoundSource.PLAYERS, 4.0f, 0.5f);
+            if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 0.9f, DROP + 2);   // telegraph: danger zone before the sword lands
+            }
         }
         if (tickCount == IMPACT) {
             level().playSound(null, x, y, z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 4.0f, 0.7f);
             level().playSound(null, x, y, z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 4.0f, 1.2f);
             level().playSound(null, x, y, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 3.0f, 0.6f);
+            if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, position().add(0, 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);   // sword lands
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, position().add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.5f);
+            }
             if (t != null) {
                 apply(t);
             }
+        }
+        if (tickCount == TOTAL && level() instanceof net.minecraft.server.level.ServerLevel sl) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, position().add(0, 2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);   // finish: stuck sword shatters
         }
     }
 

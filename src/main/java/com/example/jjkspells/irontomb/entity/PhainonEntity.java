@@ -241,6 +241,12 @@ public class PhainonEntity extends Mob {
         }
         if (t == 1) {
             sound(PhainonSounds.DEATH, 14f, 1f);
+            if (level() instanceof ServerLevel xsl) {
+                Vec3 xg = new Vec3(getX(), groundY(getX(), getY(), getZ()), getZ());
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, xg, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 4f, 108);
+                com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, xg, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f, 108);
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6f);
+            }
         }
         if (t == 44 || t == 70 || t == 96) {
             burst(position().add(0, 2, 0), 60);
@@ -248,6 +254,11 @@ public class PhainonEntity extends Mob {
         if (t == 110 && !rewarded) {
             rewarded = true;
             rewardPlayers();
+            if (level() instanceof ServerLevel xsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 14f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, position().add(0, 2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 10f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, new Vec3(getX(), groundY(getX(), getY(), getZ()), getZ()), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 10f);
+            }
         }
         if (t >= PhainonAttack.EV_LENGTH[PhainonAttack.EV_DEATH]) {
             if (level() instanceof ServerLevel sl) {
@@ -401,6 +412,11 @@ public class PhainonEntity extends Mob {
             case PhainonAttack.EV_INTRO -> {
                 if (t == 1) {
                     sound(PhainonSounds.ROAR, 16f, 1f);
+                    if (level() instanceof ServerLevel xsl) {
+                        Vec3 xg = new Vec3(getX(), groundY(getX(), getY(), getZ()), getZ());
+                        com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, xg, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 26f * 2f / 7f, 75);
+                        com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, xg, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 26f * 2f / 7f, 75);
+                    }
                 }
                 if (t <= 80) {
                     float k = t / 80f;
@@ -417,6 +433,12 @@ public class PhainonEntity extends Mob {
             case PhainonAttack.EV_PHASE2 -> {
                 if (t == 1) {
                     sound(PhainonSounds.ROAR, 16f, 1.1f);
+                    if (level() instanceof ServerLevel xsl) {
+                        Vec3 xg = new Vec3(getX(), groundY(getX(), getY(), getZ()), getZ());
+                        com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 6f);
+                        com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, xg, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 34f * 2f / 7f, 25);
+                        com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, xg, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 34f * 2f / 7f, 25);
+                    }
                 }
                 if (t == 26) {
                     shockwave(34, 2.0, 0.6);
@@ -425,6 +447,12 @@ public class PhainonEntity extends Mob {
             case PhainonAttack.EV_PHASE3 -> {
                 if (t == 1) {
                     sound(PhainonSounds.ROAR, 18f, 0.9f);
+                    if (level() instanceof ServerLevel xsl) {
+                        Vec3 xg = new Vec3(getX(), groundY(getX(), getY(), getZ()), getZ());
+                        com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 8f);
+                        com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, xg, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 48f * 2f / 7f, 43);
+                        com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, xg, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 48f * 2f / 7f, 43);
+                    }
                 }
                 if (t == 34) {
                     sound(PhainonSounds.WING, 14f, 0.7f);
@@ -453,6 +481,9 @@ public class PhainonEntity extends Mob {
         if (level() instanceof ServerLevel sl) {
             IrontombFxServer.ring(sl, IrontombFxServer.dust(IrontombFxServer.GOLD, 2.4f), new Vec3(c.x, groundY(c.x, c.y, c.z), c.z), 6, 40, 0.9);
             IrontombFxServer.burst(sl, c.add(0, 1.5, 0), IrontombFxServer.GOLD, 90, 3.0, 0.5);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(c.x, groundY(c.x, c.y, c.z), c.z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) r * 2f / 6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) r / 4f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, c.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) r / 5f);
         }
     }
 
@@ -665,6 +696,9 @@ public class PhainonEntity extends Mob {
     private void lance(int t, LivingEntity tg) {
         if (t == 1) {
             sound(PhainonSounds.CHARGE, 12f, 1f);
+            if (level() instanceof ServerLevel xsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(xsl, this, 1.9f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.5f, PhainonAttack.LANCE_FIRE - 1);
+            }
         }
         if (t <= 16 && tg != null) {
             setAim(tg.position().add(0, tg.getBbHeight() * 0.5, 0));
@@ -678,10 +712,18 @@ public class PhainonEntity extends Mob {
             dir = dir.normalize();
             sound(PhainonSounds.LANCE, 16f, 1f);
             fireLance(o, dir);
+            if (level() instanceof ServerLevel xsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3f);
+            }
             if (getPhase() >= 3) {
                 fireLance(o, rotY(dir, 0.32));
                 fireLance(o, rotY(dir, -0.32));
             }
+        }
+        if (getPhase() >= 2 && t == 17 && level() instanceof ServerLevel xsl) {
+            Vec3 xa = getAim();
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, new Vec3(xa.x, groundY(xa.x, xa.y, xa.z), xa.z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 7f * 2f / 7f, 44 - 17);
         }
         if (getPhase() >= 2 && t == 44) {
             Vec3 a = getAim();
@@ -709,6 +751,7 @@ public class PhainonEntity extends Mob {
             }
         }
         if (level() instanceof ServerLevel sl) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, o, end, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3f, 6);
             for (int i = 0; i < 36; i++) {
                 Vec3 p = o.add(dir.scale(i * 2.5));
                 IrontombFxServer.send(sl, IrontombFxServer.dust(IrontombFxServer.GOLD, 2.6f), p.x, p.y, p.z, 3, 0.25, 0.25, 0.25, 0.0);
@@ -765,6 +808,8 @@ public class PhainonEntity extends Mob {
                     IrontombFxServer.send(sl, IrontombFxServer.dust(IrontombFxServer.GOLD, 1.8f), p.x, p.y, p.z, 2, 0.15, 0.3, 0.15, 0.0);
                 }
                 IrontombFxServer.burst(sl, from.add(0, 1.2, 0), IrontombFxServer.GOLD, 24, 0.8, 0.2);
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, from.add(0, 1.2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, dest, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 7f * 2f / 7f, PhainonAttack.DASH_HIT_DELAY);
             }
         }
         if (local == PhainonAttack.DASH_HIT_DELAY) {
@@ -778,6 +823,8 @@ public class PhainonEntity extends Mob {
             sound(PhainonSounds.IMPACT, 6f, 1.6f);
             if (level() instanceof ServerLevel sl) {
                 IrontombFxServer.burst(sl, c.add(0, 1.3, 0), IrontombFxServer.GOLD, 30, 1.4, 0.3);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, c.add(0, 1.3, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3.5f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 7f * 2f / 6f);
             }
         }
     }
@@ -797,12 +844,22 @@ public class PhainonEntity extends Mob {
         if (rel >= 0 && rel % PhainonAttack.FEATHER_STEP == 0 && rel / PhainonAttack.FEATHER_STEP < PhainonAttack.FEATHER_VOLLEYS) {
             Vec3 a = getAim();
             sound(PhainonSounds.FEATHER, a.x, a.y + 8, a.z, 5f, 0.9f + random.nextFloat() * 0.3f);
+            if (level() instanceof ServerLevel xsl) {
+                for (int xs = 0; xs < S; xs++) {
+                    Vec3 xp = PhainonAttack.featherPoint(getSeed(), rel / PhainonAttack.FEATHER_STEP, xs, S, a);
+                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, xp, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3.4f * 2f / 7f, PhainonAttack.FEATHER_FALL);
+                }
+            }
             // homing strike on somebody (a telegraphed gold ring, then a hit)
             if ((rel / PhainonAttack.FEATHER_STEP) % 2 == 0) {
                 List<LivingEntity> l = foes(70);
                 if (!l.isEmpty()) {
                     LivingEntity v = l.get(random.nextInt(l.size()));
                     pending.add(new double[]{v.getX(), groundY(v.getX(), v.getY() + 1, v.getZ()), v.getZ(), t + 14});
+                    if (level() instanceof ServerLevel xsl) {
+                        double[] xq = pending.get(pending.size() - 1);
+                        com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, new Vec3(xq[0], xq[1], xq[2]), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f * 2f / 7f, 14);
+                    }
                 }
             }
         }
@@ -837,6 +894,7 @@ public class PhainonEntity extends Mob {
         sound(PhainonSounds.IMPACT, p.x, p.y, p.z, 2.5f, 1.8f);
         if (level() instanceof ServerLevel sl) {
             IrontombFxServer.burst(sl, p.add(0, 0.6, 0), IrontombFxServer.GOLD, 14, 0.7, 0.18);
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, p.add(0, 0.6, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) r * 0.6f);
         }
     }
 
@@ -844,6 +902,9 @@ public class PhainonEntity extends Mob {
     private void sunfall(int t, LivingEntity tg) {
         if (t == 1) {
             sound(PhainonSounds.CHARGE, 14f, 0.8f);
+            if (level() instanceof ServerLevel xsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(xsl, this, 2f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3f, PhainonAttack.SUN_THROW - 1);
+            }
         }
         if (t == 18) {
             sound(PhainonSounds.SUNFALL, 18f, 1f);
@@ -851,8 +912,15 @@ public class PhainonEntity extends Mob {
         if (t <= PhainonAttack.SUN_LOCK && tg != null) {
             setAim(new Vec3(tg.getX(), groundY(tg.getX(), tg.getY() + 1, tg.getZ()), tg.getZ()));
         }
+        if (t == PhainonAttack.SUN_LOCK && level() instanceof ServerLevel xsl) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) PhainonAttack.SUN_RADIUS * 2f / 7f, PhainonAttack.SUN_HIT - PhainonAttack.SUN_LOCK);
+            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) PhainonAttack.SUN_RADIUS * 2f / 7f, PhainonAttack.SUN_HIT - PhainonAttack.SUN_LOCK);
+        }
         if (t == PhainonAttack.SUN_HIT) {
             blast(getAim(), PhainonAttack.SUN_RADIUS, IrontombBalance.PH_SUNFALL, 1f, 1.6);
+            if (getPhase() >= 3 && level() instanceof ServerLevel xsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 10f * 2f / 7f, 14);
+            }
         }
         if (getPhase() >= 3 && t == PhainonAttack.SUN_HIT + 14) {
             blast(getAim(), 10.0, IrontombBalance.PH_SUNFALL, 0.5f, 1.2);
@@ -868,12 +936,19 @@ public class PhainonEntity extends Mob {
                 ringHit.add(new HashSet<>());
             }
             sound(PhainonSounds.CHARGE, 12f, 1.2f);
+            if (level() instanceof ServerLevel xsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 36f * 2f / 7f, PhainonAttack.HALO_START - 1);
+            }
         }
         Vec3 o = getAim();
         for (int i = 0; i < N && i < ringHit.size(); i++) {
             int t0 = PhainonAttack.HALO_START + PhainonAttack.HALO_STEP * i;
             if (t == t0) {
                 sound(PhainonSounds.HALO, o.x, o.y + 1, o.z, 14f, 1f + 0.06f * i);
+                if (level() instanceof ServerLevel xsl) {
+                    com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, o, i % 2 == 0 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4f);
+                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, o.add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);
+                }
             }
             if (t < t0) {
                 continue;
@@ -899,9 +974,17 @@ public class PhainonEntity extends Mob {
             setAim(new Vec3(getX(), groundY(getX(), getY(), getZ()), getZ()));
             entityData.set(D_SEED, random.nextInt(1 << 24));
             sound(PhainonSounds.CHARGE, 12f, 1f);
+            if (level() instanceof ServerLevel xsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) PhainonAttack.SWEEP_LENGTH * 2f / 7f, PhainonAttack.SWEEP_START - 1);
+            }
         }
         if (t == PhainonAttack.SWEEP_START) {
             sound(PhainonSounds.SWEEP, 16f, 1f);
+            if (level() instanceof ServerLevel xsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) PhainonAttack.SWEEP_LENGTH * 2f / 6f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4f, PhainonAttack.SWEEP_END - PhainonAttack.SWEEP_START);
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, getAim().add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4f);
+            }
         }
         if (t < PhainonAttack.SWEEP_START || t > PhainonAttack.SWEEP_END) {
             return;
@@ -937,6 +1020,9 @@ public class PhainonEntity extends Mob {
     private void judgment(int t, LivingEntity tg) {
         if (t == 1) {
             sound(PhainonSounds.ROAR, 16f, 1.2f);
+            if (level() instanceof ServerLevel xsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(xsl, this, 2f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4f, PhainonAttack.JUDG_THROW - 1);
+            }
         }
         if (t == 16) {
             sound(PhainonSounds.JUDGMENT, 20f, 1f);
@@ -944,8 +1030,15 @@ public class PhainonEntity extends Mob {
         if (t <= PhainonAttack.JUDG_LOCK && tg != null) {
             setAim(new Vec3(tg.getX(), groundY(tg.getX(), tg.getY() + 1, tg.getZ()), tg.getZ()));
         }
+        if (t == PhainonAttack.JUDG_LOCK && level() instanceof ServerLevel xsl) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) PhainonAttack.JUDG_RADIUS * 2f / 7f, PhainonAttack.JUDG_HIT - PhainonAttack.JUDG_LOCK);
+            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) PhainonAttack.JUDG_RADIUS * 2f / 7f, PhainonAttack.JUDG_HIT - PhainonAttack.JUDG_LOCK);
+        }
         if (t == PhainonAttack.JUDG_HIT) {
             blast(getAim(), PhainonAttack.JUDG_RADIUS, IrontombBalance.PH_JUDGMENT, 1f, 2.4);
+            if (level() instanceof ServerLevel xsl) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 42f * 2f / 7f, 14);
+            }
         }
         if (t == PhainonAttack.JUDG_HIT + 14) {
             blast(getAim(), 42.0, IrontombBalance.PH_JUDGMENT, 0.4f, 1.6);
@@ -966,12 +1059,17 @@ public class PhainonEntity extends Mob {
             IrontombFxServer.ring(sl, IrontombFxServer.dust(IrontombFxServer.GOLD, 2.6f), c, r * 0.5, 40, 0.8);
             IrontombFxServer.ring(sl, IrontombFxServer.dust(IrontombFxServer.WHITE, 2.2f), c, r * 0.25, 28, 0.6);
             IrontombFxServer.burst(sl, c.add(0, 1.5, 0), IrontombFxServer.GOLD, 120, r * 0.25, 0.6);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) r * 2f / 6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) r * 0.4f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, c.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) r * 0.3f);
         }
     }
 
     private void burst(Vec3 c, int n) {
         if (level() instanceof ServerLevel sl) {
             IrontombFxServer.burst(sl, c, IrontombFxServer.GOLD, n, 3.0, 0.5);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 8f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 5f);
         }
     }
 
@@ -994,9 +1092,30 @@ public class PhainonEntity extends Mob {
                 && !(e instanceof IrontombEntity) && !(e instanceof IrontombSatellite) && !(e instanceof PhainonEntity);
     }
 
+    /** Per-tick scan cache: attacks call foes(r) many times a tick with the same r (halo rings, feather spokes), and each call is a 90-block-tall AABB scan. */
+    private int foeCacheTick = -1;
+    private final java.util.HashMap<Double, List<LivingEntity>> foeCache = new java.util.HashMap<>();
+
     private List<LivingEntity> foes(double r) {
-        return level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(r, 90, r),
-                e -> isFoe(e) && e.distanceToSqr(this) <= r * r + 90 * 90);
+        if (foeCacheTick != tickCount) {
+            foeCache.clear();
+            foeCacheTick = tickCount;
+        }
+        List<LivingEntity> hit = foeCache.get(r);
+        if (hit == null) {
+            hit = level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(r, 90, r),
+                    e -> isFoe(e) && e.distanceToSqr(this) <= r * r + 90 * 90);
+            foeCache.put(r, hit);
+            return new java.util.ArrayList<>(hit);
+        }
+        // same tick, same radius: reuse the scan, but still drop anything killed since (callers expect only living foes)
+        java.util.ArrayList<LivingEntity> out = new java.util.ArrayList<>(hit.size());
+        for (LivingEntity e : hit) {
+            if (isFoe(e)) {
+                out.add(e);
+            }
+        }
+        return out;
     }
 
     private static String fmt(double v) {

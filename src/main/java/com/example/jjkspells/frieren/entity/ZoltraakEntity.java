@@ -205,10 +205,13 @@ public class ZoltraakEntity extends Entity {
         if (age == 0) {
             sl.playSound(null, o.x, o.y, o.z, SoundEvents.EVOKER_CAST_SPELL, SoundSource.PLAYERS, 0.7f, 1.7f);
             sl.playSound(null, o.x, o.y, o.z, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.0f, 2.0f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(sl, this, 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 1.2f, LAUNCH + 6);
         }
         if (age == LAUNCH) {
             sl.playSound(null, o.x, o.y, o.z, SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 0.45f, 2.0f);
             sl.playSound(null, o.x, o.y, o.z, SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.PLAYERS, 1.2f, 1.9f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.0f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, o, o.add(dir.scale(len)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 1.2f, endTick() - LAUNCH + HOLD);
         }
         if (age > LAUNCH) {
             LivingEntity owner = resolveOwner(sl);
@@ -224,6 +227,8 @@ public class ZoltraakEntity extends Entity {
             Vec3 e = o.add(dir.scale(len));
             sl.playSound(null, e.x, e.y, e.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 0.5f, 2.0f);
             sl.playSound(null, e.x, e.y, e.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 1.6f, 1.6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, e, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 2.0f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, e, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f);
         }
         if (age > endTick() + HOLD + FADE + 4) discard();
     }
@@ -256,6 +261,7 @@ public class ZoltraakEntity extends Entity {
             hitCount++;
             strike(h.target(), owner, direct);
             pushEvent((float) h.dist(), direct ? K_DIRECT : K_PIERCE);
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, o.add(dir.scale(h.dist())), direct ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, direct ? 1.6f : 1.2f);
         }
     }
 

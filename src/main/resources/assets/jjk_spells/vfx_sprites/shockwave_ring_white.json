@@ -1,0 +1,14 @@
+{
+  "texture": "jjk_spells:textures/sprite_vfx/shockwave_ring_white.png",
+  "cols": 8,
+  "rows": 4,
+  "frames": 32,
+  "blend": "additive",
+  "fullbright": true,
+  "playback": "once",
+  "lifetime": 18,
+  "size": 6.0,
+  "orientation": "flat",
+  "scale_end": 1.0,
+  "fade_out": 0
+}

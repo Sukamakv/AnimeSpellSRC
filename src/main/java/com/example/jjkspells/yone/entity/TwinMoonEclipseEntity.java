@@ -190,6 +190,8 @@ public class TwinMoonEclipseEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 3.0f, 0.6f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 4.0f, 0.7f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.9f, X_T);
+            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.5f, CHARGE);
         }
         if (tickCount >= TwinMoonEclipseSpell.PULL_START && tickCount < X_T) {
             pull(owner, c);
@@ -197,6 +199,7 @@ public class TwinMoonEclipseEntity extends Entity {
         if (tickCount == CHARGE) {
             level().playSound(null, c.x, c.y + 6, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 2.5f, 0.7f);
             level().playSound(null, c.x, c.y + 6, c.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 3.0f, 0.8f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.9f, X_T - CHARGE);
         }
         if (tickCount == X_T) {
             double r = TwinMoonEclipseSpell.X_RADIUS;
@@ -214,12 +217,15 @@ public class TwinMoonEclipseEntity extends Entity {
                 t.hurtMarked = true;
                 t.fallDistance = 0;
                 level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.5f, 0.9f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.0f);
             }
             caught.clear();
             syncCaught();
             level().playSound(null, c.x, c.y + 3, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 4.0f, 0.9f);
             level().playSound(null, c.x, c.y + 3, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 4.0f, 1.5f);
             level().playSound(null, c.x, c.y + 3, c.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 4.0f, 0.6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 2.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4.5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3.3f);
         }
         if (tickCount == AFTER_T) {
             double r = TwinMoonEclipseSpell.AFTER_RADIUS;
@@ -237,6 +243,7 @@ public class TwinMoonEclipseEntity extends Entity {
                 t.hurtMarked = true;
             }
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 3.0f, 1.4f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 4.3f);
         }
     }
 

@@ -217,6 +217,14 @@ public class DimensionRushEntity extends Entity {
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 2.5f, 0.5f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 2.0f, 1.8f);
         }
+        if (tickCount == 1) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.2f, BLINK - 1);
+            com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, a.add(0, 0.5, 0), b.add(0, 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f, CUT0 - 1);
+        }
+        if (tickCount == BLINK) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, b.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 1.2f, FINAL - BLINK);
+        }
         if (tickCount == BLINK && owner != null) {
             if (owner instanceof ServerPlayer sp) {
                 sp.connection.teleport(b.x, b.y, b.z, sp.getYRot(), sp.getXRot());
@@ -240,7 +248,9 @@ public class DimensionRushEntity extends Entity {
             for (int i = 0; i < ids.length; i++) {
                 ids[i] = in.get(i).getId();
                 hit(in.get(i), owner, DimensionRushSpell.CUT_FLAT, DimensionRushSpell.CUT_PERCENT);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, in.get(i).position().add(0, in.get(i).getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);
             }
+            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, mid.add(0, 1.5, 0), new Vec3(0, 1, 0), (float) Math.toDegrees(Math.atan2(b.z - a.z, b.x - a.x)) + 25f * k, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4f);
             log.putIntArray("c" + k, ids);
             log.putInt("n", k + 1);
             this.entityData.set(LOG, log.copy());
@@ -256,11 +266,14 @@ public class DimensionRushEntity extends Entity {
             level().playSound(null, mid.x, mid.y + 4, mid.z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 5.0f, 1.1f);
             level().playSound(null, b.x, b.y + 4, b.z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 5.0f, 0.8f);
             level().playSound(null, mid.x, mid.y + 4, mid.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, mid.add(0, 3.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f);
             double dx = b.x - a.x;
             double dz = b.z - a.z;
             double len2 = Math.max(1.0E-6, dx * dx + dz * dz);
             for (LivingEntity t : inCorridor(owner)) {
                 hit(t, owner, DimensionRushSpell.FINAL_FLAT, DimensionRushSpell.FINAL_PERCENT);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 2.5f);
                 double f = Math.max(0.0, Math.min(1.0, ((t.getX() - a.x) * dx + (t.getZ() - a.z) * dz) / len2));
                 Vec3 out = new Vec3(t.getX() - (a.x + dx * f), 0, t.getZ() - (a.z + dz * f));
                 out = out.lengthSqr() < 0.01 ? Vec3.ZERO : out.normalize().scale(0.6);

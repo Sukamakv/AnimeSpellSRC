@@ -1,0 +1,16 @@
+{
+  "texture": "jjk_spells:textures/sprite_vfx/flame_loop_fire.png",
+  "cols": 8,
+  "rows": 4,
+  "frames": 32,
+  "blend": "additive",
+  "fullbright": true,
+  "playback": "loop",
+  "fps": 24,
+  "lifetime": 40,
+  "size": 2.2,
+  "orientation": "billboard_y",
+  "scale_end": 1.0,
+  "fade_in": 3,
+  "fade_out": 6
+}

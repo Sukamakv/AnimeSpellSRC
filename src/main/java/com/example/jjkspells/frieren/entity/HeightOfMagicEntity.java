@@ -141,12 +141,22 @@ public class HeightOfMagicEntity extends Entity {
         entityData.set(RELEASE, tickCount);
         level().playSound(null, getX(), getY(), getZ(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 3.0f, 0.6f);
         level().playSound(null, getX(), getY(), getZ(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 3.0f, 1.8f);
+        if (level() instanceof net.minecraft.server.level.ServerLevel fsl) {
+            int travel = Math.max(1, impactTick() - tickCount);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(fsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 4.0f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.beam(fsl, position(), target, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3.0f, travel + HOLD);
+            // telegraph: the explosion zone around the target point until the beam lands
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(fsl, target, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, HeightOfMagicSpell.EXPLOSION_RADIUS * 2f / 7f, travel);
+        }
     }
 
     private void cancel() {
         if (release() >= 0 || cancelTick() >= 0) return;
         entityData.set(CANCEL, tickCount);
         level().playSound(null, getX(), getY(), getZ(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 1.5f, 1.4f);
+        if (level() instanceof net.minecraft.server.level.ServerLevel fsl) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(fsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.0f);
+        }
     }
 
     public void finish() {
@@ -239,6 +249,8 @@ public class HeightOfMagicEntity extends Entity {
         if (age == 0) {
             ACTIVE.add(this);
             sl.playSound(null, getX(), getY(), getZ(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2.0f, 0.6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(getX(), getY() - STAR_H, getZ()), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.8f, CAST);
+            com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(sl, this, 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.0f, CAST);
         }
         Entity o = ownerId == null ? null : sl.getEntity(ownerId);
         LivingEntity owner = o instanceof LivingEntity le && le.isAlive() ? le : null;
@@ -282,6 +294,9 @@ public class HeightOfMagicEntity extends Entity {
             sl.playSound(null, t.x, t.y, t.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 6.0f, 0.5f);
             sl.playSound(null, t.x, t.y, t.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 5.0f, 1.3f);
             sl.playSound(null, t.x, t.y, t.z, SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.PLAYERS, 5.0f, 0.7f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, t, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 10.0f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 8.0f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, t, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, HeightOfMagicSpell.EXPLOSION_RADIUS * 2f / 6f);
         }
         if (impacted) {
             // the shockwave front: everything it reaches takes the hit (once)

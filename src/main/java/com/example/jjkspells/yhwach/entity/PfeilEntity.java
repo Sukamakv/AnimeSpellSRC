@@ -157,6 +157,10 @@ public class PfeilEntity extends Entity {
                 Vec3 c = BowFrame.charging(owner.position(), owner.getLookAngle()).center;
                 level().playSound(null, c.x, c.y, c.z, SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 0.8f, 1.9f);
                 level().playSound(null, c.x, c.y, c.z, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 2.0f, 0.6f);
+                if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
+                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, owner.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 0.8f, CHARGE_TICKS);   // cast: rune circle under the caster
+                    com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(sl, owner, (float) BOW_HEIGHT, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1f, CHARGE_TICKS - 1);   // arrow charging
+                }
             }
             if (tickCount == 12) {
                 Vec3 c = owner.position();
@@ -201,6 +205,11 @@ public class PfeilEntity extends Entity {
         level().playSound(null, origin.x, origin.y, origin.z, SoundEvents.TRIDENT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.9f);
         level().playSound(null, origin.x, origin.y, origin.z, SoundEvents.FIREWORK_ROCKET_LARGE_BLAST, SoundSource.PLAYERS, 3.0f, 0.7f);
         level().playSound(null, origin.x, origin.y, origin.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 1.5f, 2.0f);
+        if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, origin, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.6f, 6);   // release: laser arrow
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, origin, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.2f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (HeiligerPfeilSpell.BLAST_RADIUS / 3.5), TRAVEL_TICKS);   // telegraph: blast zone
+        }
     }
 
     private void explode(@Nullable LivingEntity owner) {
@@ -233,6 +242,11 @@ public class PfeilEntity extends Entity {
         level().playSound(null, p.x, p.y, p.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 5.0f, 0.8f);
         level().playSound(null, p.x, p.y, p.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 4.0f, 1.4f);
         level().playSound(null, p.x, p.y, p.z, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 4.0f, 0.5f);
+        if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (r / 3.0));   // detonation
+            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (r / 3.0));
+        }
     }
 
     // ------------------------------------------------------------------ client-only particles (the heavy VFX is in PfeilRenderer)

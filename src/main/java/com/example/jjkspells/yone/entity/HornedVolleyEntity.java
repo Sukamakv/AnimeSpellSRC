@@ -184,6 +184,8 @@ public class HornedVolleyEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, o.x, o.y + 2, o.z, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 2.5f, 1.4f);
             level().playSound(null, o.x, o.y + 2, o.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 0.8f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.4f, FIRE_START);
+            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 2.4f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2f, FIRE_START);
         }
         if (tickCount < FIN) {
             owner.setDeltaMovement(0, Math.min(0.0, owner.getDeltaMovement().y), 0);
@@ -208,9 +210,11 @@ public class HornedVolleyEntity extends Entity {
                         hit(t, owner, HornedVolleySpell.IMPACT_FLAT, HornedVolleySpell.IMPACT_PERCENT);
                         level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.0f, 1.2f);
                         level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.TRIDENT_HIT, SoundSource.PLAYERS, 2.0f, 1.4f);
+                        com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.5f);
                     }
                 } else {
                     level().playSound(null, s.fallback.x, s.fallback.y, s.fallback.z, SoundEvents.TRIDENT_HIT_GROUND, SoundSource.PLAYERS, 1.5f, 1.4f);
+                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, s.fallback, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1f);
                 }
             }
         }
@@ -227,10 +231,14 @@ public class HornedVolleyEntity extends Entity {
                     t.setDeltaMovement(out.x * 0.25, 0.3, out.z * 0.25);
                     t.hurtMarked = true;
                     level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.5f, 1.7f);
+                    com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2f);
+                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f);
                 }
             }
             level().playSound(null, o.x, o.y + 3, o.z, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 3.0f, 0.8f);
             level().playSound(null, o.x, o.y + 3, o.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 3.0f, 0.9f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, o.add(0, 2.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);
         }
     }
 
@@ -280,6 +288,7 @@ public class HornedVolleyEntity extends Entity {
         this.entityData.set(LOG, tag);
         level().playSound(null, o.x, o.y + 3, o.z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.5f, 1.4f + 0.05f * idx);
         level().playSound(null, o.x, o.y + 3, o.z, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.5f, 1.2f + 0.04f * idx);
+        com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, o.add(0, 3.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 0.8f);
     }
 
     // ------------------------------------------------------------------ client

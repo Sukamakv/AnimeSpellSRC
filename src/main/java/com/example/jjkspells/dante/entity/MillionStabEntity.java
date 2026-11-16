@@ -230,11 +230,16 @@ public class MillionStabEntity extends Entity {
             }
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 3.0f, 0.6f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 1.5f, 1.6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.2f, DASH0 - 1);   // cast: Stinger wind-up
+            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, a.add(0, 1.2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.2f);
         }
         if (tickCount == DASH0) {
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.TRIDENT_THUNDER, SoundSource.PLAYERS, 4.0f, 1.2f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 3.0f, 0.5f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 3.0f, 0.6f);
+            Vec3 sa = a.add(0, 1.0, 0);
+            com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, sa, sa.add(dir.scale(MillionStabSpell.DASH_SPEED * DASH_TICKS)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.5f, DASH_TICKS);   // Stinger line
+            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, sa, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.5f);
         }
         boolean dashing = tickCount >= DASH0 && tickCount < B_TICK;
         if (dashing && owner != null) {
@@ -248,6 +253,7 @@ public class MillionStabEntity extends Entity {
                     pierced.add(tickCount);
                     hit(t, owner, MillionStabSpell.DASH_FLAT, MillionStabSpell.DASH_PERCENT);
                     any = true;
+                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.8f);   // skewered
                 }
             }
             if (any) {
@@ -274,6 +280,8 @@ public class MillionStabEntity extends Entity {
                 owner.hurtMarked = true;
             }
             level().playSound(null, b.x, b.y + 1, b.z, SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 2.0f, 0.6f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.0f);   // Stinger ends
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (MillionStabSpell.STAB_RADIUS / 3.5), FINAL - B_TICK);   // telegraph: stab zone
         }
         Vec3 b = endPos();
         if (b == null) {
@@ -305,6 +313,7 @@ public class MillionStabEntity extends Entity {
                     out = out.lengthSqr() < 0.01 ? Vec3.ZERO : out.normalize().scale(0.7);
                     t.setDeltaMovement(t.getDeltaMovement().add(out.x, 0.6, out.z));
                     t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2, false, true, true));
+                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.5f);
                     t.hurtMarked = true;
                 }
             }
@@ -314,15 +323,22 @@ public class MillionStabEntity extends Entity {
             if (!last) {
                 level().playSound(null, b.x, b.y + 1.5, b.z, SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.0f, 1.2f + 0.04f * k);
                 level().playSound(null, b.x, b.y + 1.5, b.z, SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 0.8f, 1.8f + 0.03f * k);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, b.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);   // stab
+                com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, b.add(0, 1.5, 0), new Vec3(Math.cos(k * 1.1), 0.4, Math.sin(k * 1.1)), k * 37f, k % 2 == 0 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.2f);
             } else {
                 level().playSound(null, b.x, b.y + 1, b.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 5.0f, 0.6f);
                 level().playSound(null, b.x, b.y + 1, b.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 5.0f, 0.9f);
                 level().playSound(null, b.x, b.y + 1, b.z, SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 3.0f, 0.5f);
                 level().playSound(null, b.x, b.y + 1, b.z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 3.0f, 0.6f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, b.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4.0f);   // final Rebellion lands
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, b.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 5.0f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (MillionStabSpell.FINAL_RADIUS / 3.0));
             }
         }
         if (tickCount == FINAL - 6) {
             level().playSound(null, b.x, b.y + 12, b.z, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 4.0f, 0.5f);
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (MillionStabSpell.FINAL_RADIUS / 3.5), 6);   // telegraph: final zone
+            com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, b.add(0, 30, 0), b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f, 6);   // giant Rebellion falls
         }
     }
 

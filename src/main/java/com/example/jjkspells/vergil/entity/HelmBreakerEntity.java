@@ -215,6 +215,12 @@ public class HelmBreakerEntity extends Entity {
         double y = getY();
         double z = getZ();
 
+        if (tickCount == LAUNCH) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 7.0), IMPACT - 1);
+        }
+        if (tickCount == APEX) {
+            com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, new Vec3(x, y + 20, z), new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f, IMPACT - APEX);
+        }
         if (tickCount == LAUNCH && owner != null) {
             owner.setDeltaMovement(owner.getDeltaMovement().add(0, 1.9, 0));
             owner.hurtMarked = true;
@@ -246,6 +252,7 @@ public class HelmBreakerEntity extends Entity {
             for (int i = 0; i < ids.length; i++) {
                 LivingEntity t = in.get(i);
                 ids[i] = t.getId();
+                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, k == 0 || k == EVENTS - 1 ? 3f : 1.5f);
                 if (k == 0) {
                     hit(t, owner, HelmBreakerSpell.IMPACT_FLAT, HelmBreakerSpell.IMPACT_PERCENT);
                     t.setDeltaMovement(t.getDeltaMovement().add(0, 0.8, 0));
@@ -264,14 +271,19 @@ public class HelmBreakerEntity extends Entity {
             log.putInt("n", k + 1);
             this.entityData.set(LOG, log.copy());
             if (k == 0) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, new Vec3(x, y + 1, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 8f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 6.0));
                 level().playSound(null, x, y + 1, z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 5.0f, 0.6f);
                 level().playSound(null, x, y + 1, z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 5.0f, 1.0f);
                 level().playSound(null, x, y + 1, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 5.0f, 0.5f);
                 level().playSound(null, x, y + 1, z, SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 3.0f, 1.2f);
             } else if (k < EVENTS - 1) {
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, (float) (R * 2.0 / 6.0) * (0.4f + 0.12f * k));
                 level().playSound(null, x, y + 2, z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 3.0f, 1.0f + 0.08f * k);
                 level().playSound(null, x, y + 2, z, SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.0f, 1.3f);
             } else {
+                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, new Vec3(x, y + 1, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 6f);
+                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (R * 2.0 / 6.0));
                 level().playSound(null, x, y + 2, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 5.0f, 0.6f);
                 level().playSound(null, x, y + 2, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 5.0f, 1.1f);
                 level().playSound(null, x, y + 2, z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 3.0f, 1.2f);
