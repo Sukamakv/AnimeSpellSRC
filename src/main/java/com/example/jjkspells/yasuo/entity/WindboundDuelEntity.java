@@ -202,7 +202,6 @@ public class WindboundDuelEntity extends Entity {
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.6f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 1.5f, 1.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (R * 2.0 / 7.0), DURATION);
             com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 6.0));
             com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);
         }

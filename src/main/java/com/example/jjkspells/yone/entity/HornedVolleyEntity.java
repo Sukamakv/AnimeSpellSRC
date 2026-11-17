@@ -184,8 +184,6 @@ public class HornedVolleyEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, o.x, o.y + 2, o.z, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 2.5f, 1.4f);
             level().playSound(null, o.x, o.y + 2, o.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 0.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.4f, FIRE_START);
-            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 2.4f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2f, FIRE_START);
         }
         if (tickCount < FIN) {
             owner.setDeltaMovement(0, Math.min(0.0, owner.getDeltaMovement().y), 0);

@@ -211,8 +211,6 @@ public class SteelTempestEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 3.0f, 1.5f);
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.0f, 1.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.3f, T0);
-            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, this, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.8f, T0);
         }
         if (owner != null && tickCount < T0) {
             owner.setDeltaMovement(0, Math.min(0, owner.getDeltaMovement().y), 0);

@@ -245,7 +245,6 @@ public class SanktZwingerEntity extends Entity {
             level().playSound(null, c.x, c.y, c.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 3.0f, 1.4f);
             if (level() instanceof net.minecraft.server.level.ServerLevel zsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(zsl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) (SEAL_R / 3.5), ACTIVE_END);   // cast: Quincy seal
                 com.example.jjkspells.vfx.sprite.SpriteFx.ring(zsl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) (SEAL_R / 3.0));
                 com.example.jjkspells.vfx.sprite.SpriteFx.burst(zsl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f);
             }
@@ -255,7 +254,6 @@ public class SanktZwingerEntity extends Entity {
             level().playSound(null, b.x, b.y, b.z, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 4.0f, 0.5f);
             level().playSound(null, b.x, b.y, b.z, SoundEvents.PISTON_EXTEND, SoundSource.PLAYERS, 3.0f, 0.5f);
             if (level() instanceof net.minecraft.server.level.ServerLevel zsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(zsl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 0.8f, PILLAR_RISE);   // pillar rises
                 com.example.jjkspells.vfx.sprite.SpriteFx.ring(zsl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 0.8f);
             }
         }

@@ -218,12 +218,10 @@ public class DimensionRushEntity extends Entity {
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 2.0f, 1.8f);
         }
         if (tickCount == 1) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.2f, BLINK - 1);
             com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, a.add(0, 0.5, 0), b.add(0, 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f, CUT0 - 1);
         }
         if (tickCount == BLINK) {
             com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, b.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 1.2f, FINAL - BLINK);
         }
         if (tickCount == BLINK && owner != null) {
             if (owner instanceof ServerPlayer sp) {

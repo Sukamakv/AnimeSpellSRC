@@ -122,10 +122,6 @@ public class RoyalGuardEntity extends Entity {
             this.entityData.set(PHASE_TICK, tickCount);
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 4.0f, 0.5f);
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.PLAYERS, 3.0f, 0.6f);
-            if (level() instanceof ServerLevel rsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(rsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (RoyalGuardSpell.RADIUS / 3.5), CHARGE);   // telegraph: release zone
-                com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(rsl, this, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.5f, CHARGE);
-            }
         }
     }
 
@@ -241,7 +237,6 @@ public class RoyalGuardEntity extends Entity {
             if (tickCount == 1) {
                 level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 2.0f, 0.7f);
                 level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2.0f, 1.3f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.0f, 24);   // guard raised
                 com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, position().add(0, 1.2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.2f);
             }
             if (age >= RoyalGuardSpell.GUARD_TICKS) {
@@ -249,8 +244,6 @@ public class RoyalGuardEntity extends Entity {
                 if (phase() == PH_GUARD) {
                     this.entityData.set(PHASE, PH_RELEASE);
                     this.entityData.set(PHASE_TICK, tickCount);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (RoyalGuardSpell.RADIUS / 3.5), CHARGE);   // telegraph: release zone
-                    com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, this, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.5f, CHARGE);
                 }
             }
             return;

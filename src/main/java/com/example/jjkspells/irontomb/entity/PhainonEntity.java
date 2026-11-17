@@ -696,9 +696,6 @@ public class PhainonEntity extends Mob {
     private void lance(int t, LivingEntity tg) {
         if (t == 1) {
             sound(PhainonSounds.CHARGE, 12f, 1f);
-            if (level() instanceof ServerLevel xsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(xsl, this, 1.9f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.5f, PhainonAttack.LANCE_FIRE - 1);
-            }
         }
         if (t <= 16 && tg != null) {
             setAim(tg.position().add(0, tg.getBbHeight() * 0.5, 0));
@@ -902,9 +899,6 @@ public class PhainonEntity extends Mob {
     private void sunfall(int t, LivingEntity tg) {
         if (t == 1) {
             sound(PhainonSounds.CHARGE, 14f, 0.8f);
-            if (level() instanceof ServerLevel xsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(xsl, this, 2f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3f, PhainonAttack.SUN_THROW - 1);
-            }
         }
         if (t == 18) {
             sound(PhainonSounds.SUNFALL, 18f, 1f);
@@ -1020,9 +1014,6 @@ public class PhainonEntity extends Mob {
     private void judgment(int t, LivingEntity tg) {
         if (t == 1) {
             sound(PhainonSounds.ROAR, 16f, 1.2f);
-            if (level() instanceof ServerLevel xsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(xsl, this, 2f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4f, PhainonAttack.JUDG_THROW - 1);
-            }
         }
         if (t == 16) {
             sound(PhainonSounds.JUDGMENT, 20f, 1f);

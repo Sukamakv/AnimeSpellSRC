@@ -178,7 +178,6 @@ public class AncientReleaseEntity extends Entity {
             com.example.jjkspells.vfx.sprite.SpriteFx.burst(fsl, origin, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 5.0f);
             com.example.jjkspells.vfx.sprite.SpriteFx.beam(fsl, origin, stop, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (BEAM_RADIUS * 2.0), BEAM_TICKS);
             // telegraph: the blast zone at the end of the beam, shown until the explosion
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(fsl, stop.subtract(dir.scale(0.5)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, AncientReleaseSpell.EXPLOSION_RADIUS * 2f / 7f, BEAM_TICKS);
         }
     }
 
@@ -316,7 +315,6 @@ public class AncientReleaseEntity extends Entity {
             entityData.set(DY, (float) look.y);
             entityData.set(DZ, (float) look.z);
             if (age == 0) sl.playSound(null, getX(), getY(), getZ(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2.5f, 0.5f);
-            if (age == 0) com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.5f, CAST);
             if (age > 0 && age % 20 == 0) { // a rising hum
                 sl.playSound(null, getX(), getY(), getZ(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 2.5f, 0.5f + age / 120f);
             }

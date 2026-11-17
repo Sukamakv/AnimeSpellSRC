@@ -146,7 +146,6 @@ public class HeightOfMagicEntity extends Entity {
             com.example.jjkspells.vfx.sprite.SpriteFx.burst(fsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 4.0f);
             com.example.jjkspells.vfx.sprite.SpriteFx.beam(fsl, position(), target, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3.0f, travel + HOLD);
             // telegraph: the explosion zone around the target point until the beam lands
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(fsl, target, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, HeightOfMagicSpell.EXPLOSION_RADIUS * 2f / 7f, travel);
         }
     }
 
@@ -249,8 +248,6 @@ public class HeightOfMagicEntity extends Entity {
         if (age == 0) {
             ACTIVE.add(this);
             sl.playSound(null, getX(), getY(), getZ(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2.0f, 0.6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(getX(), getY() - STAR_H, getZ()), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.8f, CAST);
-            com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(sl, this, 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.0f, CAST);
         }
         Entity o = ownerId == null ? null : sl.getEntity(ownerId);
         LivingEntity owner = o instanceof LivingEntity le && le.isAlive() ? le : null;

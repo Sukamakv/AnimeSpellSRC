@@ -247,8 +247,6 @@ public class DevilTriggerEntity extends Entity {
             owner.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, d, 1, false, false, true));
             owner.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, d, 0, false, false, true));
             owner.addEffect(new MobEffectInstance(MobEffects.REGENERATION, d, 0, false, false, true));
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (DevilTriggerSpell.RADIUS * 2.0 / 7.0), RISE - 1);
-            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 3f, DURATION - 1);
             level().playSound(null, x, y + 2, z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 4.0f, 1.6f);
             level().playSound(null, x, y + 2, z, SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.PLAYERS, 2.5f, 1.2f);
             level().playSound(null, x, y + 2, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 3.0f, 0.6f);

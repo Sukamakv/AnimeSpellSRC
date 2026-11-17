@@ -251,8 +251,6 @@ public class SpiritCleaveEntity extends Entity {
             prevAbsorb = owner.getAbsorptionAmount();
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 2.5f, 1.6f);
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.0f, 1.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (SpiritCleaveSpell.RADIUS * 2.0 / 7.0), T2);
-            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.8f, T1);
         }
         if (tickCount <= T2 + 2) {
             owner.setDeltaMovement(0, Math.min(0.0, owner.getDeltaMovement().y), 0);

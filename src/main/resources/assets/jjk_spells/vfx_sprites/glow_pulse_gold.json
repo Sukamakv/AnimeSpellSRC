@@ -12,5 +12,6 @@
   "orientation": "billboard",
   "scale_end": 1.0,
   "fade_in": 4,
-  "fade_out": 6
+  "fade_out": 6,
+  "alpha": 0.5
 }

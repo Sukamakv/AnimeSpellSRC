@@ -220,9 +220,6 @@ public class DimensionSeverEntity extends Entity {
             level().playSound(null, x, y + 2, z, SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.PLAYERS, 4.0f, 0.8f);
             level().playSound(null, x, y + 2, z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 3.0f, 0.5f);
         }
-        if (tickCount == 1) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 7.0), SLASH - 1);
-        }
         if (tickCount > 4 && tickCount < SLASH + 30 && tickCount % 5 == 0) {
             level().playSound(null, x, y + 20, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 4.0f, 0.5f + 0.02f * tickCount);
         }
@@ -277,7 +274,6 @@ public class DimensionSeverEntity extends Entity {
             if (k == 0) {
                 com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, new Vec3(x, y + 4, z), new Vec3(0, 0, 1), 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 12f);
                 com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 6.0));
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, (float) (R * 2.0 / 7.0), FINAL - SLASH);
                 level().playSound(null, x, y + 4, z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 6.0f, 1.2f);
                 level().playSound(null, x, y + 4, z, SoundEvents.TRIDENT_THUNDER, SoundSource.PLAYERS, 5.0f, 0.7f);
                 level().playSound(null, x, y + 4, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 6.0f, 0.5f);

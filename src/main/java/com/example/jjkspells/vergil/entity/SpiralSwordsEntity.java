@@ -212,9 +212,6 @@ public class SpiralSwordsEntity extends Entity {
             level().playSound(null, x, y + 4, z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 3.0f, 1.9f);
             level().playSound(null, x, y + 4, z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 2.5f, 0.6f);
         }
-        if (tickCount == 1) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 7.0), VOLLEY0 + FLIGHT - 2);
-        }
         if (tickCount == PULL) {
             com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, (float) (R * 2.0 / 7.0), FINAL - PULL);
         }

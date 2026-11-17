@@ -310,7 +310,6 @@ public class AlmightyEntity extends Entity {
             level().playSound(null, c.x, c.y, c.z, SoundEvents.WARDEN_EMERGE, SoundSource.PLAYERS, 6.0f, 0.5f);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.WITHER_SPAWN, SoundSource.PLAYERS, 3.0f, 0.5f);
             if (level() instanceof ServerLevel asl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(asl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (AlmightySpell.ZONE_RADIUS / 3.5), ZONE_TICKS);   // cast: zone
                 com.example.jjkspells.vfx.sprite.SpriteFx.ring(asl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) (AlmightySpell.ZONE_RADIUS / 3.0));
                 com.example.jjkspells.vfx.sprite.SpriteFx.burst(asl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f);
             }
@@ -342,10 +341,6 @@ public class AlmightyEntity extends Entity {
             zonePhase(owner, c, R);
         } else if (tickCount == ZONE_TICKS) {
             level().playSound(null, c.x, c.y, c.z, SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.PLAYERS, 6.0f, 0.6f);
-            if (level() instanceof ServerLevel asl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(asl, owner, 1.6f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.0f, BEAM_START - ZONE_TICKS);   // darkness gathers into the orb
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(asl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.5f, BEAM_START - ZONE_TICKS);
-            }
         }
         if (tickCount == BEAM_START) {
             level().playSound(null, c.x, c.y, c.z, SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 8.0f, 0.5f);
@@ -411,9 +406,6 @@ public class AlmightyEntity extends Entity {
             int id = nextPillarId++;
             addEvent(0, id, new Vec3(x, y, z), new Vec3(x, y, z));
             level().playSound(null, x, y, z, SoundEvents.WARDEN_DIG, SoundSource.PLAYERS, 3.0f, 0.6f);
-            if (level() instanceof ServerLevel asl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(asl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.2f, 14);   // telegraph: pillar before its lasers fire
-            }
             int beams = AlmightySpell.PILLAR_MIN_BEAMS + random.nextInt(AlmightySpell.PILLAR_MAX_BEAMS - AlmightySpell.PILLAR_MIN_BEAMS + 1);
             Vec3 eye = new Vec3(x, y + PILLAR_H + 1.5, z);
             for (int j = 0; j < beams; j++) {

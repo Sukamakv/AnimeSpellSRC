@@ -211,9 +211,6 @@ public class JudgementCutEntity extends Entity {
             level().playSound(null, x, y + 1, z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.9f);
             level().playSound(null, x, y + 1, z, SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 2.0f, 2.0f);
         }
-        if (tickCount == 1) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 7.0), CUT0 - 1);
-        }
         if (tickCount == RING) {
             com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, (float) (R * 2.0 / 6.0));
         }

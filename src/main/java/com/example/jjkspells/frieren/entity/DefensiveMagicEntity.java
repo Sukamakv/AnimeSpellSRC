@@ -233,7 +233,6 @@ public class DefensiveMagicEntity extends Entity {
         if (tickCount == 0) {
             ACTIVE.add(this);
             sl.playSound(null, getX(), getY(), getZ(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.0f, 1.9f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(getX(), getY() - CENTER_Y, getZ()), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.1f, ACTIVE_FROM + 12);
         }
         Entity o = ownerId == null ? null : sl.getEntity(ownerId);
         if (!(o instanceof LivingEntity owner) || !owner.isAlive()) {
@@ -245,7 +244,6 @@ public class DefensiveMagicEntity extends Entity {
         if (tickCount == ACTIVE_FROM) {
             sl.playSound(null, getX(), getY(), getZ(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 0.6f, 1.8f);
             com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(getX(), getY() - CENTER_Y, getZ()), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 0.9f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, this, 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f, DefensiveMagicSpell.DURATION_TICKS);
         }
         if (pendingShatter && !shattered) {
             shattered = true;

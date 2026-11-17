@@ -146,8 +146,8 @@ def k_flame_loop(t, i):
 
 def k_energy_orb(t, i):
     a = t * 2 * math.pi
-    core = np.exp(-(R / 0.17) ** 2) * 1.0
-    halo = np.exp(-(R / 0.5) ** 2) * 0.4
+    core = np.exp(-(R / 0.13) ** 2) * 0.9
+    halo = np.exp(-(R / 0.32) ** 2) * 0.12
     n = fbm(CX * 0.5 + 0.5 + 0.35 * math.cos(a), CY * 0.5 + 0.5 + 0.35 * math.sin(a), base=4, octaves=4,
             z=0.0, seed=21)
     rim = np.exp(-((R - 0.40 - 0.05 * (n - 0.5)) / 0.07) ** 2) * (0.55 + 0.9 * n)
@@ -182,7 +182,7 @@ def k_shockwave_ring(t, i):
     n = fbm(np.cos(TH) * 0.5 + 0.5, np.sin(TH) * 0.5 + 0.5, base=5, octaves=3, z=t * 2, seed=55)
     d = np.abs(R - rr * (0.97 + 0.06 * n)) / th
     ring = np.clip(1.0 - d, 0, 1) ** 1.4
-    inner = np.clip(1.0 - R / rr, 0, 1) ** 2.0 * 0.28 * (1.0 - t)
+    inner = 0.0 * R
     fade = (1.0 - t) ** 0.7
     return np.clip((ring * (0.7 + 0.6 * n) + inner) * fade * 1.15, 0, 1.2) * (R < 1.0)
 
@@ -256,7 +256,7 @@ def k_magic_circle(t, i):
     x, y = CX * c + CY * s, -CX * s + CY * c
     r = np.hypot(x, y)
     th = np.arctan2(y, x)
-    line = lambda d, w: np.exp(-(d / w) ** 2) + 0.35 * np.exp(-(d / (w * 4)) ** 2)
+    line = lambda d, w: np.exp(-(d / (w * 0.7)) ** 2)
     out = line(r - 0.94, 0.012) + line(r - 0.86, 0.008) * 0.8
     # tick marks
     ticks = 24
@@ -275,8 +275,7 @@ def k_magic_circle(t, i):
         a0 = k * math.pi / 3
         a1 = a0 + 2 * math.pi / 3
         out += line(_seg(x, y, 0.8 * math.cos(a0), 0.8 * math.sin(a0), 0.8 * math.cos(a1), 0.8 * math.sin(a1)), 0.008) * 0.9
-    out += np.exp(-(r / 0.12) ** 2) * 0.8
-    return np.clip(out, 0, 1.2) * (R < 1.0)
+    return np.clip(out, 0, 1.0) * (R < 1.0)
 
 
 def k_vortex(t, i):
@@ -292,8 +291,8 @@ def k_vortex(t, i):
 def k_beam_segment(t, i):
     # tiles along u (x): scroll by exactly one lattice period per loop
     dv = np.abs(V - 0.5)
-    core = np.exp(-(dv / 0.085) ** 2) * 1.2
-    glow = np.exp(-(dv / 0.3) ** 2) * 0.5
+    core = np.exp(-(dv / 0.06) ** 2) * 1.1
+    glow = np.exp(-(dv / 0.16) ** 2) * 0.18
     n = fbm(U, V, base=4, octaves=4, z=0.0, seed=99, loop_x=True, loop_y=False)
     # scroll in x via wrapped lattice: shift u by t * (lattice period) in noise space
     f = 4
@@ -327,7 +326,7 @@ def k_sparkle_burst(t, i):
 
 def k_glow_pulse(t, i):
     p = 0.85 + 0.15 * math.sin(t * 2 * math.pi)
-    return np.clip((np.exp(-(R / (0.35 * p)) ** 2) * 1.0 + np.exp(-(R / (0.8 * p)) ** 2) * 0.35), 0, 1.1) * (R < 1.0)
+    return np.clip((np.exp(-(R / (0.22 * p)) ** 2) * 0.8 + np.exp(-(R / (0.5 * p)) ** 2) * 0.1), 0, 1.0) * (R < 1.0)
 
 
 # kind -> (function, default def values)
@@ -336,15 +335,15 @@ KINDS = {
     "flame_loop":     (k_flame_loop,     dict(playback="loop", fps=24, lifetime=40, size=2.2, orientation="billboard_y", scale_end=1.0, fade_in=3, fade_out=6)),
     "energy_orb":     (k_energy_orb,     dict(playback="loop", fps=24, lifetime=40, size=2.0, orientation="billboard", scale_end=1.0, fade_in=3, fade_out=4)),
     "slash_arc":      (k_slash_arc,      dict(playback="once", lifetime=10, size=4.0, orientation="normal", scale_end=1.1, fade_out=0)),
-    "shockwave_ring": (k_shockwave_ring, dict(playback="once", lifetime=18, size=6.0, orientation="flat", scale_end=1.0, fade_out=0)),
+    "shockwave_ring": (k_shockwave_ring, dict(playback="once", lifetime=18, size=6.0, orientation="flat", scale_end=1.0, fade_out=0, alpha=0.7)),
     "smoke_puff":     (k_smoke_puff,     dict(playback="once", lifetime=50, size=3.0, orientation="billboard", scale_end=1.3, fade_out=0)),
     "lightning":      (k_lightning,      dict(playback="once", lifetime=12, size=6.0, orientation="axis", axis_uv="v", scale_end=1.0, fade_out=0)),
     "impact_star":    (k_impact_star,    dict(playback="once", lifetime=14, size=3.2, orientation="billboard", scale_end=1.0, fade_out=0)),
-    "magic_circle":   (k_magic_circle,   dict(playback="loop", fps=20, lifetime=60, size=7.0, orientation="flat", scale_end=1.0, fade_in=8, fade_out=10)),
+    "magic_circle":   (k_magic_circle,   dict(playback="loop", fps=20, lifetime=60, size=7.0, orientation="flat", scale_end=1.0, fade_in=8, fade_out=10, alpha=0.55)),
     "vortex":         (k_vortex,         dict(playback="loop", fps=24, lifetime=50, size=4.5, orientation="flat", scale_end=1.0, fade_in=6, fade_out=8)),
     "beam_segment":   (k_beam_segment,   dict(playback="loop", fps=30, lifetime=24, size=1.2, orientation="axis", scale_end=1.0, fade_in=2, fade_out=4, tile_length=4.0)),
     "sparkle_burst":  (k_sparkle_burst,  dict(playback="once", lifetime=24, size=4.0, orientation="billboard", scale_end=1.0, fade_out=0)),
-    "glow_pulse":     (k_glow_pulse,     dict(playback="loop", fps=20, lifetime=40, size=3.0, orientation="billboard", scale_end=1.0, fade_in=4, fade_out=6)),
+    "glow_pulse":     (k_glow_pulse,     dict(playback="loop", fps=20, lifetime=40, size=3.0, orientation="billboard", scale_end=1.0, fade_in=4, fade_out=6, alpha=0.5)),
 }
 
 # --------------------------------------------------------------------------------------------------
@@ -352,7 +351,7 @@ KINDS = {
 # --------------------------------------------------------------------------------------------------
 
 def _ramp(edge, mid, hot):
-    return [(0.0, *[c * 0.4 for c in edge]), (0.22, *edge), (0.5, *mid), (0.8, *hot), (1.0, 1.0, 1.0, 1.0)]
+    return [(0.0, *[c * 0.4 for c in edge]), (0.22, *edge), (0.5, *mid), (0.85, *hot), (1.0, *[min(1.0, h * 1.04) for h in hot])]
 
 
 PALETTES = {
@@ -376,7 +375,7 @@ def colourise(heat, stops):
     h = np.clip(heat, 0, 1)
     xs = [s[0] for s in stops]
     rgb = np.stack([np.interp(h, xs, [s[k] for s in stops]) for k in (1, 2, 3)], -1)
-    alpha = smoothstep(0.015, 0.4, heat)
+    alpha = smoothstep(0.10, 0.50, heat) * 0.92
     return rgb.astype(np.float32), alpha.astype(np.float32)
 
 

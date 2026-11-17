@@ -28,7 +28,7 @@ SpriteFx.sparks(level, pos, Palette.VIOLET, 1f);                 // decor
 SpriteFx.smoke(level, pos, Smoke.VOID, 2f);                      // decor
 SpriteFx.lightning(level, from, to, Palette.AZURE, widthBlocks);
 SpriteFx.beam(level, from, to, Palette.CRIMSON, widthBlocks, ticks);
-SpriteFx.circle(level, pos, Palette.VIOLET, 1.2f, ticks);        // rotating rune circle on the ground (telegraphs, casts)
+SpriteFx.circle(level, pos, Palette.VIOLET, 1.2f, ticks);        // thin rune line-art on the ground; boss telegraphs only, never on the caster
 SpriteFx.vortex(level, pos, Palette.AZURE, 1f, ticks);
 SpriteFx.flame(level, pos, Palette.FIRE, 1f, ticks);
 SpriteFx.orbOn(level, entity, yOffset, Palette.GOLD, 1f, ticks); // follows the entity
@@ -42,4 +42,6 @@ Anything else: `SpriteVfxApi.play(level, "name", pos).scale(..).velocity(..).dir
 2. Use sprite effects for **moments** (cast, telegraph, impact, phase change, death), not per-tick spam. At most a few calls per tick per spell. Looping effects get a `ticks` lifetime instead of being re-spawned every tick.
 3. Mark filler effects `.decor()` (sparks, smoke, flames) so low-end clients can thin them out.
 4. Pick the palette from the spell's identity, keep it consistent within a spell.
-5. Telegraph big attacks with `circle` (or `ring`) at the danger zone before the damage lands.
+5. Telegraph big attacks with a thin `ring` (or, for bosses only, a small `circle`) at the danger zone before the damage lands.
+6. Keep glow subtle. Do not attach `glowOn` / `orbOn` / `flameOn` to casters, and do not emit large glowing circles out of the caster on cast. Cast feedback should come from shape (slashes, shards, sparks, impacts), not from a halo.
+7. Glow kinds (`glow_pulse`, `magic_circle`, `shockwave_ring`) ship with a low default `alpha`; leave it alone unless a spell needs more.

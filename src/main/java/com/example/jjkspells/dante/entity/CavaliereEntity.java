@@ -228,16 +228,12 @@ public class CavaliereEntity extends Entity {
             }
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 3.0f, 1.6f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 3.0f, 1.4f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.4f, RIDE0 + 6);
             com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, a.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);
         }
         if (tickCount == RIDE0) {
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.TRIDENT_THUNDER, SoundSource.PLAYERS, 4.0f, 1.1f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.5f);
             com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.2f);
-            if (owner != null) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.2f, RIDE_TICKS);
-            }
         }
 
         boolean riding = tickCount >= RIDE0 && tickCount < RIDE_END;
@@ -312,9 +308,6 @@ public class CavaliereEntity extends Entity {
         for (int k = 0; k <= BOLTS; k++) {
             if (tickCount == boltTick(k) - 10) {
                 Vec3 tp = boltPos(k);
-                if (tp != null) {
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, tp, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, k == BOLTS ? 3.0f : 1.6f, 10);
-                }
             }
             if (tickCount != boltTick(k)) {
                 continue;

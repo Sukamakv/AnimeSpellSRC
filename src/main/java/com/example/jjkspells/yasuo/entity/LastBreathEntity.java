@@ -274,8 +274,6 @@ public class LastBreathEntity extends Entity {
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.TRIDENT_RIPTIDE_3, SoundSource.PLAYERS, 3.0f, 1.0f);
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.4f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f, T0);
-            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f, T0);
         }
         if (tickCount >= finalTick) {
             if (tickCount == finalTick) {

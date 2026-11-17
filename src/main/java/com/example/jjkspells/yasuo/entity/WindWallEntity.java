@@ -160,7 +160,6 @@ public class WindWallEntity extends Entity {
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 4.0f, 0.7f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.TRIDENT_RIPTIDE_3, SoundSource.PLAYERS, 3.0f, 1.3f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f, RISE + 12);
             com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f);
             com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, c.add(0, WindWallSpell.HEIGHT * 0.5, 0), d, 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6f);
         }

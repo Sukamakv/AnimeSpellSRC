@@ -190,9 +190,6 @@ public class CrescentWaveEntity extends Entity {
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 3.0f, 2.0f);
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.8f);
         }
-        if (tickCount == 1) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f, LAUNCH - 1);
-        }
         if (tickCount == LAUNCH) {
             com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f);
             com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, o.add(d.scale(2.0)).add(0, 1.0, 0), new Vec3(0, 1, 0), (float) Math.toDegrees(Math.atan2(d.z, d.x)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6f);

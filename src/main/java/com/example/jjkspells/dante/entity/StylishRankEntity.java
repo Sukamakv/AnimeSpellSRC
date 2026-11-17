@@ -129,7 +129,6 @@ public class StylishRankEntity extends Entity {
                 com.example.jjkspells.vfx.sprite.SpriteFx.impact(rsl, hp, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f + 0.5f * (r - RANK_S));
             }
             if (r == RANK_S && ph == PH_RANKING) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(rsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.4f, COUNTDOWN_TICKS);   // countdown starts
                 com.example.jjkspells.vfx.sprite.SpriteFx.ring(rsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.5f);
             }
         }
@@ -322,8 +321,6 @@ public class StylishRankEntity extends Entity {
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 3.0f, 0.5f);
             if (level() instanceof ServerLevel fsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(fsl, owner.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.6f, SLASH_WINDUP);   // telegraph: Hellfire Slash wind-up
-                com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(fsl, owner, 1.2f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3.0f, SLASH_WINDUP);
                 com.example.jjkspells.vfx.sprite.SpriteFx.beam(fsl, o, o.add(look.scale(StylishRankSpell.SLASH_LENGTH)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.0f, SLASH_WINDUP);   // telegraph: slash line
             }
         } else {
@@ -338,7 +335,6 @@ public class StylishRankEntity extends Entity {
         level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 3.0f, 0.6f);
         level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 1.5f, 1.6f);
         if (level() instanceof ServerLevel hsl) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(hsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, radius / 3.5f, HELL_TICKS);   // bullet hell zone
             com.example.jjkspells.vfx.sprite.SpriteFx.ring(hsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, radius / 3.0f);
             com.example.jjkspells.vfx.sprite.SpriteFx.burst(hsl, position().add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f);
         }

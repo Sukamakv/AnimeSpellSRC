@@ -188,9 +188,7 @@ public class DestinyCleavedEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 3.0f, 0.6f);
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 2.5f, 0.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 7.0), T3 - 1);
             com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (R * 1.2 / 7.0), T1);
-            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, this, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f, T1);
         }
         if (tickCount == T1 || tickCount == T2) {
             for (LivingEntity t : level().getEntitiesOfClass(LivingEntity.class, area(c, R))) {

@@ -171,8 +171,6 @@ public class SweepingBladeEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, owner.getX(), owner.getY() + 1, owner.getZ(), SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 3.0f, 1.6f);
             level().playSound(null, owner.getX(), owner.getY() + 1, owner.getZ(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.5f, 1.9f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, owner.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.2f, T0 + 6);
-            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.8f, 12);
         }
         if (finished || tickCount < T0) {
             return;

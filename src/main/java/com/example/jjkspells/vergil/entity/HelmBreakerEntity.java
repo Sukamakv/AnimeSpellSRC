@@ -215,9 +215,6 @@ public class HelmBreakerEntity extends Entity {
         double y = getY();
         double z = getZ();
 
-        if (tickCount == LAUNCH) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 7.0), IMPACT - 1);
-        }
         if (tickCount == APEX) {
             com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, new Vec3(x, y + 20, z), new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f, IMPACT - APEX);
         }

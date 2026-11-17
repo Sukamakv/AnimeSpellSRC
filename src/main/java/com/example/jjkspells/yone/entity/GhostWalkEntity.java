@@ -221,9 +221,7 @@ public class GhostWalkEntity extends Entity {
             level().playSound(null, origin.x, origin.y + 1, origin.z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 2.5f, 1.4f);
             level().playSound(null, origin.x, origin.y + 1, origin.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 3.0f, 1.5f);
             level().playSound(null, origin.x, origin.y + 1, origin.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.5f, 0.9f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, origin, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (GhostWalkSpell.SNAP_RADIUS * 2.0 / 7.0), SNAP - 1);
             com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, origin.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.orbOn(sl, this, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.6f, SNAP);
         }
         if (tickCount < SNAP) {
             // the body stands untouchable while the spirit is out

@@ -224,8 +224,6 @@ public class FateSealedEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.0f);
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 2.5f, 1.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (FateSealedSpell.HALF_WIDTH * 2.0 / 7.0), DASH - 1);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, o.add(dir.scale(len)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (FateSealedSpell.HALF_WIDTH * 2.0 / 7.0), DASH - 1);
             com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, o.add(0, 0.2, 0), o.add(dir.scale(len)).add(0, 0.2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (FateSealedSpell.HALF_WIDTH * 2.0), DASH - 1);
         }
         if (tickCount < SUNDER) {

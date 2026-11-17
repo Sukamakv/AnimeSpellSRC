@@ -211,9 +211,7 @@ public class SinJudgmentEntity extends Entity {
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 5.0f, 0.5f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 5.0f, 0.6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (SinJudgmentSpell.RADIUS / 3.5), LOCK0);   // cast: judgment heptagram
             com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3.0f, FIN);
         }
         if (floating && tickCount < DIVE0) {
             double target = a.y + SinJudgmentSpell.HOVER;
@@ -254,7 +252,6 @@ public class SinJudgmentEntity extends Entity {
             tag.putIntArray("s", arr);
             this.entityData.set(LOG, tag);
             level().playSound(null, px, a.y + 1, pz, SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.PLAYERS, 2.0f, 1.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(px, a.y, pz), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (SinJudgmentSpell.STRIKE_RADIUS / 3.5), WARN);   // telegraph: strike lock-on
         }
         // impacts
         for (int i = 0; i + 2 < strikeLog.size(); i += 3) {
@@ -280,7 +277,6 @@ public class SinJudgmentEntity extends Entity {
             owner.hurtMarked = true;
             level().playSound(null, a.x, a.y + 6, a.z, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 5.0f, 0.5f);
             level().playSound(null, a.x, a.y + 6, a.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 4.0f, 0.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (SinJudgmentSpell.FINAL_RADIUS / 3.5), FIN - DIVE0);   // telegraph: judgment zone
             com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, owner.position(), a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3.0f, FIN - DIVE0);   // the dive
         }
         if (tickCount > DIVE0 && tickCount < FIN) {

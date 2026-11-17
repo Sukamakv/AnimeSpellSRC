@@ -268,22 +268,17 @@ public class AuswaehlenEntity extends Entity {
             level().playSound(null, c.x, c.y, c.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 8.0f, 0.5f);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 8.0f, 0.7f);
             if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3f, PILLAR0);   // cast: golden insignia
                 com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 2f);
             }
         }
         if (tickCount == HALO0) {
             level().playSound(null, c.x, c.y + 10, c.z, SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 8.0f, 0.6f);
             if (owner != null && level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 2f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 5f, COLLAPSE0 - HALO0);   // halo gathers behind the caster
                 com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.2f, COLLAPSE0 - HALO0);
             }
         }
         if (tickCount == COLLAPSE0) {
             level().playSound(null, c.x, c.y + 10, c.z, SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 8.0f, 0.5f);
-            if (owner != null && level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, owner.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.2f, RECLAIM - COLLAPSE0);   // telegraph: reclamation
-            }
         }
         for (int i = 0; i < targetUuids.size(); i++) {
             int land = PILLAR0 + i * PILLAR_STAGGER + DESCEND;
@@ -293,7 +288,6 @@ public class AuswaehlenEntity extends Entity {
             }
             if (tickCount == MARK0 + i * MARK_STAGGER && level() instanceof net.minecraft.server.level.ServerLevel sl) {
                 LivingEntity markT = targetAt(i);
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, markT != null ? markT.position() : targetStart.get(i), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 0.55f, land - tickCount);   // telegraph: mark before the pillar lands
             }
             if (tickCount == land) {
                 hit(owner, i, AuswaehlenSpell.DIVINE_FLAT, AuswaehlenSpell.DIVINE_PERCENT, true);

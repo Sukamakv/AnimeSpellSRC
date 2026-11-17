@@ -203,7 +203,6 @@ public class RoundTripEntity extends Entity {
             }
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 3.0f, 0.6f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 1.5f, 1.6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.3f, START);
             com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, a.add(0, 1.4, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.2f);
         }
         if (tickCount == START) {
@@ -238,10 +237,6 @@ public class RoundTripEntity extends Entity {
         }
         if (tickCount == APEX - 12) {
             Vec3 ap = swordPos(a, dir, 1, APEX, op);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(ap.x, a.y, ap.z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3.1f, 12);
-        }
-        if (tickCount == HOME - 12) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, op, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 4.5f, 12);
         }
         if (tickCount == APEX) {
             Vec3 c = swordPos(a, dir, 1, tickCount, op);

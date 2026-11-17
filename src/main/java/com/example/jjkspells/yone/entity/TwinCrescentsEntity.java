@@ -199,7 +199,6 @@ public class TwinCrescentsEntity extends Entity {
         LivingEntity owner = oe instanceof LivingEntity le ? le : null;
         if (tickCount == 1 && owner != null) {
             level().playSound(null, owner.getX(), owner.getY() + 1, owner.getZ(), SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 2.5f, 1.7f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.glowOn(sl, owner, 1.0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.6f, 14);
         }
         if (owner != null) {
             int k = (tickCount - T0) / STEP;
