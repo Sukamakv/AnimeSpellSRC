@@ -1,0 +1,14 @@
+{
+  "texture": "jjk_spells:textures/sprite_vfx/shard_burst_azure.png",
+  "cols": 8,
+  "rows": 4,
+  "frames": 32,
+  "blend": "additive",
+  "fullbright": true,
+  "playback": "once",
+  "lifetime": 26,
+  "size": 4.0,
+  "orientation": "billboard",
+  "scale_end": 1.1,
+  "fade_out": 0
+}

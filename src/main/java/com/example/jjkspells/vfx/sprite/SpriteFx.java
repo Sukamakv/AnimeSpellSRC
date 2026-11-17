@@ -21,7 +21,7 @@ public final class SpriteFx {
     private SpriteFx() {}
 
     public enum Palette {
-        FIRE("fire"), CRIMSON("crimson"), AZURE("azure"), VIOLET("violet"), GOLD("gold"), TOXIC("toxic"), WHITE("white");
+        FIRE("fire"), CRIMSON("crimson"), AZURE("azure"), VIOLET("violet"), GOLD("gold"), TOXIC("toxic"), WHITE("white"), ROT("rot"), WIND("wind");
         public final String key;
 
         Palette(String key) {
@@ -40,9 +40,11 @@ public final class SpriteFx {
 
     public static final String BURST = "fire_burst", FLAME = "flame_loop", ORB = "energy_orb", SLASH = "slash_arc", RING = "shockwave_ring",
             LIGHTNING = "lightning", IMPACT = "impact_star", CIRCLE = "magic_circle", VORTEX = "vortex", BEAM = "beam_segment",
-            SPARKS = "sparkle_burst", GLOW = "glow_pulse", SMOKE_PUFF = "smoke_puff";
+            SPARKS = "sparkle_burst", GLOW = "glow_pulse", SMOKE_PUFF = "smoke_puff", STREAK = "slash_streak", CLAWS = "claw_rake",
+            SHARDS = "shard_burst", CRACKS = "ground_crack", PETALS = "petal_swirl", FRACTURE = "fracture_web", TENDRILS = "tendril_burst";
 
-    private static final String[] KINDS = {BURST, FLAME, ORB, SLASH, RING, LIGHTNING, IMPACT, CIRCLE, VORTEX, BEAM, SPARKS, GLOW};
+    private static final String[] KINDS = {BURST, FLAME, ORB, SLASH, RING, LIGHTNING, IMPACT, CIRCLE, VORTEX, BEAM, SPARKS, GLOW,
+            STREAK, CLAWS, SHARDS, CRACKS, PETALS, FRACTURE, TENDRILS};
 
     /** Every effect name the generator makes, for command completion. */
     public static List<String> allNames() {
@@ -92,6 +94,43 @@ public final class SpriteFx {
     public static void lightning(ServerLevel l, Vec3 a, Vec3 b, Palette p, float width) {
         Vec3 d = b.subtract(a);
         SpriteVfxApi.play(l, n(LIGHTNING, p), a).dir(d).length((float) d.length()).scale(width / 6f).send();
+    }
+
+    // ---------------------------------------------------------------------------- sharp, designed shapes (preferred over burst/glow)
+
+    /** Thin tapered blade cut on the plane with the given normal. Sharp, almost no halo. scale 1 is about 4.5 blocks long. */
+    public static void streak(ServerLevel l, Vec3 pos, Vec3 planeNormal, float rollDegrees, Palette p, float scale) {
+        SpriteVfxApi.play(l, n(STREAK, p), pos).dir(planeNormal).roll(rollDegrees).scale(scale).send();
+    }
+
+    /** Three parallel claw cuts on the plane with the given normal. */
+    public static void claws(ServerLevel l, Vec3 pos, Vec3 planeNormal, float rollDegrees, Palette p, float scale) {
+        SpriteVfxApi.play(l, n(CLAWS, p), pos).dir(planeNormal).roll(rollDegrees).scale(scale).send();
+    }
+
+    /** Hard-edged fragments flying outward (billboard). */
+    public static void shards(ServerLevel l, Vec3 pos, Palette p, float scale) {
+        SpriteVfxApi.play(l, n(SHARDS, p), pos).scale(scale).send();
+    }
+
+    /** Cracks spreading over the ground from the point. scale 1 is about 7 blocks across. */
+    public static void cracks(ServerLevel l, Vec3 pos, Palette p, float scale) {
+        SpriteVfxApi.play(l, n(CRACKS, p), pos.x, pos.y + 0.05, pos.z).scale(scale).send();
+    }
+
+    /** Petals spiralling out and fading (billboard). */
+    public static void petals(ServerLevel l, Vec3 pos, Palette p, float scale) {
+        SpriteVfxApi.play(l, n(PETALS, p), pos).scale(scale).decor().send();
+    }
+
+    /** Shattered-glass web that appears on a point in the air (billboard). */
+    public static void fracture(ServerLevel l, Vec3 pos, Palette p, float scale) {
+        SpriteVfxApi.play(l, n(FRACTURE, p), pos).scale(scale).send();
+    }
+
+    /** Curling tendrils reaching out from a point (billboard). */
+    public static void tendrils(ServerLevel l, Vec3 pos, Palette p, float scale) {
+        SpriteVfxApi.play(l, n(TENDRILS, p), pos).scale(scale).send();
     }
 
     // ---------------------------------------------------------------------------- timed / looping

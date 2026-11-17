@@ -329,6 +329,190 @@ def k_glow_pulse(t, i):
     return np.clip((np.exp(-(R / (0.22 * p)) ** 2) * 0.8 + np.exp(-(R / (0.5 * p)) ** 2) * 0.1), 0, 1.0) * (R < 1.0)
 
 
+
+# --------------------------------------------------------------------------------------------------
+# sharp, designed shapes (slashes, shards, cracks, petals, tendrils): hard edges, little halo
+# --------------------------------------------------------------------------------------------------
+
+def _wrap(a):
+    return (a + math.pi) % (2 * math.pi) - math.pi
+
+
+def _streak(x0, y0, ang, length, bow, width, head, tail, px=None, py=None):
+    """Tapered curved blade. Local coords: u along the blade (-1..1), v across. Visible span [tail, head] in u."""
+    px = CX if px is None else px
+    py = CY if py is None else py
+    c, s_ = math.cos(ang), math.sin(ang)
+    dx, dy = px - x0, py - y0
+    u = (dx * c + dy * s_) / length
+    v = (-dx * s_ + dy * c)
+    v = v - bow * (1.0 - u * u) * length * 0.5
+    span = np.clip((u + 1.0) / 2.0, 0, 1)
+    taper = np.maximum(np.sin(np.pi * np.clip(span, 0, 1)), 0.0) ** 0.7
+    w = width * (0.15 + taper)
+    d = np.abs(v) / (w + 1e-4)
+    core = np.clip(1.0 - d, 0, 1) ** 1.2
+    edge = np.clip(1.0 - d / 2.6, 0, 1) ** 2.0
+    vis = (u >= tail) & (u <= head)
+    rel = np.clip((u - tail) / (head - tail + 1e-4), 0, 1)
+    heat = (core * 1.05 + edge * 0.5) * vis * (0.35 + 0.65 * rel ** 1.2)
+    return heat
+
+
+def k_slash_streak(t, i):
+    head = -1.0 + 2.2 * ease_out(min(t / 0.32, 1.0))
+    tail = -1.0 + 2.2 * smoothstep(0.18, 0.85, t)
+    heat = _streak(0.0, 0.3, -0.42, 1.0, -0.34, 0.085, head, tail)
+    fade = 1.0 - smoothstep(0.55, 1.0, t)
+    rng = np.random.default_rng(31)
+    out = heat * fade
+    for _ in range(18):
+        a = rng.random() * 0.9
+        px = -0.9 + 1.8 * a
+        py = 0.3 - 0.4 * px - 0.34 * 0.5 * (1 - px * px) + (rng.random() - 0.5) * 0.35
+        vx, vy = (rng.random() - 0.5) * 0.5, (rng.random() - 0.2) * 0.5
+        tt = max(0.0, t - 0.1 - a * 0.2)
+        x, y = px + vx * tt, py + vy * tt
+        d = np.hypot(CX - x, CY - y)
+        out += np.exp(-(d / 0.018) ** 2) * (1.0 - smoothstep(0.1, 0.5, tt)) * (tt > 0) * 0.9
+    return np.clip(out, 0, 1.15) * (R < 1.0)
+
+
+def k_claw_rake(t, i):
+    out = np.zeros((FRAME, FRAME), np.float32)
+    for k in range(3):
+        off = (k - 1) * 0.30
+        delay = k * 0.08
+        tt = max(0.0, t - delay) / (1.0 - delay)
+        head = -1.0 + 2.2 * ease_out(min(tt / 0.3, 1.0))
+        tail = -1.0 + 2.2 * smoothstep(0.2, 0.85, tt)
+        out += _streak(-off * 0.55 + 0.05, off * 0.85 + 0.12, 0.92, 1.1, 0.1, 0.07, head, tail) * (1.0 - smoothstep(0.55, 1.0, tt))
+    return np.clip(out, 0, 1.15) * (R < 1.0)
+
+
+def _tri_mask(px, py, a, b, c):
+    (ax, ay), (bx, by), (cx_, cy_) = a, b, c
+    den = (by - cy_) * (ax - cx_) + (cx_ - bx) * (ay - cy_)
+    w1 = ((by - cy_) * (px - cx_) + (cx_ - bx) * (py - cy_)) / den
+    w2 = ((cy_ - ay) * (px - cx_) + (ax - cx_) * (py - cy_)) / den
+    w3 = 1.0 - w1 - w2
+    return w1, w2, w3
+
+
+def k_shard_burst(t, i):
+    rng = np.random.default_rng(77)
+    out = np.zeros((FRAME, FRAME), np.float32)
+    for _ in range(16):
+        ang = rng.random() * 2 * math.pi
+        speed = 0.3 + 0.62 * rng.random()
+        size = 0.07 + 0.08 * rng.random()
+        spin = (rng.random() - 0.5) * 6.0
+        delay = rng.random() * 0.12
+        tt = max(0.0, t - delay) / (1.0 - delay)
+        dist = 0.08 + speed * ease_out(tt)
+        cx_, cy_ = math.cos(ang) * dist, math.sin(ang) * dist + 0.18 * tt * tt
+        rot = ang + spin * tt
+        dr = (math.cos(rot), math.sin(rot))
+        pr = (-dr[1], dr[0])
+        k = size * (1.0 - 0.55 * smoothstep(0.5, 1.0, tt))
+        a = (cx_ + dr[0] * k * 1.8, cy_ + dr[1] * k * 1.8)
+        b = (cx_ + pr[0] * k * 0.6 - dr[0] * k * 0.5, cy_ + pr[1] * k * 0.6 - dr[1] * k * 0.5)
+        c = (cx_ - pr[0] * k * 0.6 - dr[0] * k * 0.5, cy_ - pr[1] * k * 0.6 - dr[1] * k * 0.5)
+        w1, w2, w3 = _tri_mask(CX, CY, a, b, c)
+        m = np.minimum(np.minimum(w1, w2), w3)
+        inside = (m > 0)
+        life = (1.0 - smoothstep(0.55, 1.0, tt)) * (tt > 0 or t == 0)
+        heat = inside * (0.5 + 0.3 * np.clip(w1, 0, 1)) + inside * np.clip(1.0 - m / 0.14, 0, 1) * 0.4
+        out += heat * life
+    flash = np.exp(-(R / 0.16) ** 2) * (1.0 - smoothstep(0.0, 0.22, t)) * 1.1
+    return np.clip(out + flash, 0, 1.15) * (R < 1.0)
+
+
+def _jag(r, k, amp, freq=7.0):
+    return (vnoise(r * freq, np.full_like(r, k * 3.17), 0.0, seed=123 + k) - 0.5) * amp
+
+
+def k_ground_crack(t, i):
+    reach = 0.12 + 0.86 * ease_out(min(t / 0.45, 1.0))
+    out = np.zeros_like(R)
+    n = 9
+    for k in range(n):
+        th0 = k * 2 * math.pi / n + (k % 3) * 0.11
+        for br, (r0, off, w) in enumerate([(0.0, 0.0, 0.017), (0.38, 0.35, 0.011), (0.55, -0.4, 0.009)]):
+            if br > 0 and k % 2 == br % 2:
+                continue
+            th = th0 + _jag(R, k * 3 + br, 0.7) + off * np.clip((R - r0) / 0.5, 0, 1) * (br > 0)
+            d = R * np.abs(_wrap(TH - th))
+            vis = (R >= r0) & (R <= reach * (1.0 - 0.28 * br)) & (R > 0.04)
+            taper = 1.0 - 0.7 * np.clip(R / 1.0, 0, 1)
+            out += (np.exp(-(d / (w * taper)) ** 2) + 0.3 * np.exp(-(d / (w * 3.2)) ** 2)) * vis
+    life = 1.0 - smoothstep(0.55, 1.0, t)
+    core = np.exp(-(R / 0.1) ** 2) * (1.0 - smoothstep(0.0, 0.4, t)) * 0.9
+    return np.clip(out * life * 0.95 + core, 0, 1.1) * (R < 1.0)
+
+
+def k_petal_swirl(t, i):
+    rng = np.random.default_rng(55)
+    out = np.zeros((FRAME, FRAME), np.float32)
+    for _ in range(18):
+        a0 = rng.random() * 2 * math.pi
+        rr = 0.25 + 0.7 * rng.random()
+        spin = 0.8 + rng.random() * 0.7
+        flip = rng.random() * 6.0
+        size = 0.075 + 0.045 * rng.random()
+        tt = t
+        ang = a0 + spin * 2 * math.pi * tt * 0.5
+        dist = (0.12 + rr * ease_out(min(tt * 1.2, 1.0))) * (1.0 + 0.1 * math.sin(tt * 5 + a0))
+        px, py = math.cos(ang) * dist, math.sin(ang) * dist * 0.85
+        rot = ang + math.pi / 2 + flip + tt * 5.0
+        c, s_ = math.cos(rot), math.sin(rot)
+        lx = (CX - px) * c + (CY - py) * s_
+        ly = -(CX - px) * s_ + (CY - py) * c
+        tw = 0.3 + 0.7 * abs(math.cos(flip + tt * 7.0))
+        e = (lx / (size * 1.5)) ** 2 + (ly / (size * 0.62 * tw + 1e-4)) ** 2
+        mask = e < 1.0
+        shade = 0.55 + 0.25 * np.clip(-lx / (size * 1.5), 0, 1)
+        vein = np.exp(-(ly / 0.006) ** 2) * (np.abs(lx) < size * 1.3)
+        life = smoothstep(0.0, 0.12, tt) * (1.0 - smoothstep(0.6, 1.0, tt))
+        out += (mask * shade + mask * vein * 0.35 + mask * np.clip(1.0 - e, 0, 1) * 0.2) * life
+    return np.clip(out, 0, 1.1) * (R < 1.0)
+
+
+def k_fracture_web(t, i):
+    grow = ease_out(min(t / 0.22, 1.0))
+    n = 11
+    out = np.zeros_like(R)
+    for k in range(n):
+        th = k * 2 * math.pi / n + _jag(R, k, 0.45, 9.0) + (k % 2) * 0.05
+        d = R * np.abs(_wrap(TH - th))
+        reach = grow * (0.55 + 0.43 * ((k * 37) % 10) / 10.0)
+        w = 0.012 * (1.0 - 0.6 * R)
+        out += (np.exp(-(d / w) ** 2) + 0.25 * np.exp(-(d / (w * 3.5)) ** 2)) * (R < reach) * (R > 0.03)
+    for j, rj in enumerate((0.22, 0.4, 0.6, 0.8)):
+        seg = (vnoise(TH * 2.0 + 20, np.full_like(R, j), 0.0, seed=200 + j) > 0.42)
+        d = np.abs(R - rj - _jag(TH * 0.5 + 5, j, 0.06, 6.0))
+        out += np.exp(-(d / 0.0085) ** 2) * seg * (R < grow * 0.98) * 0.85
+    life = 1.0 - smoothstep(0.62, 1.0, t)
+    flash = np.exp(-(R / 0.22) ** 2) * (1.0 - smoothstep(0.0, 0.25, t)) * 1.1
+    return np.clip(out * life * 0.95 + flash, 0, 1.1) * (R < 1.0)
+
+
+def k_tendril_burst(t, i):
+    out = np.zeros_like(R)
+    n = 9
+    reach = 0.15 + 0.82 * ease_out(min(t / 0.5, 1.0))
+    for k in range(n):
+        th = k * 2 * math.pi / n + 0.2 * math.sin(k * 3.1) + (1.3 + 0.4 * math.sin(k)) * R * (-1 if k % 2 else 1)
+        th = th + _jag(R, k, 0.35, 5.0) * R
+        d = R * np.abs(_wrap(TH - th))
+        w = np.maximum(0.03 * (1.0 - R / (reach + 0.02)) + 0.005, 0.004)
+        body = np.exp(-np.minimum(d / w, 6.0) ** 3) * (R < reach) * (R > 0.05)
+        out += body * (0.65 + 0.4 * (1.0 - R))
+    life = smoothstep(0.0, 0.06, t) * (1.0 - smoothstep(0.55, 1.0, t))
+    core = np.exp(-(R / 0.09) ** 2) * life
+    return np.clip(out * life + core * 0.8, 0, 1.1) * (R < 1.0)
+
+
 # kind -> (function, default def values)
 KINDS = {
     "fire_burst":     (k_fire_burst,     dict(playback="once", lifetime=26, size=3.0, orientation="billboard", scale_end=1.15, fade_out=6)),
@@ -344,6 +528,13 @@ KINDS = {
     "beam_segment":   (k_beam_segment,   dict(playback="loop", fps=30, lifetime=24, size=1.2, orientation="axis", scale_end=1.0, fade_in=2, fade_out=4, tile_length=4.0)),
     "sparkle_burst":  (k_sparkle_burst,  dict(playback="once", lifetime=24, size=4.0, orientation="billboard", scale_end=1.0, fade_out=0)),
     "glow_pulse":     (k_glow_pulse,     dict(playback="loop", fps=20, lifetime=40, size=3.0, orientation="billboard", scale_end=1.0, fade_in=4, fade_out=6, alpha=0.5)),
+    "slash_streak":   (k_slash_streak,   dict(playback="once", lifetime=9, size=4.5, orientation="normal", scale_end=1.05, fade_out=0)),
+    "claw_rake":      (k_claw_rake,      dict(playback="once", lifetime=12, size=4.5, orientation="normal", scale_end=1.05, fade_out=0)),
+    "shard_burst":    (k_shard_burst,    dict(playback="once", lifetime=26, size=4.0, orientation="billboard", scale_end=1.1, fade_out=0)),
+    "ground_crack":   (k_ground_crack,   dict(playback="once", lifetime=36, size=7.0, orientation="flat", scale_end=1.0, fade_out=0)),
+    "petal_swirl":    (k_petal_swirl,    dict(playback="once", lifetime=44, size=4.0, orientation="billboard", scale_end=1.0, fade_out=0)),
+    "fracture_web":   (k_fracture_web,   dict(playback="once", lifetime=26, size=5.0, orientation="billboard", scale_end=1.0, fade_out=0)),
+    "tendril_burst":  (k_tendril_burst,  dict(playback="once", lifetime=30, size=4.0, orientation="billboard", scale_end=1.1, fade_out=0)),
 }
 
 # --------------------------------------------------------------------------------------------------
@@ -362,6 +553,8 @@ PALETTES = {
     "gold":    _ramp((0.5, 0.25, 0.0), (1.0, 0.72, 0.1), (1.0, 0.93, 0.55)),
     "toxic":   _ramp((0.0, 0.25, 0.05), (0.2, 0.85, 0.15), (0.78, 1.0, 0.5)),
     "white":   _ramp((0.5, 0.55, 0.65), (0.85, 0.9, 1.0), (1.0, 1.0, 1.0)),
+    "rot":     _ramp((0.3, 0.06, 0.0), (0.86, 0.3, 0.04), (1.0, 0.74, 0.42)),
+    "wind":    _ramp((0.04, 0.3, 0.3), (0.4, 0.85, 0.8), (0.92, 1.0, 1.0)),
 }
 # smoke is its own thing (alpha blended, dark)
 SMOKE_PALETTES = {
@@ -405,7 +598,7 @@ def render_kind(kind, palette_name, fn):
             rgb, a = colourise(out, PALETTES[palette_name])
         # premultiplied-style soften at edges, then 8 bit
         rgba = np.concatenate([np.clip(rgb, 0, 1), a[..., None]], -1)
-        frames.append((rgba * 255).astype(np.uint8))
+        frames.append((np.nan_to_num(rgba) * 255).astype(np.uint8))
     return to_sheet(frames)
 
 
