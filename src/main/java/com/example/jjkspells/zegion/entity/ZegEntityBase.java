@@ -23,6 +23,16 @@ public abstract class ZegEntityBase extends Entity {
     protected UUID ownerId;
     protected boolean finished;
 
+    /** Server level for sprite effects (the sequences only ever run on the server). */
+    protected ServerLevel sv() {
+        return (ServerLevel) level();
+    }
+
+    /** Config numbers come as Double or Integer; sprite scales are floats. */
+    protected static float f(Number n) {
+        return n.floatValue();
+    }
+
     protected ZegEntityBase(EntityType<?> type, Level level) {
         super(type, level);
         this.noPhysics = true;
