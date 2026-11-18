@@ -32,8 +32,6 @@ public class GoddessRenderer extends MelRenderer<GoddessEntity> {
             if (t < GoddessEntity.T_RISE || (t >= GoddessEntity.T_FINAL && t < GoddessEntity.T_END)) {
                 // Divine Scarlet Protection
                 float k = t < GoddessEntity.T_RISE ? in : 1f - c01((t - GoddessEntity.T_END + 10f) / 10f);
-                Fx.glow(buf, ps, ownerP.add(0, 1.0, 0), 2.6f, SCARLET, 0.5f * k);
-                Fx.glow(buf, ps, ownerP.add(0, 1.0, 0), 1.6f, GOLD, 0.35f * k);
             }
             if (t < GoddessEntity.T_RISE) {
                 float s = in;
@@ -85,8 +83,6 @@ public class GoddessRenderer extends MelRenderer<GoddessEntity> {
         if (t >= GoddessEntity.T_IMPACT && t < GoddessEntity.T_IMPACT + 18) {
             float u = c01((t - GoddessEntity.T_IMPACT) / 18f);
             Draw.disc(add(buf, RING_WAVE), ps, 1f + R_IMPACT * u, 0f, y + 0.1f, CRIMSON, 1f - u);
-            Draw.disc(add(buf, GLOW), ps, R_IMPACT, 0f, y + 0.06f, SCARLET, 0.7f * (1f - u));
-            Fx.star(buf, ps, p.add(0, 2.0, 0), 8f * (1f - u), 0f, WHITE, 1f - u);
             ps.pushPose();
             ps.translate(p.x, p.y, p.z);
             Draw.cross(add(buf, LINE), ps, 1.6f * (1f - u * 0.5f), 0f, 30f, t * 3f, SCARLET, 1f - u, LightTexture.FULL_BRIGHT);
@@ -120,7 +116,6 @@ public class GoddessRenderer extends MelRenderer<GoddessEntity> {
             float u = c01((t - GoddessEntity.T_BLOOM) / 18f);
             Draw.disc(add(buf, RING_WAVE), ps, 1f + R_FLOWER * u, 0f, y + 0.12f, CRIMSON, 1f - u);
             Draw.disc(add(buf, WAVE), ps, 1f + R_FLOWER * u, 0f, y + 0.11f, SCARLET, 0.7f * (1f - u));
-            Fx.star(buf, ps, p.add(0, 2.0, 0), 10f * (1f - u), 0f, WHITE, 1f - u);
         }
         // ---- eight blades
         for (int k = 0; k < GoddessEntity.SWORDS; k++) {
@@ -136,13 +131,11 @@ public class GoddessRenderer extends MelRenderer<GoddessEntity> {
                 Vec3 tip = q.add(0, h, 0);
                 Draw.disc(add(buf, TARGET), ps, R_SWORD * 0.8f * u, t * 4f, (float) q.y + 0.08f, CRIMSON, 0.9f * u);
                 Fx.sword(buf, ps, tip.add(0, 18, 0), tip, cam, 1.0f, WHITE, 0.95f * u);
-                Fx.glow(buf, ps, tip, 1.6f, GOLD, 0.6f * u);
             } else {
                 float f = 1f - c01((s - 12f) / 16f);
                 Fx.sword(buf, ps, q.add(0, 16, 0), q, cam, 1.0f, WHITE, 0.95f * f);
                 float u = c01(s / 10f);
                 Draw.disc(add(buf, RING_WAVE), ps, 0.6f + R_SWORD * u, 0f, (float) q.y + 0.12f, CRIMSON, 1f - u);
-                Fx.star(buf, ps, q.add(0, 1.0, 0), 4f * (1f - u), 0f, GOLD, 1f - u);
             }
         }
         // ---- the judgment wave
@@ -152,7 +145,6 @@ public class GoddessRenderer extends MelRenderer<GoddessEntity> {
             Draw.disc(add(buf, RING_WAVE), ps, r, 0f, y + 0.13f, GOLD, 1f - u);
             Fx.crescentRing(buf, ps, p, r, 5.0f, 16, u * 30f, GOLD, 0.9f * (1f - u));
             Fx.crescentRing(buf, ps, p, r * 0.75f, 3.5f, 12, -u * 40f, SILVER, 0.8f * (1f - u));
-            Fx.star(buf, ps, p.add(0, 2.0, 0), 9f * (1f - u), 0f, WHITE, 1f - u);
         }
         // ---- the collapsing sphere
         if (t > GoddessEntity.T_JUDG + 6 && t < GoddessEntity.T_FINAL + 6) {
@@ -165,8 +157,6 @@ public class GoddessRenderer extends MelRenderer<GoddessEntity> {
             Draw.sphere(add(buf, SPHERE), ps, r, 12, 18, t * 0.02f, WHITE, 0.95f * vis);
             Draw.sphere(add(buf, SPHERE), ps, r * 1.25f, 10, 14, -t * 0.015f, SCARLET, 0.4f * vis);
             ps.popPose();
-            Fx.glow(buf, ps, core, r * 2.8f, CRIMSON, 0.7f * vis);
-            Fx.glow(buf, ps, core, r * 1.4f, WHITE, 0.6f * vis * u);
         }
         // ---- final detonation
         if (t >= GoddessEntity.T_FINAL && t < GoddessEntity.T_FINAL + 22) {
@@ -174,8 +164,6 @@ public class GoddessRenderer extends MelRenderer<GoddessEntity> {
             float r = 1f + R_FLOWER * smooth(u);
             Draw.disc(add(buf, RING_WAVE), ps, r, 0f, y + 0.14f, WHITE, 1f - u);
             Draw.disc(add(buf, WAVE), ps, r, 0f, y + 0.13f, CRIMSON, 0.8f * (1f - u));
-            Fx.star(buf, ps, p.add(0, 3.5, 0), 16f * (1f - u), t * 2f, WHITE, 1f - u);
-            Fx.glow(buf, ps, p.add(0, 3.5, 0), 14f * (1f - u * 0.5f), SCARLET, 0.8f * (1f - u));
             Fx.crescentRing(buf, ps, p, r, 6.0f, 20, u * 20f, CRIMSON, 0.7f * (1f - u));
         }
     }

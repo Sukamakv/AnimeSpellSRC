@@ -34,7 +34,6 @@ public class BloomRenderer extends MelRenderer<BloomEntity> {
         }
         if (owner != null && t < BloomEntity.IMPACT) {
             float s = c01(t / BloomEntity.ARMS);
-            Fx.glow(buf, ps, ownerP.add(0, 1.2, 0), 1.6f + 0.8f * s, CRIMSON, 0.45f * s);
             Draw.disc(add(buf, RUNE), ps, 2.4f * s, t * 5f, (float) ownerP.y - 0.4f, CRIMSON, 0.6f * s);
             if (t >= BloomEntity.TOP - 4) {
                 Fx.trail(buf, ps, java.util.List.of(ownerP.add(0, 4.0, 0), ownerP.add(0, 1.0, 0)), cam, 0.8f, CRIMSON, 0.6f);
@@ -44,8 +43,6 @@ public class BloomRenderer extends MelRenderer<BloomEntity> {
         if (t >= BloomEntity.IMPACT && t < BloomEntity.IMPACT + 14) {
             float u = c01((t - BloomEntity.IMPACT) / 14f);
             Draw.disc(add(buf, RING_WAVE), ps, 0.8f + Ri * u, 0f, y + 0.1f, CRIMSON, 1f - u);
-            Draw.disc(add(buf, GLOW), ps, Ri * 0.8f, 0f, y + 0.06f, SCARLET, 0.6f * (1f - u));
-            Fx.star(buf, ps, p.add(0, 1.0, 0), 4f * (1f - u), 0f, WHITE, 1f - u);
         }
         // the flower
         if (t >= BloomEntity.BLOOM0) {
@@ -53,15 +50,11 @@ public class BloomRenderer extends MelRenderer<BloomEntity> {
             float fade = 1f - c01((t - gardenEnd + 24f) / 24f);
             float pulse = t > BloomEntity.BLOOM1 ? 1f + 0.03f * Mth.sin(t * 0.15f) : 1f;
             Fx.flower(buf, ps, p, R * pulse, open, t * 0.4f, 20, WHITE, 0.95f * fade);
-            if (open > 0.3f) {
-                Fx.glow(buf, ps, p.add(0, 1.6, 0), 3.0f * open, SCARLET, 0.45f * fade);
-            }
         }
         if (t >= BloomEntity.BLOOM1 - 2 && t < BloomEntity.BLOOM1 + 16) {
             float u = c01((t - BloomEntity.BLOOM1) / 16f);
             Draw.disc(add(buf, RING_WAVE), ps, 1f + R * u, 0f, y + 0.12f, CRIMSON, 1f - u);
             Draw.disc(add(buf, WAVE), ps, 1f + R * u, 0f, y + 0.11f, SCARLET, 0.7f * (1f - u));
-            Fx.star(buf, ps, p.add(0, 1.4, 0), 5f * (1f - u), 0f, WHITE, 1f - u);
         }
         // the garden
         if (t >= BloomEntity.BLOOM1) {

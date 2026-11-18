@@ -17,6 +17,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
@@ -255,6 +256,8 @@ public class BladeEntity extends MelEntityBase {
         Util.swing(owner);
         Util.sound(level(), p.x, p.y, p.z, ModSounds.DASH.get(), 1.1f, 1.2f);
         Util.bladeBurst(level(), p.x, p.y, p.z, 8);
+        SpriteFx.beam(sv(), start.add(0, 1.0, 0), p, SpriteFx.Palette.GOLD, 0.4f, 6);
+        SpriteFx.impact(sv(), p, SpriteFx.Palette.WHITE, 1.4f);
         boolean any = false;
         Set<UUID> done = new HashSet<>();
         Vec3 line = start.add(0, 1, 0);
@@ -292,6 +295,18 @@ public class BladeEntity extends MelEntityBase {
         Util.swing(owner);
         Util.sound(level(), sp.x, sp.y, sp.z, ModSounds.SLASH.get(), 1.0f, 0.9f + 0.1f * i);
         Util.bladeBurst(level(), sp.x, sp.y, sp.z, 5);
+        // the four cuts: right to left, reverse diagonal, upward, then the spin
+        if (i == 3) {
+            for (int s = 0; s < 3; s++) {
+                SpriteFx.streak(sv(), sp, face, s * 60f, s == 1 ? SpriteFx.Palette.GOLD : SpriteFx.Palette.WHITE, 3.6f);
+            }
+            SpriteFx.ring(sv(), center, SpriteFx.Palette.GOLD, 0.8f);
+        } else {
+            float[] roll = {-8f, 40f, 82f};
+            SpriteFx.streak(sv(), sp, face, roll[i], i == 1 ? SpriteFx.Palette.GOLD : SpriteFx.Palette.WHITE, 3.4f);
+            SpriteFx.streak(sv(), sp, face, roll[i], SpriteFx.Palette.WHITE, 2.4f);
+        }
+        SpriteFx.shards(sv(), sp, SpriteFx.Palette.GOLD, 1.2f);
         boolean any = false;
         for (LivingEntity e : Util.enemies(level(), center, 3.2, owner)) {
             Util.hurt(owner, e, c.slashFlat.get(), 0);
@@ -320,6 +335,9 @@ public class BladeEntity extends MelEntityBase {
         Util.sound(level(), sp.x, sp.y, sp.z, ModSounds.STAB.get(), 1.4f, 1.0f);
         Util.ring(level(), ModParticles.SILVER.get(), sp, 12, 0.3, 0.0);
         Util.bladeBurst(level(), sp.x, sp.y, sp.z, 10);
+        SpriteFx.beam(sv(), sp.subtract(face.scale(3.0)), sp.add(face.scale(2.5)), SpriteFx.Palette.GOLD, 0.35f, 5);
+        SpriteFx.impact(sv(), sp.add(face.scale(1.6)), SpriteFx.Palette.WHITE, 1.8f);
+        SpriteFx.shards(sv(), sp.add(face.scale(1.6)), SpriteFx.Palette.GOLD, 1.6f);
         boolean any = false;
         for (LivingEntity e : Util.enemies(level(), center, 3.2, owner)) {
             double mult = 1.0;
@@ -354,6 +372,15 @@ public class BladeEntity extends MelEntityBase {
         Util.ring(level(), ModParticles.GOLD.get(), g.add(0, 0.8, 0), 24, 0.35, 0.08);
         Util.fxDir(level(), ModParticles.RING.get(), g.x, g.y + 0.5, g.z, 0, 0, 0);
         Util.fx(level(), ModParticles.FLASH.get(), g.x, g.y + 1, g.z, 1, 0, 0, 0, 0);
+        float er = f(c.radius.get());
+        SpriteFx.beam(sv(), g.add(0, 14, 0), g.add(0, 0.1, 0), SpriteFx.Palette.WHITE, 0.9f, 5);
+        SpriteFx.fracture(sv(), g.add(0, 1.2, 0), SpriteFx.Palette.WHITE, 5.0f);
+        SpriteFx.cracks(sv(), g, SpriteFx.Palette.GOLD, er * 2f / 7f);
+        SpriteFx.ring(sv(), g, SpriteFx.Palette.GOLD, er / 3f);
+        SpriteFx.shards(sv(), g.add(0, 1.0, 0), SpriteFx.Palette.WHITE, 3.0f);
+        if (perfect) {
+            SpriteFx.petals(sv(), g.add(0, 1.5, 0), SpriteFx.Palette.CRIMSON, 4.0f);
+        }
         double mult = perfect ? 1.0 + c.perfectBonusPercent.get() / 100.0 : 1.0;
         for (LivingEntity e : Util.enemies(level(), g, c.radius.get(), owner)) {
             Util.hurt(owner, e, c.executeFlat.get(), c.executePercent.get(), mult, 1.0);

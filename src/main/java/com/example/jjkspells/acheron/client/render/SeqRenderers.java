@@ -305,8 +305,6 @@ public final class SeqRenderers {
             }
             // the ascent: a glow gathers under the caster
             float asc = env(t, 50f, 56f, 62f, 70f);
-            if (asc > 0.01f && owner != null) {
-            }
         }
     }
 
@@ -357,8 +355,6 @@ public final class SeqRenderers {
                         Vec3 c = en.getPosition(pt).subtract(base).add(0, en.getBbHeight() * 0.5, 0);
                     }
                 }
-            }
-            if (t < 24f && owner != null) {
             }
         }
     }

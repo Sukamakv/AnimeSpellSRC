@@ -17,6 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class WaterfowlEntity extends MelEntityBase {
     private UUID targetId;
     private Vec3 start, center, leapTop, approach, diveFrom;
     private double angle;
-    private int connected, slashes;
+    private int connected, slashes, hitFx;
 
     public WaterfowlEntity(EntityType<? extends WaterfowlEntity> type, Level level) {
         super(type, level);
@@ -293,11 +294,20 @@ public class WaterfowlEntity extends MelEntityBase {
         Util.swing(owner);
         Util.sound(level(), sp.x, sp.y, sp.z, n % 8 == 0 ? ModSounds.FLURRY.get() : ModSounds.SLASH.get(), 1.0f, 0.95f + 0.1f * (n % 3));
         Util.bladeBurst(level(), sp.x, sp.y, sp.z, 4);
+        // every slash is a thin blade cut facing the dancer's line of sight, a different angle each time
+        SpriteFx.streak(sv(), sp, face, ((n * 67) % 140) - 70f, n % 2 == 0 ? SpriteFx.Palette.WHITE : SpriteFx.Palette.GOLD, 2.6f + (flurry == 2 ? 0.6f : 0f));
+        if (n % 8 == 7) {
+            SpriteFx.claws(sv(), sp, face, 20f * flurry - 20f, SpriteFx.Palette.WHITE, 3.4f);
+            SpriteFx.shards(sv(), sp, SpriteFx.Palette.GOLD, 1.6f);
+        }
         boolean last = flurry == 2 && n % 8 == 7;
         for (LivingEntity e : hit) {
             Util.hurt(owner, e, c.slashFlat.get(), 0);
             Vec3 ec = e.position().add(0, e.getBbHeight() * 0.5, 0);
             Util.bladeBurst(level(), ec.x, ec.y, ec.z, 5);
+            if (hitFx++ % 3 == 0) {
+                SpriteFx.impact(sv(), ec, SpriteFx.Palette.WHITE, 0.9f);
+            }
             if (e.isAlive() && last) {
                 Util.launchBlocks(e, c.launchBlocks.get());
             }
@@ -325,6 +335,16 @@ public class WaterfowlEntity extends MelEntityBase {
         Util.ring(level(), ModParticles.GOLD.get(), g.add(0, 0.9, 0), 24, 0.4, 0.08);
         Util.fxDir(level(), ModParticles.RING.get(), g.x, g.y + 0.6, g.z, 0, 0, 0);
         Util.fx(level(), ModParticles.FLASH.get(), g.x, g.y + 1.0, g.z, 1, 0, 0, 0, 0);
+        float cr = f(c.crescentRadius.get());
+        SpriteFx.ring(sv(), g, dance ? SpriteFx.Palette.GOLD : SpriteFx.Palette.WHITE, cr / 3f);
+        SpriteFx.cracks(sv(), g, SpriteFx.Palette.WHITE, cr * 2f / 7f);
+        SpriteFx.streak(sv(), g.add(0, 0.6, 0), new Vec3(0, 1, 0), 0f, SpriteFx.Palette.WHITE, cr / 2.2f);
+        SpriteFx.streak(sv(), g.add(0, 0.6, 0), new Vec3(0, 1, 0), 90f, SpriteFx.Palette.GOLD, cr / 2.6f);
+        SpriteFx.shards(sv(), g.add(0, 1.0, 0), SpriteFx.Palette.WHITE, 3.0f);
+        if (dance) {
+            SpriteFx.claws(sv(), g.add(0, 1.4, 0), flat(owner.position().subtract(g)), 0f, SpriteFx.Palette.GOLD, 6.0f);
+            SpriteFx.petals(sv(), g.add(0, 1.5, 0), SpriteFx.Palette.GOLD, 4.0f);
+        }
         double mult = dance ? 1.0 + c.danceBonusPercent.get() / 100.0 : 1.0;
         for (LivingEntity e : Util.enemies(level(), g, c.crescentRadius.get(), owner)) {
             Util.hurt(owner, e, c.crescentFlat.get(), c.crescentPercent.get(), mult, 1.0);

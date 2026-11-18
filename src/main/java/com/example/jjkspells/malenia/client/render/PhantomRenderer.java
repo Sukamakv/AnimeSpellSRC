@@ -32,8 +32,6 @@ public class PhantomRenderer extends MelRenderer<PhantomEntity> {
             Draw.disc(add(buf, CIRCLE), ps, 3.2f, -t * 4f, (float) tp.y + 0.08f, GOLD, 0.55f * a);
         }
         if (owner != null && t < PhantomEntity.DIVE) {
-            Fx.glow(buf, ps, ownerP.add(0, 1.0, 0), 1.8f, CRIMSON, 0.35f * a);
-            Fx.glow(buf, ps, ownerP.add(0, 1.0, 0), 1.0f, WHITE, 0.2f * a);
             Draw.disc(add(buf, RUNE), ps, 2.6f * c01(t / 14f), t * 5f, (float) ownerP.y - 0.5f, CRIMSON, 0.6f * a);
         }
         float[][] ph = e.ph();
@@ -72,8 +70,6 @@ public class PhantomRenderer extends MelRenderer<PhantomEntity> {
                     case 1, 2 -> {
                         Fx.sword(buf, ps, hand, hand.add(dir.scale(2.4)), cam, 0.16f, WHITE, alpha * 0.8f);
                         float su = c01((since - 3f) / 7f);
-                        Fx.slash(buf, ps, tip, yaw, 0f, kind == 1 ? 40f : -40f, 2.4f + 0.6f * su, CRIMSON, (1f - su) * alpha);
-                        Fx.slash(buf, ps, tip, yaw, 0f, kind == 1 ? 40f : -40f, 1.9f + 0.5f * su, WHITE, (1f - su) * alpha * 0.7f);
                     }
                     case 3 -> {
                         float su = c01((since - 2f) / 9f);
@@ -96,7 +92,6 @@ public class PhantomRenderer extends MelRenderer<PhantomEntity> {
             }
             float yawp = 0f;
             Fx.phantom(buf, ps, pos, yawp, 2.2f, 0.85f * alpha, WHITE);
-            Fx.glow(buf, ps, pos.add(0, 1.2, 0), 1.1f, CRIMSON, 0.4f * alpha);
         }
         // the real one: afterimages of the dive
         if (owner != null && t >= PhantomEntity.DIVE - 2 && t < PhantomEntity.LAND + 14) {
@@ -118,7 +113,6 @@ public class PhantomRenderer extends MelRenderer<PhantomEntity> {
         if (t >= PhantomEntity.HIT && t < PhantomEntity.HIT + 14) {
             float u = c01((t - PhantomEntity.HIT) / 14f);
             Draw.disc(add(buf, RING_WAVE), ps, 0.8f + 5f * u, 0f, (float) tp.y + 0.1f, e.isPerfect() ? GOLD : CRIMSON, 1f - u);
-            Fx.star(buf, ps, tp.add(0, 1.0, 0), 3.0f * (1f - u), 0f, e.isPerfect() ? GOLD : WHITE, 1f - u);
         }
     }
 

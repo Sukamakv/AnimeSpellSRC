@@ -14,6 +14,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
@@ -141,6 +142,9 @@ public class GoddessEntity extends MelEntityBase {
             Util.sound(level(), p.x, p.y, p.z, ModSounds.TRANSFORM.get(), 1.8f, 1.0f);
             Util.fx(level(), ModParticles.FLASH.get(), p.x, p.y + 1.2, p.z, 3, 0.1, 0.1, 0.1, 0);
             Util.ring(level(), ModParticles.PETAL.get(), p.add(0, 1.0, 0), 40, 0.5, 0.05);
+            SpriteFx.shards(sv(), p.add(0, 1.4, 0), SpriteFx.Palette.CRIMSON, 2.6f);
+            SpriteFx.petals(sv(), p.add(0, 1.6, 0), SpriteFx.Palette.CRIMSON, 4.0f);
+            SpriteFx.ring(sv(), p, SpriteFx.Palette.CRIMSON, 0.9f);
         }
         if (age == T_WINGS + 14) {
             Vec3 p = owner.position();
@@ -154,6 +158,7 @@ public class GoddessEntity extends MelEntityBase {
         }
         if (age == T_RISE) {
             Util.sound(level(), start.x, start.y, start.z, ModSounds.WINGS.get(), 1.8f, 0.7f);
+            SpriteFx.cracks(sv(), point, SpriteFx.Palette.ROT, f(c.impactRadius.get()) * 2f / 7f);
         }
         if (age == T_IMPACT) {
             impact(owner);
@@ -278,6 +283,14 @@ public class GoddessEntity extends MelEntityBase {
         Util.ring(level(), ModParticles.ROT.get(), point.add(0, 0.5, 0), 40, 0.6, 0.04);
         Util.fxDir(level(), ModParticles.RING.get(), point.x, point.y + 0.5, point.z, 0, 0, 0);
         Util.fx(level(), ModParticles.FLASH.get(), point.x, point.y + 1.0, point.z, 3, 0.2, 0.2, 0.2, 0);
+        float ir = f(c.impactRadius.get());
+        SpriteFx.cracks(sv(), point, SpriteFx.Palette.ROT, ir * 2f / 7f);
+        SpriteFx.ring(sv(), point, SpriteFx.Palette.CRIMSON, ir / 3f);
+        SpriteFx.impact(sv(), point.add(0, 1.0, 0), SpriteFx.Palette.CRIMSON, 2.6f);
+        SpriteFx.shards(sv(), point.add(0, 1.0, 0), SpriteFx.Palette.CRIMSON, 4.0f);
+        SpriteFx.shards(sv(), point.add(0, 1.0, 0), SpriteFx.Palette.WHITE, 2.8f);
+        SpriteFx.tendrils(sv(), point.add(0, 1.0, 0), SpriteFx.Palette.ROT, 4.0f);
+        SpriteFx.smoke(sv(), point.add(0, 1.0, 0), SpriteFx.Smoke.EMBER, 4.5f);
         for (LivingEntity e : Util.enemies(level(), point, c.impactRadius.get(), owner)) {
             boolean dead = Util.hurt(owner, e, c.impactFlat.get(), c.impactPercent.get(), 1.0, bossFactor(e));
             if (dead) {
@@ -296,6 +309,11 @@ public class GoddessEntity extends MelEntityBase {
         Util.ring(level(), ModParticles.PETAL.get(), point.add(0, 0.8, 0), 80, 1.0, 0.1);
         Util.ring(level(), ModParticles.GOLD.get(), point.add(0, 1.0, 0), 40, 0.6, 0.1);
         Util.fxDir(level(), ModParticles.RING.get(), point.x, point.y + 0.5, point.z, 0, 0, 0);
+        float br = f(c.bloomRadius.get());
+        SpriteFx.ring(sv(), point, SpriteFx.Palette.ROT, br / 3f);
+        SpriteFx.cracks(sv(), point, SpriteFx.Palette.ROT, br * 2f / 7f);
+        SpriteFx.petals(sv(), point.add(0, 2.5, 0), SpriteFx.Palette.CRIMSON, 9.0f);
+        SpriteFx.shards(sv(), point.add(0, 1.5, 0), SpriteFx.Palette.GOLD, 4.0f);
         blast(owner, point, c.bloomRadius.get(), c.bloomFlat.get(), c.bloomPercent.get(), true);
     }
 
@@ -311,6 +329,12 @@ public class GoddessEntity extends MelEntityBase {
         Util.bloomBurst(level(), q.x, q.y, q.z, c.swordRadius.get(), 30);
         Util.bladeBurst(level(), q.x, q.y + 1, q.z, 12);
         Util.fxDir(level(), ModParticles.RING.get(), q.x, q.y + 0.4, q.z, 0, 0, 0);
+        float sr = f(c.swordRadius.get());
+        SpriteFx.beam(sv(), q.add(0, 16, 0), q.add(0, 0.1, 0), SpriteFx.Palette.WHITE, 0.8f, 4);
+        SpriteFx.cracks(sv(), q, SpriteFx.Palette.GOLD, sr * 2f / 7f);
+        SpriteFx.impact(sv(), q.add(0, 0.8, 0), SpriteFx.Palette.GOLD, 1.8f);
+        SpriteFx.shards(sv(), q.add(0, 0.8, 0), SpriteFx.Palette.WHITE, 1.8f);
+        SpriteFx.ring(sv(), q, SpriteFx.Palette.GOLD, sr / 3f);
         blast(owner, q, c.swordRadius.get(), c.swordFlat.get(), 0, false);
     }
 
@@ -322,6 +346,12 @@ public class GoddessEntity extends MelEntityBase {
         Util.ring(level(), ModParticles.GOLD.get(), point.add(0, 1.0, 0), 50, 0.7, 0.06);
         Util.fxDir(level(), ModParticles.RING.get(), point.x, point.y + 0.6, point.z, 0, 0, 0);
         Util.fx(level(), ModParticles.FLASH.get(), point.x, point.y + 1.0, point.z, 2, 0.2, 0.2, 0.2, 0);
+        float jr = f(c.judgmentRadius.get());
+        SpriteFx.ring(sv(), point, SpriteFx.Palette.WHITE, jr / 3f);
+        SpriteFx.streak(sv(), point.add(0, 1.0, 0), new Vec3(0, 1, 0), 0f, SpriteFx.Palette.WHITE, jr / 2.2f);
+        SpriteFx.streak(sv(), point.add(0, 1.0, 0), new Vec3(0, 1, 0), 90f, SpriteFx.Palette.GOLD, jr / 2.4f);
+        SpriteFx.streak(sv(), point.add(0, 1.0, 0), new Vec3(0, 1, 0), 45f, SpriteFx.Palette.WHITE, jr / 2.8f);
+        SpriteFx.cracks(sv(), point, SpriteFx.Palette.GOLD, jr * 2f / 7f);
         blast(owner, point, c.judgmentRadius.get(), c.judgmentFlat.get(), c.judgmentPercent.get(), true);
     }
 
@@ -336,6 +366,14 @@ public class GoddessEntity extends MelEntityBase {
         Util.ring(level(), ModParticles.BUTTERFLY.get(), point.add(0, 1.2, 0), 24, 0.3, 0.1);
         Util.fxDir(level(), ModParticles.RING.get(), point.x, point.y + 0.6, point.z, 0, 0, 0);
         Util.fx(level(), ModParticles.FLASH.get(), core.x, core.y, core.z, 4, 0.3, 0.3, 0.3, 0);
+        float fr = f(c.bloomRadius.get());
+        SpriteFx.fracture(sv(), core, SpriteFx.Palette.CRIMSON, 8.0f);
+        SpriteFx.shards(sv(), core, SpriteFx.Palette.ROT, 6.0f);
+        SpriteFx.shards(sv(), core, SpriteFx.Palette.CRIMSON, 4.5f);
+        SpriteFx.tendrils(sv(), core, SpriteFx.Palette.ROT, 7.0f);
+        SpriteFx.petals(sv(), core, SpriteFx.Palette.CRIMSON, 10.0f);
+        SpriteFx.ring(sv(), point, SpriteFx.Palette.ROT, fr / 3f);
+        SpriteFx.cracks(sv(), point, SpriteFx.Palette.ROT, fr * 2f / 7f);
         blast(owner, point, c.bloomRadius.get(), c.finalFlat.get(), c.finalPercent.get(), true);
         // the Goddess of Rot state
         applyBuff(owner, buffTicks);

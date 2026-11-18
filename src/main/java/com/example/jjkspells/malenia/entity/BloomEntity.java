@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.HashMap;
@@ -125,8 +126,15 @@ public class BloomEntity extends MelEntityBase {
             Util.fx(level(), ModParticles.PETAL.get(), p.x, p.y + 1.0, p.z, 3, 0.6, 0.8, 0.6, 0.04);
             Util.fx(level(), ModParticles.SPORE.get(), point.x, point.y + 0.2, point.z, 3, c.impactRadius.get() * 0.6, 0.1, c.impactRadius.get() * 0.6, 0.02);
         }
+        if (age >= ARMS && age < IMPACT && age % 8 == 0) {
+            SpriteFx.petals(sv(), owner.position().add(0, 1.2, 0), SpriteFx.Palette.CRIMSON, 1.3f);
+        }
         if (age == IMPACT) {
             impact(owner);
+        }
+        if (age > IMPACT && age < BLOOM1 && age % 4 == 0) {
+            double bu = smooth((age - BLOOM0) / (double) (BLOOM1 - BLOOM0)), ba = level().random.nextDouble() * Math.PI * 2;
+            SpriteFx.petals(sv(), point.add(Math.cos(ba) * getRadius() * bu * 0.8, 0.8, Math.sin(ba) * getRadius() * bu * 0.8), SpriteFx.Palette.CRIMSON, 1.6f);
         }
         if (age > IMPACT && age < BLOOM1 && age % 2 == 0) {
             double u = smooth((age - BLOOM0) / (double) (BLOOM1 - BLOOM0));
@@ -185,6 +193,13 @@ public class BloomEntity extends MelEntityBase {
         Util.ring(level(), ModParticles.PETAL.get(), point.add(0, 0.4, 0), 40, 0.5, 0.06);
         Util.fxDir(level(), ModParticles.RING.get(), point.x, point.y + 0.5, point.z, 0, 0, 0);
         Util.fx(level(), ModParticles.FLASH.get(), point.x, point.y + 1, point.z, 2, 0, 0, 0, 0);
+        float ir = f(c.impactRadius.get());
+        SpriteFx.cracks(sv(), point, SpriteFx.Palette.ROT, ir * 2f / 7f);
+        SpriteFx.ring(sv(), point, SpriteFx.Palette.CRIMSON, ir / 3f);
+        SpriteFx.impact(sv(), point.add(0, 1.0, 0), SpriteFx.Palette.CRIMSON, 2.6f);
+        SpriteFx.shards(sv(), point.add(0, 1.0, 0), SpriteFx.Palette.CRIMSON, 3.4f);
+        SpriteFx.petals(sv(), point.add(0, 1.5, 0), SpriteFx.Palette.CRIMSON, 4.0f);
+        SpriteFx.smoke(sv(), point.add(0, 1.0, 0), SpriteFx.Smoke.EMBER, 3.5f);
         List<LivingEntity> hit = Util.enemies(level(), point, c.impactRadius.get(), owner);
         for (LivingEntity e : hit) {
             Util.hurt(owner, e, c.impactFlat.get(), c.impactPercent.get());
@@ -216,6 +231,12 @@ public class BloomEntity extends MelEntityBase {
         Util.ring(level(), ModParticles.PETAL.get(), point.add(0, 0.6, 0), 56, 0.7, 0.08);
         Util.ring(level(), ModParticles.GOLD.get(), point.add(0, 0.9, 0), 32, 0.5, 0.1);
         Util.fxDir(level(), ModParticles.RING.get(), point.x, point.y + 0.5, point.z, 0, 0, 0);
+        float br = f(c.bloomRadius.get());
+        SpriteFx.ring(sv(), point, SpriteFx.Palette.ROT, br / 3f);
+        SpriteFx.cracks(sv(), point, SpriteFx.Palette.ROT, br * 2f / 7f);
+        SpriteFx.petals(sv(), point.add(0, 2.0, 0), SpriteFx.Palette.CRIMSON, 7.0f);
+        SpriteFx.shards(sv(), point.add(0, 1.2, 0), SpriteFx.Palette.GOLD, 3.2f);
+        SpriteFx.tendrils(sv(), point.add(0, 1.2, 0), SpriteFx.Palette.ROT, 4.0f);
         for (LivingEntity e : Util.enemies(level(), point, c.bloomRadius.get(), owner)) {
             Util.hurt(owner, e, c.bloomFlat.get(), c.bloomPercent.get(), mult, 1.0);
             if (e.isAlive()) {
@@ -235,6 +256,12 @@ public class BloomEntity extends MelEntityBase {
                         point.z + Math.sin(a) * d, 0, 0.03 + level().random.nextDouble() * 0.04, 0);
             }
             Util.fx(level(), ModParticles.ROT.get(), point.x, point.y + 0.3, point.z, 3, r * 0.5, 0.1, r * 0.5, 0.01);
+        }
+        if (gage % 20 == 10) {
+            double ga = level().random.nextDouble() * Math.PI * 2, gd = Math.sqrt(level().random.nextDouble()) * r * 0.8;
+            Vec3 gp = point.add(Math.cos(ga) * gd, 0.2, Math.sin(ga) * gd);
+            SpriteFx.tendrils(sv(), gp.add(0, 0.8, 0), SpriteFx.Palette.ROT, 2.0f);
+            SpriteFx.petals(sv(), gp.add(0, 1.2, 0), SpriteFx.Palette.CRIMSON, 1.8f);
         }
         if (gage % 20 != 10) {
             return;

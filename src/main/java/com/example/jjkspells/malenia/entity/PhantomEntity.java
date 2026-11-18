@@ -15,6 +15,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
@@ -245,6 +246,8 @@ public class PhantomEntity extends MelEntityBase {
         for (int i = 0; i < N; i++) {
             Util.fx(level(), ModParticles.FLASH.get(), pos[i][0], pos[i][1] + 1, pos[i][2], 1, 0, 0, 0, 0);
             Util.fx(level(), ModParticles.PETAL.get(), pos[i][0], pos[i][1] + 1, pos[i][2], 8, 0.4, 0.7, 0.4, 0.08);
+            SpriteFx.fracture(sv(), new Vec3(pos[i][0], pos[i][1] + 1.2, pos[i][2]), SpriteFx.Palette.CRIMSON, 2.2f);
+            SpriteFx.petals(sv(), new Vec3(pos[i][0], pos[i][1] + 1.2, pos[i][2]), SpriteFx.Palette.CRIMSON, 1.4f);
         }
         Util.sound(level(), here.x, here.y, here.z, ModSounds.WINGS.get(), 1.2f, 1.2f);
     }
@@ -291,6 +294,23 @@ public class PhantomEntity extends MelEntityBase {
         Util.sound(level(), ec.x, ec.y, ec.z, kind == 0 ? ModSounds.STAB.get() : ModSounds.SLASH.get(), 1.1f, 0.9f + 0.05f * i);
         Util.bladeBurst(level(), ec.x, ec.y, ec.z, 6);
         Util.fx(level(), ModParticles.PETAL.get(), ec.x, ec.y, ec.z, 6, 0.3, 0.4, 0.3, 0.12);
+        Vec3 aim = flat(ec.subtract(from));
+        if (kind == 0) {
+            SpriteFx.beam(sv(), from, ec, SpriteFx.Palette.CRIMSON, 0.3f, 4);
+            SpriteFx.impact(sv(), ec, SpriteFx.Palette.CRIMSON, 1.5f);
+        } else if (kind == 1 || kind == 2) {
+            SpriteFx.streak(sv(), ec, aim, kind == 1 ? 38f : -38f, SpriteFx.Palette.CRIMSON, 3.4f);
+            SpriteFx.streak(sv(), ec, aim, kind == 1 ? 38f : -38f, SpriteFx.Palette.WHITE, 2.6f);
+        } else if (kind == 3) {
+            for (int s = 0; s < 3; s++) {
+                SpriteFx.streak(sv(), ec, aim, s * 60f, SpriteFx.Palette.CRIMSON, 3.2f);
+            }
+            SpriteFx.ring(sv(), t.position(), SpriteFx.Palette.ROT, 0.7f);
+        } else {
+            SpriteFx.beam(sv(), ec.add(0, 5, 0), ec, SpriteFx.Palette.CRIMSON, 0.5f, 5);
+            SpriteFx.cracks(sv(), t.position(), SpriteFx.Palette.ROT, 0.6f);
+        }
+        SpriteFx.shards(sv(), ec, SpriteFx.Palette.CRIMSON, 1.2f);
         Util.hurt(owner, t, c.phantomFlat.get(), 0);
         hits++;
         if (t.isAlive()) {
@@ -299,6 +319,8 @@ public class PhantomEntity extends MelEntityBase {
         if (kind != 0) {
             clouds.add(new double[]{t.getX(), t.getY(), t.getZ(), tickCount - 1 + 60});
             Util.fx(level(), ModParticles.ROT.get(), t.getX(), t.getY() + 0.3, t.getZ(), 10, 1.0, 0.2, 1.0, 0.03);
+            SpriteFx.cracks(sv(), t.position(), SpriteFx.Palette.ROT, f(c.cloudRadius.get()) * 2f / 7f);
+            SpriteFx.tendrils(sv(), t.position().add(0, 0.8, 0), SpriteFx.Palette.ROT, 2.2f);
         }
     }
 
@@ -336,6 +358,16 @@ public class PhantomEntity extends MelEntityBase {
         Vec3 ec = t.position().add(0, t.getBbHeight() * 0.5, 0);
         Util.bloomBurst(level(), t.getX(), t.getY(), t.getZ(), 3.0, 22);
         Util.bladeBurst(level(), ec.x, ec.y, ec.z, 14);
+        Vec3 dv = flat(ec.subtract(at0));
+        SpriteFx.fracture(sv(), ec, SpriteFx.Palette.WHITE, 4.2f);
+        SpriteFx.claws(sv(), ec, dv, 25f, SpriteFx.Palette.CRIMSON, 5.0f);
+        SpriteFx.streak(sv(), ec, dv, -30f, SpriteFx.Palette.WHITE, 5.0f);
+        SpriteFx.shards(sv(), ec, SpriteFx.Palette.CRIMSON, 2.6f);
+        SpriteFx.ring(sv(), t.position(), SpriteFx.Palette.CRIMSON, 1.0f);
+        if (perfect) {
+            SpriteFx.petals(sv(), ec.add(0, 1.0, 0), SpriteFx.Palette.CRIMSON, 5.0f);
+            SpriteFx.tendrils(sv(), ec, SpriteFx.Palette.ROT, 3.5f);
+        }
         Util.hurt(owner, t, c.diveFlat.get(), c.divePercent.get(), mult, 1.0);
         if (perfect) {
             owner.heal((float) (double) c.perfectHeal.get());

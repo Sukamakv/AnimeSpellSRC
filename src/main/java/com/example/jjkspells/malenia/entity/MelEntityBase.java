@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 import com.example.jjkspells.malenia.util.Util;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -85,6 +86,16 @@ public abstract class MelEntityBase extends Entity {
     protected static double smooth(double t) {
         t = Math.max(0, Math.min(1, t));
         return t * t * (3 - 2 * t);
+    }
+
+    /** Server level for sprite effects (the sequences only ever run on the server). */
+    protected net.minecraft.server.level.ServerLevel sv() {
+        return (net.minecraft.server.level.ServerLevel) level();
+    }
+
+    /** Config numbers come as Double or Integer; sprite scales are floats. */
+    protected static float f(Number n) {
+        return n.floatValue();
     }
 
     protected static Vec3 flat(Vec3 v) {

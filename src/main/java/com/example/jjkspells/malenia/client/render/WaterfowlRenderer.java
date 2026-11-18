@@ -34,10 +34,6 @@ public class WaterfowlRenderer extends MelRenderer<WaterfowlEntity> {
                 Draw.disc(add(buf, RING_WAVE), ps, 5f, t * 2f, (float) c.y + 0.09f, GOLD, 0.7f * a);
             }
         }
-        if (owner != null && t < WaterfowlEntity.CRES + 6) {
-            glow(buf, ps, ownerP.add(0, 1.0, 0), 1.6f, SILVER, 0.35f * a);
-            glow(buf, ps, ownerP.add(0, 1.0, 0), 2.4f, GOLD, 0.18f * a);
-        }
         // the ribbon behind her
         List<Vec3> pts = new ArrayList<>();
         for (Vec3 w : e.trail) {
@@ -53,7 +49,6 @@ public class WaterfowlRenderer extends MelRenderer<WaterfowlEntity> {
             float u = c01((t - (float) f[5]) / 9f);
             float al = (1f - u) * (1f - u);
             float[] col = f[4] >= 0 ? SILVER : GOLD;
-            Fx.slash(buf, ps, new Vec3(f[0], f[1], f[2]).subtract(base), (float) f[3], 0f, (float) f[4], 2.1f + 0.8f * u, col, al);
             Fx.star(buf, ps, new Vec3(f[0], f[1], f[2]).subtract(base), 0.9f * (1f - u), t * 8f, WHITE, al);
         }
         // the final crescent
@@ -63,17 +58,12 @@ public class WaterfowlRenderer extends MelRenderer<WaterfowlEntity> {
             float al = 1f - u * u;
             float r = 0.6f + 7.2f * smooth(u);
             Draw.disc(add(buf, RING_WAVE), ps, r, 0f, (float) c.y + 0.1f, SILVER, al);
-            Draw.disc(add(buf, GLOW), ps, r * 0.9f, 0f, (float) c.y + 0.06f, GOLD, 0.35f * al);
             Fx.crescentRing(buf, ps, c, r, 2.4f, 12, u * 50f, SILVER, 0.9f * al);
             Fx.crescentRing(buf, ps, c, r * 0.7f, 1.8f, 9, -u * 70f, GOLD, 0.8f * al);
             if (e.isDance()) {
                 Draw.disc(add(buf, RING_WAVE), ps, r * 1.25f, 0f, (float) c.y + 0.12f, GOLD, 0.8f * al);
-                Fx.star(buf, ps, c.add(0, 1.2, 0), 3.0f * (1f - u), 0f, GOLD, al);
             }
         }
     }
 
-    private static void glow(MultiBufferSource buf, PoseStack ps, Vec3 p, float size, float[] c, float alpha) {
-        Fx.glow(buf, ps, p, size, c, alpha);
-    }
 }

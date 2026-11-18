@@ -36,14 +36,9 @@ public class BladeRenderer extends MelRenderer<BladeEntity> {
             Vec3 dir = look.scale(0.9).add(0, 0.6, 0).add(right.scale(-0.25)).normalize();
             Vec3 p1 = p0.add(dir.scale(2.4));
             Fx.sword(buf, ps, p0, p1, cam, 0.16f, WHITE, 0.95f * a);
-            Fx.glow(buf, ps, p1, 0.6f, GOLD, 0.5f * a);
             if (t < BladeEntity.DASH0) {
                 float s = c01(t / BladeEntity.DASH0);
-                Fx.glow(buf, ps, ownerP.add(0, 1.0, 0), 1.6f + s, GOLD, 0.4f * s);
                 Fx.star(buf, ps, p1, 1.4f * s, t * 10f, WHITE, 0.9f * s);
-            }
-            if (e.isPerfect() && t > BladeEntity.EXEC) {
-                Fx.glow(buf, ps, ownerP.add(0, 1.0, 0), 2.6f, GOLD, 0.45f * a);
             }
         }
         List<Vec3> pts = new ArrayList<>();
@@ -62,9 +57,6 @@ public class BladeRenderer extends MelRenderer<BladeEntity> {
             Vec3 p = new Vec3(f[0], f[1], f[2]).subtract(base);
             float yaw = (float) f[3];
             switch (kind) {
-                case 0 -> Fx.slash(buf, ps, p, yaw, 0f, -30f, 2.2f + 0.6f * u, SILVER, al);
-                case 1 -> Fx.slash(buf, ps, p, yaw, 0f, 30f, 2.2f + 0.6f * u, GOLD, al);
-                case 2 -> Fx.slash(buf, ps, p, yaw, 0f, 82f, 2.4f + 0.6f * u, SILVER, al);
                 case 3 -> {
                     Fx.crescentRing(buf, ps, p.add(0, -0.6, 0), 1.6f + 1.2f * u, 1.4f, 6, u * 160f, GOLD, al);
                     Fx.crescentRing(buf, ps, p.add(0, -0.6, 0), 1.2f + 1.4f * u, 1.0f, 5, -u * 140f, SILVER, al);
@@ -85,7 +77,6 @@ public class BladeRenderer extends MelRenderer<BladeEntity> {
                     ps.translate(g.x, g.y, g.z);
                     Draw.cross(add(buf, LINE), ps, 0.7f, 0f, 7f, t * 5f, GOLD, aa * 0.9f, net.minecraft.client.renderer.LightTexture.FULL_BRIGHT);
                     ps.popPose();
-                    Fx.star(buf, ps, g.add(0, 1.0, 0), 3.2f * (1f - uu), 0f, WHITE, aa);
                 }
                 default -> Fx.star(buf, ps, p, 1.4f * (1f - u), t * 9f, WHITE, al);
             }
