@@ -165,11 +165,6 @@ public class ReapingCycloneEntity extends Entity {
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.TRIDENT_RIPTIDE_3, SoundSource.PLAYERS, 3.0f, 0.9f);
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.5f, 1.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (ReapingCycloneSpell.RADIUS * 2.0 / 7.0), 24);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.2f);
-        }
-        if (tickCount == DURATION - 12) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (ReapingCycloneSpell.RADIUS * 2.0 / 6.0));
         }
         if (tickCount > DURATION) {
             return;
@@ -200,7 +195,6 @@ public class ReapingCycloneEntity extends Entity {
             if (slice) {
                 hit(t, owner, ReapingCycloneSpell.SLICE_FLAT, ReapingCycloneSpell.SLICE_PERCENT);
                 level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.5f, 1.4f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, new Vec3(t.getX(), t.getY() + 1.0, t.getZ()), new Vec3(0, 1, 0), 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);
             }
             // spiral inward and up
             double d = Math.max(dist, 0.5);
@@ -222,8 +216,6 @@ public class ReapingCycloneEntity extends Entity {
         if (last) {
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.8f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 3.0f, 1.0f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (ReapingCycloneSpell.RADIUS * 2.0 / 6.0));
         }
     }
 

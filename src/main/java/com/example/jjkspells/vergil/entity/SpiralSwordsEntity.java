@@ -212,9 +212,6 @@ public class SpiralSwordsEntity extends Entity {
             level().playSound(null, x, y + 4, z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 3.0f, 1.9f);
             level().playSound(null, x, y + 4, z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 2.5f, 0.6f);
         }
-        if (tickCount == PULL) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, (float) (R * 2.0 / 7.0), FINAL - PULL);
-        }
         if (tickCount < SUMMON && tickCount % 3 == 0) {
             level().playSound(null, x, y + 6, z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.5f, 1.4f + tickCount * 0.02f);
         }
@@ -237,7 +234,6 @@ public class SpiralSwordsEntity extends Entity {
                 ids[i] = in.get(i).getId();
             }
             pending[k] = ids;
-            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, new Vec3(x, y + 8, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 3f);
             log.putIntArray("c" + k, ids);
             log.putInt("n", k + 1);
             this.entityData.set(LOG, log.copy());
@@ -250,7 +246,6 @@ public class SpiralSwordsEntity extends Entity {
                 Entity e = sl.getEntity(id);
                 if (e instanceof LivingEntity t && t.isAlive()) {
                     hit(t, owner, SpiralSwordsSpell.VOLLEY_FLAT, SpiralSwordsSpell.VOLLEY_PERCENT);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);
                 }
             }
             level().playSound(null, x, y + 1, z, SoundEvents.TRIDENT_HIT, SoundSource.PLAYERS, 3.0f, 0.8f);
@@ -261,11 +256,8 @@ public class SpiralSwordsEntity extends Entity {
             level().playSound(null, x, y + 4, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 5.0f, 1.1f);
             level().playSound(null, x, y + 4, z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 3.0f, 1.2f);
             level().playSound(null, x, y + 4, z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, new Vec3(x, y + 2, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 6.0));
             for (LivingEntity t : inZone(owner)) {
                 hit(t, owner, SpiralSwordsSpell.FINAL_FLAT, SpiralSwordsSpell.FINAL_PERCENT);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 2.5f);
                 Vec3 out = new Vec3(t.getX() - x, 0, t.getZ() - z);
                 out = out.lengthSqr() < 0.01 ? new Vec3(0, 0, 0) : out.normalize().scale(0.6);
                 t.setDeltaMovement(t.getDeltaMovement().add(out.x, 0.5, out.z));

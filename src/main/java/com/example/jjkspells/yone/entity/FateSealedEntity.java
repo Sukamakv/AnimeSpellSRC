@@ -224,7 +224,6 @@ public class FateSealedEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.0f);
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 2.5f, 1.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, o.add(0, 0.2, 0), o.add(dir.scale(len)).add(0, 0.2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (FateSealedSpell.HALF_WIDTH * 2.0), DASH - 1);
         }
         if (tickCount < SUNDER) {
             owner.setDeltaMovement(0, Math.min(0.0, owner.getDeltaMovement().y), 0);
@@ -255,7 +254,6 @@ public class FateSealedEntity extends Entity {
                 Entity e = sl.getEntity(id);
                 if (e instanceof LivingEntity t && t.isAlive()) {
                     hit(t, owner, FateSealedSpell.SUNDER_FLAT, FateSealedSpell.SUNDER_PERCENT);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.2f);
                     t.setDeltaMovement(0, -1.6, 0);
                     t.hurtMarked = true;
                     t.fallDistance = 0;
@@ -263,9 +261,6 @@ public class FateSealedEntity extends Entity {
                 }
             }
             Vec3 end = o.add(dir.scale(len));
-            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, o.add(dir.scale(len * 0.5)).add(0, 1.5, 0), new Vec3(-dir.z, 0, dir.x), 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) Math.max(4.0, len * 0.6));
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, end, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, end.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);
             level().playSound(null, end.x, end.y + 2, end.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.5f, 1.8f);
             level().playSound(null, o.x, o.y + 2, o.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 3.5f, 0.8f);
             level().playSound(null, end.x, end.y + 2, end.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 3.0f, 0.6f);
@@ -291,7 +286,6 @@ public class FateSealedEntity extends Entity {
             t.hurtMarked = true;
             sealed.add(t.getUUID());
             sealedIds.add(t.getId());
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.8f);
             baseY.put(t.getUUID(), t.getY());
             noGrav.put(t.getUUID(), t.isNoGravity());
             level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.5f, 1.3f);
@@ -304,8 +298,6 @@ public class FateSealedEntity extends Entity {
         CompoundTag tag = new CompoundTag();
         tag.putIntArray("t", ids);
         this.entityData.set(LOG, tag);
-        com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, o.add(dir.scale(len * 0.5)).add(0, 1.2, 0), new Vec3(-dir.z, 0, dir.x), 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) Math.max(4.0, len * 0.6));
-        com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, o.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.8f);
         float yaw = (float) Math.toDegrees(Math.atan2(-dir.x, dir.z));
         tp(owner, end, yaw);
         owner.setDeltaMovement(0, 0, 0);

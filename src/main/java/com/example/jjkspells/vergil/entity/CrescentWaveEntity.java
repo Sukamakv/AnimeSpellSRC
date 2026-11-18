@@ -191,8 +191,6 @@ public class CrescentWaveEntity extends Entity {
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.8f);
         }
         if (tickCount == LAUNCH) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, o.add(d.scale(2.0)).add(0, 1.0, 0), new Vec3(0, 1, 0), (float) Math.toDegrees(Math.atan2(d.z, d.x)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6f);
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 3.0f, 0.5f);
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.TRIDENT_THUNDER, SoundSource.PLAYERS, 4.0f, 1.4f);
             level().playSound(null, o.x, o.y + 1, o.z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 2.0f, 1.2f);
@@ -205,9 +203,6 @@ public class CrescentWaveEntity extends Entity {
             double ext = W + 12.0;
             AABB box = new AABB(mid.x - ext, o.y - 5, mid.z - ext, mid.x + ext, o.y + 18, mid.z + ext);
             boolean any = false;
-            if (step % 3 == 1) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, mid.add(0, 1.2, 0), new Vec3(0, 1, 0), (float) Math.toDegrees(Math.atan2(d.z, d.x)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 10f);
-            }
             for (LivingEntity t : level().getEntitiesOfClass(LivingEntity.class, box)) {
                 if (hitIds.contains(t.getId()) || !isEnemy(t, owner)) {
                     continue;
@@ -225,7 +220,6 @@ public class CrescentWaveEntity extends Entity {
                     flat.add(t.getId());
                     flat.add(tickCount);
                     hit(t, owner, CrescentWaveSpell.WAVE_FLAT, CrescentWaveSpell.WAVE_PERCENT);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);
                     t.setDeltaMovement(t.getDeltaMovement().add(0, 0.35, 0));
                     t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, DELAY, 2, false, false, false));
                     t.hurtMarked = true;
@@ -255,7 +249,6 @@ public class CrescentWaveEntity extends Entity {
                 Entity e = sl.getEntity(en.getKey());
                 if (e instanceof LivingEntity t && t.isAlive()) {
                     hit(t, owner, CrescentWaveSpell.DELAYED_FLAT, CrescentWaveSpell.DELAYED_PERCENT);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 2.5f);
                     t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 3, false, false, false));
                     level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 3.0f, 1.0f + level().random.nextFloat() * 0.5f);
                     level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.0f, 1.6f);

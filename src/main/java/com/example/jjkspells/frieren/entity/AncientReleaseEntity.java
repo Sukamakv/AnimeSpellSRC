@@ -173,12 +173,6 @@ public class AncientReleaseEntity extends Entity {
         level().playSound(null, origin.x, origin.y, origin.z, SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 4.0f, 0.5f);
         level().playSound(null, origin.x, origin.y, origin.z, SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 3.0f, 1.6f);
         level().playSound(null, origin.x, origin.y, origin.z, SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.PLAYERS, 3.0f, 0.7f);
-        if (level() instanceof net.minecraft.server.level.ServerLevel fsl) {
-            Vec3 stop = origin.add(dir.scale(len));
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(fsl, origin, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 5.0f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.beam(fsl, origin, stop, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (BEAM_RADIUS * 2.0), BEAM_TICKS);
-            // telegraph: the blast zone at the end of the beam, shown until the explosion
-        }
     }
 
     private void cancel(LivingEntity caster) {
@@ -349,9 +343,6 @@ public class AncientReleaseEntity extends Entity {
                 sl.playSound(null, end.x, end.y, end.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 7.0f, 0.45f);
                 sl.playSound(null, end.x, end.y, end.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 6.0f, 1.1f);
                 sl.playSound(null, end.x, end.y, end.z, SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.PLAYERS, 6.0f, 0.6f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, end, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 7.0f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, end, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 5.0f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, end, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, AncientReleaseSpell.EXPLOSION_RADIUS * 2f / 6f);
             }
             blastTick(sl, owner, end, k - BEAM_TICKS);
         }

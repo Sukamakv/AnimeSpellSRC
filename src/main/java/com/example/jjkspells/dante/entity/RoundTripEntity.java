@@ -203,13 +203,11 @@ public class RoundTripEntity extends Entity {
             }
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 3.0f, 0.6f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 1.5f, 1.6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, a.add(0, 1.4, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.2f);
         }
         if (tickCount == START) {
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 4.0f, 0.5f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 3.0f, 0.5f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 3.0f, 0.6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, a.add(0, 1.4, 0), new Vec3(0, 1, 0), 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3.0f);
         }
         if (tickCount >= START && tickCount < HOME && (tickCount - START) % 3 == 0) {
             for (int s = -1; s <= 1; s += 2) {
@@ -230,13 +228,7 @@ public class RoundTripEntity extends Entity {
                     }
                 }
                 level().playSound(null, c.x, c.y, c.z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 2.0f, 0.5f + 0.1f * s);
-                if ((tickCount - START) % 6 == 0) {
-                    com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, c, new Vec3(0, 1, 0), tickCount * 25f, s > 0 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.5f);
-                }
             }
-        }
-        if (tickCount == APEX - 12) {
-            Vec3 ap = swordPos(a, dir, 1, APEX, op);
         }
         if (tickCount == APEX) {
             Vec3 c = swordPos(a, dir, 1, tickCount, op);
@@ -251,9 +243,6 @@ public class RoundTripEntity extends Entity {
             level().playSound(null, c.x, c.y, c.z, SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 4.0f, 0.5f);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 4.0f, 0.8f);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 3.0f, 0.7f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, g, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.0f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.5f);
         }
         if (tickCount == HOME) {
             for (LivingEntity t : near(op, RoundTripSpell.FINAL_RADIUS, owner)) {
@@ -267,9 +256,6 @@ public class RoundTripEntity extends Entity {
             level().playSound(null, op.x, op.y + 1, op.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 5.0f, 0.7f);
             level().playSound(null, op.x, op.y + 1, op.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 4.0f, 1.0f);
             level().playSound(null, op.x, op.y + 1, op.z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 4.0f, 0.6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, op, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 3.0f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, op.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 3.0f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, op.add(0, 1.2, 0), new Vec3(0, 1, 0), 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4.0f);
         }
     }
 

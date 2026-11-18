@@ -188,7 +188,6 @@ public class DestinyCleavedEntity extends Entity {
         if (tickCount == 1) {
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 3.0f, 0.6f);
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 2.5f, 0.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (R * 1.2 / 7.0), T1);
         }
         if (tickCount == T1 || tickCount == T2) {
             for (LivingEntity t : level().getEntitiesOfClass(LivingEntity.class, area(c, R))) {
@@ -199,12 +198,9 @@ public class DestinyCleavedEntity extends Entity {
                 }
                 hit(t, owner, DestinyCleavedSpell.CUT_FLAT, DestinyCleavedSpell.CUT_PERCENT);
                 caught.add(t.getId());
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), tickCount == T1 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.8f);
                 level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 2.5f, tickCount == T1 ? 1.2f : 0.8f);
             }
             syncCaught();
-            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, c.add(0, 3.0, 0), dir(), tickCount == T1 ? -45f : 45f, tickCount == T1 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (R * 0.6));
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, tickCount == T1 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (R * 2.0 / 6.0));
             level().playSound(null, c.x, c.y + 10, c.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 4.0f, tickCount == T1 ? 1.4f : 0.7f);
             level().playSound(null, c.x, c.y + 10, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.6f);
         }
@@ -232,7 +228,6 @@ public class DestinyCleavedEntity extends Entity {
                 t.setDeltaMovement(dx / d * 0.7, 1.1, dz / d * 0.7);
                 t.hurtMarked = true;
                 t.fallDistance = 0;
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.5f);
                 level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 3.0f, 0.8f);
             }
             caught.clear();
@@ -240,10 +235,6 @@ public class DestinyCleavedEntity extends Entity {
             level().playSound(null, c.x, c.y + 4, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 5.0f, 0.7f);
             level().playSound(null, c.x, c.y + 4, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 5.0f, 1.2f);
             level().playSound(null, c.x, c.y + 4, c.z, SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 4.0f, 0.6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, c.add(0, 3.0, 0), dir(), -45f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 0.7));
-            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, c.add(0, 3.0, 0), dir(), 45f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (R * 0.7));
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 3.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (R * 0.5));
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (R * 2.0 / 6.0));
             level().playSound(null, c.x, c.y + 4, c.z, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 3.0f, 1.5f);
         }
         if (tickCount == AFTER_T) {
@@ -256,10 +247,8 @@ public class DestinyCleavedEntity extends Entity {
                 hit(t, owner, DestinyCleavedSpell.AFTER_FLAT, DestinyCleavedSpell.AFTER_PERCENT);
                 t.setDeltaMovement(t.getDeltaMovement().x, -1.2, t.getDeltaMovement().z);
                 t.hurtMarked = true;
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2f);
             }
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 4.0f, 1.2f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 6.0));
         }
     }
 }

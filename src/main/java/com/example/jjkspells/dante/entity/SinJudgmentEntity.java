@@ -211,7 +211,6 @@ public class SinJudgmentEntity extends Entity {
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 5.0f, 0.5f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 5.0f, 0.6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.5f);
         }
         if (floating && tickCount < DIVE0) {
             double target = a.y + SinJudgmentSpell.HOVER;
@@ -264,12 +263,9 @@ public class SinJudgmentEntity extends Entity {
                 t.setDeltaMovement(t.getDeltaMovement().add(0, 0.6, 0));
                 t.hurtMarked = true;
                 t.setSecondsOnFire(3);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f);
             }
             level().playSound(null, p.x, p.y + 1, p.z, SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 2.5f, 0.6f);
             level().playSound(null, p.x, p.y + 1, p.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 2.0f, 1.1f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, p.add(0, 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.5f);   // giant Rebellion lands
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (SinJudgmentSpell.STRIKE_RADIUS / 3.0));
         }
         // dive and judgment
         if (tickCount == DIVE0) {
@@ -277,7 +273,6 @@ public class SinJudgmentEntity extends Entity {
             owner.hurtMarked = true;
             level().playSound(null, a.x, a.y + 6, a.z, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 5.0f, 0.5f);
             level().playSound(null, a.x, a.y + 6, a.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 4.0f, 0.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, owner.position(), a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3.0f, FIN - DIVE0);   // the dive
         }
         if (tickCount > DIVE0 && tickCount < FIN) {
             owner.setDeltaMovement(0, -2.4, 0);
@@ -298,17 +293,12 @@ public class SinJudgmentEntity extends Entity {
                 t.hurtMarked = true;
                 t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 2, false, true, true));
                 t.setSecondsOnFire(6);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.5f);
             }
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 8.0f, 0.5f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.DRAGON_FIREBALL_EXPLODE, SoundSource.PLAYERS, 8.0f, 0.5f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 8.0f, 0.6f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 5.0f, 0.5f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 5.0f, 0.6f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, a.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 5.0f);   // Judgment
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, a.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 6.0f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) (SinJudgmentSpell.FINAL_RADIUS / 3.0));
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (SinJudgmentSpell.FINAL_RADIUS / 5.0));
         }
     }
 

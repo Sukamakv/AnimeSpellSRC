@@ -178,13 +178,6 @@ public class QualKreisEntity extends Entity {
             level().playSound(null, c.x, c.y, c.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2.0f, 1.8f);
         }
         if (tickCount >= APPEAR && tickCount < APPEAR + FIRE_TICKS) {
-            if (tickCount == APPEAR && level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (QualKreisSpell.ZONE_RADIUS / 3.0));   // barrage begins
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);
-            }
-            if ((tickCount - APPEAR) % 20 == 10 && level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);   // periodic arrow-rain pulse on the aim point
-            }
             damage(owner, p);
             if (tickCount % 3 == 0) {
                 level().playSound(null, p.x, p.y, p.z, SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.PLAYERS, 1.4f, 1.6f + level().random.nextFloat() * 0.5f);
@@ -196,10 +189,6 @@ public class QualKreisEntity extends Entity {
         if (tickCount == APPEAR + FIRE_TICKS) {
             Vec3 c = owner.position().add(0, QualKreisSpell.BOW_HEIGHT, 0);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 2.0f, 1.6f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);   // finish: bows dissolve
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.5f);
-            }
         }
     }
 

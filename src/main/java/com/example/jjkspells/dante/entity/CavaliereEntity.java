@@ -228,12 +228,10 @@ public class CavaliereEntity extends Entity {
             }
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 3.0f, 1.6f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 3.0f, 1.4f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, a.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);
         }
         if (tickCount == RIDE0) {
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.TRIDENT_THUNDER, SoundSource.PLAYERS, 4.0f, 1.1f);
             level().playSound(null, a.x, a.y + 1, a.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.2f);
         }
 
         boolean riding = tickCount >= RIDE0 && tickCount < RIDE_END;
@@ -263,7 +261,6 @@ public class CavaliereEntity extends Entity {
                     rammedLog.add(t.getId());
                     rammedLog.add(tickCount);
                     hit(t, owner, CavaliereSpell.RAM_FLAT, CavaliereSpell.RAM_PERCENT);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.8f);
                     Vec3 side = new Vec3(t.getX() - owner.getX(), 0, t.getZ() - owner.getZ());
                     side = side.lengthSqr() < 0.01 ? Vec3.ZERO : side.normalize();
                     t.setDeltaMovement(fwd.x * 1.1 + side.x * 0.9, 0.85, fwd.z * 1.1 + side.z * 0.9);
@@ -295,7 +292,6 @@ public class CavaliereEntity extends Entity {
         if (tickCount == RIDE_END) {
             Vec3 b = owner != null ? owner.position() : a;
             this.entityData.set(END_POS, new Vector3f((float) b.x, (float) b.y, (float) b.z));
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.4f);
             if (owner != null) {
                 owner.setDeltaMovement(0, Math.min(0, owner.getDeltaMovement().y), 0);
                 owner.hurtMarked = true;
@@ -306,9 +302,6 @@ public class CavaliereEntity extends Entity {
             return;
         }
         for (int k = 0; k <= BOLTS; k++) {
-            if (tickCount == boltTick(k) - 10) {
-                Vec3 tp = boltPos(k);
-            }
             if (tickCount != boltTick(k)) {
                 continue;
             }
@@ -328,12 +321,6 @@ public class CavaliereEntity extends Entity {
                     t.setDeltaMovement(t.getDeltaMovement().add(0, 0.5, 0));
                     t.hurtMarked = true;
                 }
-            }
-            com.example.jjkspells.vfx.sprite.SpriteFx.lightning(sl, c.add(0, 28, 0), c, big ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, big ? 3.0f : 1.4f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, c.add(0, 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, big ? 4.0f : 2.0f);
-            if (big) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 4.0f);
             }
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, big ? 8.0f : 5.0f, big ? 0.7f : 1.0f);
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, big ? 6.0f : 3.0f, big ? 0.7f : 1.2f);

@@ -213,10 +213,6 @@ public class SanktZwingerEntity extends Entity {
         lastRippleTick = tickCount;
         addEvent(false, 0, p);
         level().playSound(null, p.x, p.y, p.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.0f, 1.2f + level().random.nextFloat() * 0.5f);
-        if (level() instanceof net.minecraft.server.level.ServerLevel rsl) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(rsl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.2f);   // attack meets the wall
-            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(rsl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.0f);
-        }
     }
 
     public boolean isInside(Vec3 p) {
@@ -244,34 +240,19 @@ public class SanktZwingerEntity extends Entity {
             Vec3 c = position();
             level().playSound(null, c.x, c.y, c.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 3.0f, 1.4f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel zsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(zsl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) (SEAL_R / 3.0));
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(zsl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f);
-            }
         }
         if (tickCount >= PILLAR_START && (tickCount - PILLAR_START) % PILLAR_STAGGER == 0 && (tickCount - PILLAR_START) / PILLAR_STAGGER < PILLARS) {
             Vec3 b = pillarBase(position(), (tickCount - PILLAR_START) / PILLAR_STAGGER);
             level().playSound(null, b.x, b.y, b.z, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 4.0f, 0.5f);
             level().playSound(null, b.x, b.y, b.z, SoundEvents.PISTON_EXTEND, SoundSource.PLAYERS, 3.0f, 0.5f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel zsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(zsl, b, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 0.8f);
-            }
         }
         if (tickCount == ARCH_START) {
             Vec3 c = position();
             level().playSound(null, c.x, c.y + 10, c.z, SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 4.0f, 1.2f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel zsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(zsl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, (float) (WALL_R / 3.0));   // arches form
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(zsl, c.add(0, 10.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 4.0f);
-            }
         }
         if (tickCount == ACTIVE_END) {
             Vec3 c = position();
             level().playSound(null, c.x, c.y + 10, c.z, SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 4.0f, 0.8f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel zsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(zsl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (WALL_R / 3.0));   // sanctuary fades
-                com.example.jjkspells.vfx.sprite.SpriteFx.sparks(zsl, c.add(0, 2.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 3.0f);
-            }
         }
         if (tickCount % 10 == 0) {
             syncEvents();
@@ -346,12 +327,6 @@ public class SanktZwingerEntity extends Entity {
         level().playSound(null, b.x, b.y, b.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.7f);
         level().playSound(null, tp.x, tp.y, tp.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 2.0f, 1.6f);
         level().playSound(null, tp.x, tp.y, tp.z, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 3.0f, 1.9f);
-        if (level() instanceof net.minecraft.server.level.ServerLevel ksl) {
-            Vec3 hitPos = tp.add(0, target.getBbHeight() * 0.5, 0);
-            com.example.jjkspells.vfx.sprite.SpriteFx.lightning(ksl, b, hitPos, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.6f);   // pillar strikes
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(ksl, hitPos, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(ksl, tp, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 0.8f);
-        }
     }
 
     // ------------------------------------------------------------------ client

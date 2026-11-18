@@ -10,7 +10,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.Optional;
 
-/** The mod's main network channel: time stop state, skill learner, flame swing, Capri and the batched sprite VFX packet (id 4). */
+/** The mod's one network channel. Only used by Za Warudo to tell clients when time is stopped. */
 public final class ModNetwork {
     private static final String VERSION = "1";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
@@ -30,9 +30,6 @@ public final class ModNetwork {
         CHANNEL.registerMessage(3, com.example.jjkspells.enchant.FlameSwingPacket.class, com.example.jjkspells.enchant.FlameSwingPacket::encode,
                 com.example.jjkspells.enchant.FlameSwingPacket::decode, com.example.jjkspells.enchant.FlameSwingPacket::handle,
                 Optional.of(NetworkDirection.PLAY_TO_SERVER));
-        CHANNEL.registerMessage(4, com.example.jjkspells.vfx.sprite.SpriteVfxPacket.class, com.example.jjkspells.vfx.sprite.SpriteVfxPacket::encode,
-                com.example.jjkspells.vfx.sprite.SpriteVfxPacket::decode, com.example.jjkspells.vfx.sprite.SpriteVfxPacket::handle,
-                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         com.example.jjkspells.capri.CapriNet.register(CHANNEL, 10);
     }
 

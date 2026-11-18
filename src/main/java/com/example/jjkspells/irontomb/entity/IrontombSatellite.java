@@ -157,10 +157,6 @@ public class IrontombSatellite extends Mob {
         entityData.set(D_GRAVE, true);
         entityData.set(D_BOLT_T, -1);
         clearMark();
-        if (level() instanceof ServerLevel xsl) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 7f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 5f);
-        }
         graveT = b.isErasing() ? Math.min(IrontombBalance.GRAVE_TICKS, IrontombBalance.ERASURE_GRAVE_TICKS) : IrontombBalance.GRAVE_TICKS;
         b.onGrave(this);
     }
@@ -169,9 +165,6 @@ public class IrontombSatellite extends Mob {
         entityData.set(D_GRAVE, false);
         setHealth(getMaxHealth());
         playSound(SoundEvents.BEACON_ACTIVATE, 3f, 0.8f);
-        if (level() instanceof ServerLevel xsl) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 3f);
-        }
     }
 
     private int cfgVersion = -1;
@@ -238,10 +231,6 @@ public class IrontombSatellite extends Mob {
         } else {
             entityData.set(D_BOLT_TARGET, t.getId());
             entityData.set(D_BOLT_T, 0);
-            if (level() instanceof ServerLevel xsl) {
-                // telegraph the bolt's zone for the BOLT_FIRE ticks before it lands
-                com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, t.position(), getSatType() == 0 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, getSatType() == 0 ? 9f / 7f : 0.7f, BOLT_FIRE);
-            }
             playSound(SoundEvents.BEACON_POWER_SELECT, 3f, getSatType() == 0 ? 1.5f : 0.7f);
         }
     }
@@ -275,7 +264,6 @@ public class IrontombSatellite extends Mob {
         }
         if (level() instanceof ServerLevel sl) {
             IrontombFxServer.burst(sl, t.position().add(0, 1, 0), logos ? IrontombFxServer.VIOLET : IrontombFxServer.GOLD, 30, 0.6, 0.2);
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, 1, 0), logos ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, logos ? 2.5f : 1.6f);
         }
         b.addHatred(2f);
     }

@@ -252,8 +252,6 @@ public class DevilTriggerEntity extends Entity {
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 5.0f, 0.6f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 3.0f, 0.7f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 4.0f, 0.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 3.2f);
             for (LivingEntity t : enemies(owner, DevilTriggerSpell.OPEN_RADIUS)) {
                 hit(t, owner, DevilTriggerSpell.OPEN_FLAT, DevilTriggerSpell.OPEN_PERCENT);
                 knock(t, c, 1.4, 0.7);
@@ -274,8 +272,6 @@ public class DevilTriggerEntity extends Entity {
             if (tickCount == pulseTick(k)) {
                 level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 3.5f, 0.9f);
                 level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 3.0f, 0.5f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.0f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.FIRE, 2.0f);
                 for (LivingEntity t : enemies(owner, DevilTriggerSpell.PULSE_RADIUS)) {
                     hit(t, owner, DevilTriggerSpell.PULSE_FLAT, DevilTriggerSpell.PULSE_PERCENT);
                     knock(t, c, 1.0, 0.4);
@@ -287,8 +283,6 @@ public class DevilTriggerEntity extends Entity {
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 3.0f, 1.0f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, c.x, c.y + 2, c.z, SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 3.0f, 0.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.smoke(sl, c.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Smoke.EMBER, 1.5f);
         }
     }
 

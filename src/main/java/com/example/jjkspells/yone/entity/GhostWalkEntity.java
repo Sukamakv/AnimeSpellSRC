@@ -192,13 +192,11 @@ public class GhostWalkEntity extends Entity {
                 continue;
             }
             hit(t, owner, GhostWalkSpell.CUT_FLAT, GhostWalkSpell.CUT_PERCENT);
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact((ServerLevel) level(), t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.4f);
             if (marked.add(t.getId())) {
                 changed = true;
             }
             level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.8f, 1.5f);
         }
-        com.example.jjkspells.vfx.sprite.SpriteFx.slash((ServerLevel) level(), c.add(0, 1.0, 0), new Vec3(random.nextDouble() - 0.5, 0.2, random.nextDouble() - 0.5).add(0, 1.0, 0), random.nextFloat() * 360f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.5f);
         if (changed) {
             syncMarked();
         }
@@ -221,7 +219,6 @@ public class GhostWalkEntity extends Entity {
             level().playSound(null, origin.x, origin.y + 1, origin.z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 2.5f, 1.4f);
             level().playSound(null, origin.x, origin.y + 1, origin.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 3.0f, 1.5f);
             level().playSound(null, origin.x, origin.y + 1, origin.z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 2.5f, 0.9f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, origin.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);
         }
         if (tickCount < SNAP) {
             // the body stands untouchable while the spirit is out
@@ -285,7 +282,6 @@ public class GhostWalkEntity extends Entity {
                 t.hurtMarked = true;
                 t.fallDistance = 0;
                 level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.5f, 0.9f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2f);
             }
         }
         // shockwave around the body
@@ -305,13 +301,10 @@ public class GhostWalkEntity extends Entity {
             double d = Math.max(dist, 0.01);
             t.setDeltaMovement(dx / d * 0.8, 0.5, dz / d * 0.8);
             t.hurtMarked = true;
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.6f);
         }
         level().playSound(null, origin.x, origin.y + 1, origin.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 2.5f, 1.5f);
         level().playSound(null, origin.x, origin.y + 1, origin.z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 3.0f, 0.8f);
         level().playSound(null, origin.x, origin.y + 1, origin.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 3.0f, 1.0f);
-        com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, origin, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (r * 2.0 / 6.0));
-        com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, origin.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3f);
     }
 
     // ------------------------------------------------------------------ client

@@ -267,15 +267,9 @@ public class AuswaehlenEntity extends Entity {
             }
             level().playSound(null, c.x, c.y, c.z, SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 8.0f, 0.5f);
             level().playSound(null, c.x, c.y, c.z, SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 8.0f, 0.7f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 2f);
-            }
         }
         if (tickCount == HALO0) {
             level().playSound(null, c.x, c.y + 10, c.z, SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 8.0f, 0.6f);
-            if (owner != null && level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1.2f, COLLAPSE0 - HALO0);
-            }
         }
         if (tickCount == COLLAPSE0) {
             level().playSound(null, c.x, c.y + 10, c.z, SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 8.0f, 0.5f);
@@ -285,9 +279,6 @@ public class AuswaehlenEntity extends Entity {
             if (tickCount == PILLAR0 + i * PILLAR_STAGGER) {
                 Vec3 s = targetStart.get(i);
                 level().playSound(null, s.x, s.y, s.z, SoundEvents.TRIDENT_THUNDER, SoundSource.PLAYERS, 6.0f, 0.6f);
-            }
-            if (tickCount == MARK0 + i * MARK_STAGGER && level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                LivingEntity markT = targetAt(i);
             }
             if (tickCount == land) {
                 hit(owner, i, AuswaehlenSpell.DIVINE_FLAT, AuswaehlenSpell.DIVINE_PERCENT, true);
@@ -299,13 +290,6 @@ public class AuswaehlenEntity extends Entity {
         if (tickCount == RECLAIM && owner != null) {
             level().playSound(null, owner.getX(), owner.getY(), owner.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 6.0f, 0.6f);
             level().playSound(null, owner.getX(), owner.getY(), owner.getZ(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 6.0f, 1.6f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, owner.position().add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);   // halo collapses into the caster
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, owner.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 2.5f);
-            }
-        }
-        if (tickCount == TOTAL && level() instanceof net.minecraft.server.level.ServerLevel sl) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 2f);   // finish
         }
     }
 
@@ -340,17 +324,9 @@ public class AuswaehlenEntity extends Entity {
             level().playSound(null, p.x, p.y, p.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 4.0f, 1.3f);
             level().playSound(null, p.x, p.y, p.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 4.0f, 1.5f);
             level().playSound(null, p.x, p.y, p.z, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 4.0f, 0.6f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.beam(sl, p.add(0, 40, 0), p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 2.5f, 6);   // pillar of light lands
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, p.add(0, 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 1f);
-            }
         } else {
             level().playSound(null, p.x, p.y, p.z, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 4.0f, 1.9f);
             level().playSound(null, p.x, p.y, p.z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 3.0f, 0.8f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel sl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, p.add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.GOLD, 2f);   // reclamation hit
-            }
         }
     }
 

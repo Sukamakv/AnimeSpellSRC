@@ -211,9 +211,6 @@ public class JudgementCutEntity extends Entity {
             level().playSound(null, x, y + 1, z, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 3.0f, 1.9f);
             level().playSound(null, x, y + 1, z, SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 2.0f, 2.0f);
         }
-        if (tickCount == RING) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, (float) (R * 2.0 / 6.0));
-        }
         if (tickCount >= RING && tickCount < FINAL && tickCount % 4 == 0) {
             for (LivingEntity t : inZone(owner)) {
                 t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 8, 9, false, false, false));
@@ -226,9 +223,7 @@ public class JudgementCutEntity extends Entity {
             for (int i = 0; i < in.size(); i++) {
                 ids[i] = in.get(i).getId();
                 hit(in.get(i), owner, JudgementCutSpell.CUT_FLAT, JudgementCutSpell.CUT_PERCENT);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, in.get(i).position().add(0, in.get(i).getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.5f);
             }
-            com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, new Vec3(x, y + 3, z), new Vec3(0, 0, 1), 45f * k, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 6f);
             log.putIntArray("c" + k, ids);
             logged = k + 1;
             log.putInt("n", logged);
@@ -243,11 +238,8 @@ public class JudgementCutEntity extends Entity {
             level().playSound(null, x, y + 4, z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 5.0f, 0.5f);
             level().playSound(null, x, y + 4, z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.5f);
             level().playSound(null, x, y + 4, z, SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 2.0f, 2.0f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, new Vec3(x, y + 6, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(x, y, z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (R * 2.0 / 6.0));
             for (LivingEntity t : inZone(owner)) {
                 hit(t, owner, JudgementCutSpell.FINAL_FLAT, JudgementCutSpell.FINAL_PERCENT);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 2.5f);
                 t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 2, false, true, true));
                 t.setDeltaMovement(t.getDeltaMovement().add(0, 0.35, 0));
                 t.hurtMarked = true;

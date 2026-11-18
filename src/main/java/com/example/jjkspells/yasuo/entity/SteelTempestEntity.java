@@ -235,9 +235,6 @@ public class SteelTempestEntity extends Entity {
             this.entityData.set(ORIGIN, new Vector3f((float) o.x, (float) o.y, (float) o.z));
             level().playSound(null, o.x, o.y + 2, o.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.6f);
             level().playSound(null, o.x, o.y + 2, o.z, SoundEvents.TRIDENT_RIPTIDE_3, SoundSource.PLAYERS, 3.0f, 1.2f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, (float) (SteelTempestSpell.TORNADO_RADIUS * 2.0 / 6.0));
-            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (SteelTempestSpell.TORNADO_RADIUS * 2.0 / 7.0), 14);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, o.add(0, 2.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 4f);
         }
         int tt = tickCount - LAUNCH;
         Vec3 axis = tt >= 0 ? tornadoAt(tt) : null;
@@ -250,7 +247,6 @@ public class SteelTempestEntity extends Entity {
                 Entity e = sl.getEntity(id);
                 if (e instanceof LivingEntity t && t.isAlive()) {
                     hit(t, owner, SteelTempestSpell.DROP_FLAT, SteelTempestSpell.DROP_PERCENT);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2f);
                     Vec3 out = new Vec3(t.getX() - axis.x, 0, t.getZ() - axis.z);
                     out = out.lengthSqr() < 0.01 ? dir.scale(0.6) : out.normalize().scale(0.8);
                     t.setDeltaMovement(out.x, -0.2, out.z);
@@ -260,8 +256,6 @@ public class SteelTempestEntity extends Entity {
             caught.clear();
             syncCaught();
             level().playSound(null, axis.x, axis.y + 3, axis.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 2.5f, 1.4f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, axis, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (SteelTempestSpell.TORNADO_RADIUS * 2.0 / 6.0));
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, axis.add(0, 2.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 5f);
         }
     }
 
@@ -272,9 +266,6 @@ public class SteelTempestEntity extends Entity {
         Vec3 o = owner.position();
         Vec3 end = o.add(dir.scale(len));
         AABB box = new AABB(Math.min(o.x, end.x), o.y - 2, Math.min(o.z, end.z), Math.max(o.x, end.x), o.y + 4, Math.max(o.z, end.z)).inflate(half);
-        ServerLevel tsl = (ServerLevel) level();
-        Vec3 thrustN = new Vec3(-dir.z, 0, dir.x);
-        com.example.jjkspells.vfx.sprite.SpriteFx.slash(tsl, o.add(dir.scale(len * 0.5)).add(0, 1.2, 0), thrustN, 0f, last ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) (len * (last ? 0.7 : 0.6)));
         List<Integer> ids = new ArrayList<>();
         for (LivingEntity t : level().getEntitiesOfClass(LivingEntity.class, box)) {
             if (!isEnemy(t, owner)) {
@@ -287,7 +278,6 @@ public class SteelTempestEntity extends Entity {
                 continue;
             }
             ids.add(t.getId());
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(tsl, t.position().add(0, t.getBbHeight() * 0.5, 0), last ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, last ? 2.2f : 1.5f);
             if (last) {
                 hit(t, owner, SteelTempestSpell.LAST_FLAT, SteelTempestSpell.LAST_PERCENT);
                 t.setDeltaMovement(dir.x * 0.5, 0.75, dir.z * 0.5);
@@ -325,7 +315,6 @@ public class SteelTempestEntity extends Entity {
             inside.add(t.getId());
             if (caught.add(t.getId())) {
                 hit(t, owner, SteelTempestSpell.CATCH_FLAT, SteelTempestSpell.CATCH_PERCENT);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact((ServerLevel) level(), t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f);
                 changed = true;
                 level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.PLAYER_ATTACK_KNOCKBACK, SoundSource.PLAYERS, 2.0f, 1.3f);
             } else if (tt % 6 == 0) {

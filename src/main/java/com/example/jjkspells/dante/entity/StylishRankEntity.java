@@ -122,16 +122,6 @@ public class StylishRankEntity extends Entity {
         float pitch = 0.7f + 0.13f * r;
         level().playSound(null, getX(), getY() + 2, getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 2.5f, Math.min(2.0f, pitch));
         level().playSound(null, getX(), getY() + 2, getZ(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 0.6f, 1.4f + 0.08f * r);
-        if (level() instanceof ServerLevel rsl) {
-            Vec3 hp = position().add(0, 2.0, 0);
-            com.example.jjkspells.vfx.sprite.SpriteFx.sparks(rsl, hp, r >= RANK_S ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.0f + 0.2f * r);   // rank up
-            if (r >= RANK_S) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(rsl, hp, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.5f + 0.5f * (r - RANK_S));
-            }
-            if (r == RANK_S && ph == PH_RANKING) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(rsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.5f);
-            }
-        }
         if (r >= RANK_S) {
             level().playSound(null, getX(), getY() + 2, getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 2.0f, 0.8f + 0.1f * r);
         }
@@ -320,9 +310,6 @@ public class StylishRankEntity extends Entity {
             setPhase(PH_SLASH);
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 4.0f, 0.6f);
             level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 3.0f, 0.5f);
-            if (level() instanceof ServerLevel fsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.beam(fsl, o, o.add(look.scale(StylishRankSpell.SLASH_LENGTH)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.0f, SLASH_WINDUP);   // telegraph: slash line
-            }
         } else {
             startHell(r >= RANK_SS ? (float) StylishRankSpell.HELL_RADIUS_SS : (float) StylishRankSpell.HELL_RADIUS_S);
         }
@@ -334,10 +321,6 @@ public class StylishRankEntity extends Entity {
         level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 4.0f, 0.7f);
         level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 3.0f, 0.6f);
         level().playSound(null, getX(), getY() + 1, getZ(), SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 1.5f, 1.6f);
-        if (level() instanceof ServerLevel hsl) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(hsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, radius / 3.0f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(hsl, position().add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.0f);
-        }
     }
 
     private void hellTick(LivingEntity owner, int age) {
@@ -382,12 +365,6 @@ public class StylishRankEntity extends Entity {
             level().playSound(null, o.x, o.y, o.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 6.0f, 0.8f);
             level().playSound(null, o.x, o.y, o.z, SoundEvents.DRAGON_FIREBALL_EXPLODE, SoundSource.PLAYERS, 5.0f, 0.6f);
             level().playSound(null, o.x, o.y, o.z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 4.0f, 0.4f);
-            if (level() instanceof ServerLevel ssl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(ssl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 5.0f);   // Hellfire Slash released
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(ssl, owner.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.5f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.beam(ssl, o, o.add(d.scale(StylishRankSpell.SLASH_LENGTH)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 10.0f, 10);
-                com.example.jjkspells.vfx.sprite.SpriteFx.slash(ssl, o.add(d.scale(6.0)), Math.abs(d.y) > 0.99 ? new Vec3(0, 0, 1) : new Vec3(-d.z, 0, d.x), 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 8.0f);
-            }
         }
         if (rel == 0 || rel == 12) {
             double f = rel == 0 ? 1.0 : 0.5;
@@ -403,19 +380,12 @@ public class StylishRankEntity extends Entity {
                 if (p.distanceTo(o.add(d.scale(along))) <= r + t.getBbWidth() * 0.5) {
                     hit(t, owner, StylishRankSpell.SLASH_FLAT * f, StylishRankSpell.SLASH_PERCENT * f);
                     t.setSecondsOnFire(6);
-                    if (level() instanceof ServerLevel esl) {
-                        com.example.jjkspells.vfx.sprite.SpriteFx.impact(esl, p, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 2.5f);
-                    }
                     if (rel == 0) {
                         t.setDeltaMovement(t.getDeltaMovement().add(d.x * 1.4, 0.45 + d.y * 0.6, d.z * 1.4));
                         t.hurtMarked = true;
                     }
                 }
             }
-        }
-        if (rel == 12 && level() instanceof ServerLevel psl) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(psl, o, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.5f);   // second pulse
-            com.example.jjkspells.vfx.sprite.SpriteFx.slash(psl, o.add(d.scale(6.0)), Math.abs(d.y) > 0.99 ? new Vec3(0, 0, 1) : new Vec3(-d.z, 0, d.x), 90f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 6.0f);
         }
         if (rel % 8 == 0 && rel > 0 && rel < SLASH_TICKS) {
             level().playSound(null, o.x, o.y, o.z, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 3.0f, 0.5f);

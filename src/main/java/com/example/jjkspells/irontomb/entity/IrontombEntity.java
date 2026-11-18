@@ -309,12 +309,6 @@ public class IrontombEntity extends Mob {
             entityData.set(D_ATTACK, 0);
             entityData.set(D_RESIST, false);
             setCut(IrontombCut.DEATH);
-            if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 18f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 14f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 12f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 10f, IrontombCut.LENGTH[IrontombCut.DEATH]);
-            }
             for (IrontombSatellite sat : satellites()) {
                 sat.discard();
             }
@@ -333,17 +327,9 @@ public class IrontombEntity extends Mob {
         if (t == 20) {
             sound(SoundEvents.WITHER_DEATH, 4f, 0.6f);
             sound(IrontombSounds.ROAR, 14f, 0.6f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 9f);
-            }
         }
         if (t == 100) {
             sound(SoundEvents.GENERIC_EXPLODE, 4f, 0.5f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 24f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 18f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 16f);
-            }
         }
         if (t >= IrontombCut.LENGTH[IrontombCut.DEATH]) {
             if (level() instanceof ServerLevel sl) {
@@ -547,21 +533,12 @@ public class IrontombEntity extends Mob {
             if (t == 10) sound(SoundEvents.BEACON_ACTIVATE, 5f, 0.5f);
             if (t == 100) sound(SoundEvents.WITHER_SPAWN, 5f, 0.6f);
             if (t == 100) sound(IrontombSounds.ROAR, 16f, 0.7f);
-            if (t == 100 && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 14f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 10f);
-            }
             if (t == 118) sound(SoundEvents.END_PORTAL_SPAWN, 5f, 0.5f);
         } else if (id == IrontombCut.PHASE2 || id == IrontombCut.PHASE3) {
             if (t == 5) sound(SoundEvents.ENDER_DRAGON_GROWL, 5f, 0.5f);
             if (t == 5) sound(IrontombSounds.ROAR, 14f, 0.75f);
             if (t == 60) {
                 sound(SoundEvents.GENERIC_EXPLODE, 5f, 0.5f);
-                if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 20f);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 14f);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 14f);
-                }
                 for (IrontombSatellite s : satellites()) {
                     s.reforge(getPhase());
                 }
@@ -583,12 +560,6 @@ public class IrontombEntity extends Mob {
         resistCd = 600;
         unlockAll();
         setCut(n == 2 ? IrontombCut.PHASE2 : IrontombCut.PHASE3);
-        if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-            int xlife = IrontombCut.LENGTH[n == 2 ? IrontombCut.PHASE2 : IrontombCut.PHASE3];
-            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 12f, xlife);
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 10f, xlife);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 12f);
-        }
     }
 
     public void forcePhase(int n) {
@@ -707,10 +678,6 @@ public class IrontombEntity extends Mob {
         if (id == IrontombAttack.STAGGER) {
             entityData.set(D_RESIST, false);
             sound(SoundEvents.ANVIL_LAND, 5f, 0.4f);
-            if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 12f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 6f);
-            }
         }
     }
 
@@ -751,10 +718,6 @@ public class IrontombEntity extends Mob {
                 }
                 if (t == 4) sound(SoundEvents.WARDEN_ATTACK_IMPACT, 4f, 0.5f);
                 if (t == 1) sound(IrontombSounds.CHARGE, 6f, 1.8f);
-                if (t == IrontombAttack.CAST_DOWN_FREEZE && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    // the aim is frozen now: mark the danger zone until the hit lands
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, getAim(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, IrontombAttack.CAST_DOWN_RADIUS * 2f / 7f, IrontombAttack.CAST_DOWN_HIT - IrontombAttack.CAST_DOWN_FREEZE);
-                }
                 if (t == IrontombAttack.CAST_DOWN_HIT) {
                     Vec3 a = getAim();
                     impact(a, IrontombAttack.CAST_DOWN_RADIUS, IrontombBalance.CAST_DOWN, 1f, IrontombFxServer.RED);
@@ -764,12 +727,6 @@ public class IrontombEntity extends Mob {
             case IrontombAttack.WEAVE -> {
                 if (t == 8) sound(SoundEvents.ENDER_DRAGON_GROWL, 4f, 0.7f);
                 if (t == 2) sound(IrontombSounds.CHARGE, 6f, 1.8f);
-                if ((t == 6 || t == IrontombAttack.WEAVE_TICKS[0] || t == IrontombAttack.WEAVE_TICKS[1]) && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    // each ring's zone is shown until it lands (the first one early, the next two as the previous one fires)
-                    int xi = t == 6 ? 0 : t == IrontombAttack.WEAVE_TICKS[0] ? 1 : 2;
-                    int xlife = IrontombAttack.WEAVE_TICKS[xi] - t;
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, position(), xi == 2 ? com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON : com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, IrontombAttack.WEAVE_RADII[xi] * 2f / 7f, xlife);
-                }
                 for (int i = 0; i < 3; i++) {
                     if (t == IrontombAttack.WEAVE_TICKS[i]) {
                         weaveRing(IrontombAttack.WEAVE_RADII[i]);
@@ -785,9 +742,6 @@ public class IrontombEntity extends Mob {
                 }
                 if (t == 6) sound(SoundEvents.BEACON_POWER_SELECT, 4f, 0.6f);
                 if (t == 4) sound(IrontombSounds.CHARGE, 6f, 1.5f);
-                if (t == 30 && target != null && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, target.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, IrontombAttack.YIELD_RADIUS * 2f / 7f, IrontombAttack.YIELD_HIT - t);
-                }
                 if (t == IrontombAttack.YIELD_HIT && target != null) {
                     sound(SoundEvents.LIGHTNING_BOLT_THUNDER, 4f, 1.4f);
                     soundAt(target.position(), IrontombSounds.BOLT, 8f, 0.8f);
@@ -798,11 +752,6 @@ public class IrontombEntity extends Mob {
                             IronsCompat.addMana(sp, -IrontombBalance.MANA_DRAIN_YIELD);
                         }
                     }
-                    if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                        com.example.jjkspells.vfx.sprite.SpriteFx.lightning(xsl, target.position().add(0, 60, 0), target.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 3f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, target.position().add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 3.5f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, target.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, IrontombAttack.YIELD_RADIUS * 2f / 6f);
-                    }
                     addHatred(4f);
                 }
             }
@@ -810,14 +759,7 @@ public class IrontombEntity extends Mob {
                 if (target != null && t < 30) {
                     setAim(target.position());
                 }
-                if (t == 30 && target != null && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, target.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, IrontombAttack.MIRE_RADIUS * 2f / 7f, IrontombAttack.MIRE_HIT - t);
-                }
                 if (t == IrontombAttack.MIRE_HIT && target != null) {
-                    if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                        com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, target.position().add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, target.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, IrontombAttack.MIRE_RADIUS * 2f / 6f);
-                    }
                     sound(SoundEvents.BELL_RESONATE, 4f, 0.6f);
                     soundAt(target.position(), IrontombSounds.BELL, 8f, 0.9f);
                     for (LivingEntity p : areaPlayers(target, IrontombAttack.MIRE_RADIUS)) {
@@ -830,17 +772,6 @@ public class IrontombEntity extends Mob {
             case IrontombAttack.CROWN -> {
                 if (t == 10) sound(SoundEvents.END_PORTAL_SPAWN, 5f, 0.5f);
                 if (t == 24) sound(IrontombSounds.CHARGE, 9f, 1.0f);
-                if (t == 24 && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    // the whole arena is the danger zone: a seal under the boss, and a mark under every player in range
-                    int xlife = IrontombAttack.CROWN_HIT - t;
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 9f, xlife);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 7f, xlife);
-                    for (Player xp : xsl.players()) {
-                        if (isFoe(xp) && xp.distanceToSqr(this) <= IrontombAttack.CROWN_RADIUS * IrontombAttack.CROWN_RADIUS + 140.0 * 140.0) {
-                            com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, xp.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.2f, xlife);
-                        }
-                    }
-                }
                 if (t == 60) sound(SoundEvents.BEACON_DEACTIVATE, 5f, 0.5f);
                 if (t == IrontombAttack.CROWN_HIT) {
                     sound(SoundEvents.GENERIC_EXPLODE, 6f, 0.5f);
@@ -854,14 +785,7 @@ public class IrontombEntity extends Mob {
                         }
                         if (level() instanceof ServerLevel sl) {
                             IrontombFxServer.burst(sl, p.position().add(0, 1, 0), IrontombFxServer.VIOLET, 40, 0.6, 0.15);
-                            if (p instanceof Player) {
-                                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, p.position().add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 2.5f);
-                            }
                         }
-                    }
-                    if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                        com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 16f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, IrontombAttack.CROWN_RADIUS / 3f);
                     }
                     addHatred(6f);
                 }
@@ -875,17 +799,7 @@ public class IrontombEntity extends Mob {
                 }
                 if (t == 1) sound(IrontombSounds.CHARGE, 6f, 1.8f);
                 if (t == IrontombAttack.PRISON_FREEZE) sound(SoundEvents.IRON_DOOR_CLOSE, 5f, 0.4f);
-                if (t == IrontombAttack.PRISON_FREEZE && target != null && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    // the target is held still from here: mark the zone until the cage closes
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, target.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, IrontombAttack.PRISON_RADIUS * 2f / 7f, IrontombAttack.PRISON_HIT - t);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, target.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, IrontombAttack.PRISON_RADIUS * 2f / 7f, IrontombAttack.PRISON_HIT - t);
-                }
                 if (t == IrontombAttack.PRISON_HIT && target != null) {
-                    if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                        com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, target.position().add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 4f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, target.position().add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 2.5f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, target.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, IrontombAttack.PRISON_RADIUS * 2f / 6f);
-                    }
                     sound(SoundEvents.GENERIC_EXPLODE, 5f, 0.7f);
                     soundAt(target.position(), IrontombSounds.IMPACT, 8f, 0.8f);
                     soundAt(target.position(), IrontombSounds.SHATTER, 6f, 1.3f);
@@ -902,19 +816,6 @@ public class IrontombEntity extends Mob {
                 if (t == 90) sound(IrontombSounds.CHARGE, 14f, 1.0f);
                 if (t == 60) sound(SoundEvents.BEACON_ACTIVATE, 6f, 0.4f);
                 if (t == 100) sound(SoundEvents.WITHER_SPAWN, 6f, 0.5f);
-                if (t == 30 && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    // the whole arena is the danger zone: a seal under the boss until the hit
-                    int xlife = IrontombAttack.IMMOLATE_HIT - t;
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 12f, xlife);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 9f, xlife);
-                }
-                if (t == 90 && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    for (Player xp : xsl.players()) {
-                        if (isFoe(xp) && xp.distanceToSqr(this) <= IrontombAttack.IMMOLATE_RADIUS * IrontombAttack.IMMOLATE_RADIUS + 140.0 * 140.0) {
-                            com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, xp.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.4f, IrontombAttack.IMMOLATE_HIT - t);
-                        }
-                    }
-                }
                 if (t == IrontombAttack.IMMOLATE_HIT) {
                     sound(SoundEvents.GENERIC_EXPLODE, 8f, 0.4f);
                     sound(SoundEvents.LIGHTNING_BOLT_THUNDER, 8f, 0.5f);
@@ -932,16 +833,6 @@ public class IrontombEntity extends Mob {
                     if (!mythosDown && !list.isEmpty()) {
                         lockPlayer(list.get(random.nextInt(list.size())), 140);
                     }
-                    if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                        com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 22f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 16f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, IrontombAttack.IMMOLATE_RADIUS / 3f);
-                        for (LivingEntity xp : list) {
-                            if (xp instanceof Player) {
-                                com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, xp.position().add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3f);
-                            }
-                        }
-                    }
                     addHatred(8f);
                 }
             }
@@ -951,17 +842,6 @@ public class IrontombEntity extends Mob {
                 if (t == IrontombAttack.GENESIS_HIT - (int) (109 * IrontombAttack.scale(IrontombAttack.GENESIS))) sound(IrontombSounds.GENESIS, 20f, 1.0f);
                 if (t == 60) sound(SoundEvents.END_PORTAL_SPAWN, 8f, 0.4f);
                 if (t == 150) sound(SoundEvents.WITHER_SPAWN, 8f, 0.4f);
-                if (t == 60 && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    // t is in authored ticks, the spawned effects last real ticks
-                    int xlife = Math.max(1, (int) ((IrontombAttack.GENESIS_HIT - t) / IrontombAttack.scale(IrontombAttack.GENESIS)));
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 14f, xlife);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.vortex(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 11f, xlife);
-                    for (Player xp : xsl.players()) {
-                        if (isFoe(xp) && xp.distanceToSqr(this) <= IrontombAttack.GENESIS_RADIUS * IrontombAttack.GENESIS_RADIUS + 140.0 * 140.0) {
-                            com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, xp.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.4f, xlife);
-                        }
-                    }
-                }
                 if (t == IrontombAttack.GENESIS_HIT) {
                     sound(SoundEvents.GENERIC_EXPLODE, 10f, 0.3f);
                     sound(SoundEvents.LIGHTNING_BOLT_THUNDER, 10f, 0.4f);
@@ -973,11 +853,6 @@ public class IrontombEntity extends Mob {
                             p.die(gk);
                         }
                     }
-                    if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                        com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 28f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 20f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, IrontombAttack.GENESIS_RADIUS / 3f);
-                    }
                 }
             }
             case IrontombAttack.SINGULARITY -> runSingularity(t);
@@ -986,17 +861,9 @@ public class IrontombEntity extends Mob {
                 if (t == 3) sound(SoundEvents.ENDER_DRAGON_GROWL, 6f, 0.5f);
                 if (t == 3) sound(IrontombSounds.ROAR, 12f, 0.9f);
                 if (t == 8) sound(SoundEvents.BEACON_ACTIVATE, 6f, 0.5f);
-                if (t == 8 && level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                    com.example.jjkspells.vfx.sprite.SpriteFx.circle(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 9f, 60);
-                    com.example.jjkspells.vfx.sprite.SpriteFx.burst(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 12f);
-                }
                 if (getAtkT() > 12 && graveCount() >= 2) {
                     // Resist and Destroy is dispelled: both satellites are in Grave Wound at once
                     sound(SoundEvents.GLASS_BREAK, 6f, 0.5f);
-                    if (level() instanceof net.minecraft.server.level.ServerLevel xsl) {
-                        com.example.jjkspells.vfx.sprite.SpriteFx.impact(xsl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 14f);
-                        com.example.jjkspells.vfx.sprite.SpriteFx.ring(xsl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 8f);
-                    }
                     entityData.set(D_RESIST, false);
                     entityData.set(D_ATTACK, 0);
                     entityData.set(D_ATK_T, 0);
@@ -1085,13 +952,6 @@ public class IrontombEntity extends Mob {
         if (t == 60) sound(IrontombSounds.BELL, 20f, 0.5f);
         if (t == IrontombAttack.SINGULARITY_HIT - (int) (140 * IrontombAttack.scale(IrontombAttack.SINGULARITY))) sound(IrontombSounds.SUCK, 24f, 1.0f);
         if (t == IrontombAttack.SINGULARITY_PULL) {
-            // t is in authored ticks, the spawned effects last real ticks
-            Vec3 xc = sphereCenter();
-            Vec3 xg = new Vec3(xc.x, getY(), xc.z);
-            int xlife = Math.max(1, (int) ((IrontombAttack.SINGULARITY_HIT - t) / IrontombAttack.scale(IrontombAttack.SINGULARITY)));
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, xg, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 5f, xlife);
-            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, xg, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 5f, xlife);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, xc, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 6f);
             sound(SoundEvents.END_PORTAL_SPAWN, 16f, 0.4f);
             broadcast(sl, "All of reality is being pulled toward Irontomb...");
         }
@@ -1105,19 +965,11 @@ public class IrontombEntity extends Mob {
         if (t == IrontombAttack.SINGULARITY_HIT - 4) {
             sound(IrontombSounds.GRAVE, 24f, 0.4f);
         }
-        if (t == 230) {
-            // the cluster tightens: second, smaller mark on the ground under the sphere
-            Vec3 xc2 = sphereCenter();
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, new Vec3(xc2.x, getY(), xc2.z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 1.4f, Math.max(1, (int) ((IrontombAttack.SINGULARITY_HIT - t) / IrontombAttack.scale(IrontombAttack.SINGULARITY))));
-        }
         if (t == IrontombAttack.SINGULARITY_HIT) {
             sound(SoundEvents.GENERIC_EXPLODE, 20f, 0.3f);
             sound(IrontombSounds.SHATTER, 24f, 0.55f);
             sound(IrontombSounds.IMPACT, 24f, 0.45f);
             sound(IrontombSounds.ROAR, 24f, 0.5f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, sphereCenter(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 24f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, sphereCenter(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 18f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(sphereCenter().x, getY(), sphereCenter().z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 20f);
             blastAll(sl);
             addHatred(0f);
         }
@@ -1150,8 +1002,6 @@ public class IrontombEntity extends Mob {
             sound(IrontombSounds.ROAR, 20f, 0.5f);
             sound(IrontombSounds.BELL, 20f, 0.4f);
             broadcast(sl, "The Sword of Erasure is forming! Break BOTH satellites into Grave Wound at the same time!");
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 12f, IrontombBalance.ERASURE_COUNTDOWN);
-            com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 16f);
         }
     }
 
@@ -1165,8 +1015,6 @@ public class IrontombEntity extends Mob {
             sound(IrontombSounds.SHATTER, 20f, 0.8f);
             if (level() instanceof ServerLevel sl) {
                 broadcast(sl, "The Sword of Erasure shatters!");
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 16f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 10f);
             }
             return;
         }
@@ -1187,12 +1035,6 @@ public class IrontombEntity extends Mob {
             return;
         }
         if (t == 3) sound(IrontombSounds.ROAR, 20f, 0.45f);
-        if (t == 3) {
-            // t is in authored ticks, the spawned effects last real ticks
-            int xlife = Math.max(1, (int) ((IrontombAttack.ERASURE_HIT - t) / IrontombAttack.scale(IrontombAttack.ERASURE)));
-            com.example.jjkspells.vfx.sprite.SpriteFx.circle(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 16f, xlife);
-            com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 12f, xlife);
-        }
         if (t == 40) sound(IrontombSounds.BELL, 20f, 0.4f);
         if (t == IrontombAttack.ERASURE_HIT - (int) (160 * IrontombAttack.scale(IrontombAttack.ERASURE))) sound(IrontombSounds.ERASE, 28f, 1.0f);
         // everyone is drawn to a viewing spot in front of the boss, so that every player sees it
@@ -1208,9 +1050,6 @@ public class IrontombEntity extends Mob {
             if (i == 0) {
                 sound(SoundEvents.GENERIC_EXPLODE, 28f, 0.25f);
                 sound(IrontombSounds.SHATTER, 28f, 0.5f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 32f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, position().add(0, 31, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 24f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 30f);
             }
             sound(IrontombSounds.IMPACT, 28f, 0.35f + 0.04f * i);
             if (IrontombBalance.ERASURE_KILL) {
@@ -1251,8 +1090,6 @@ public class IrontombEntity extends Mob {
         }
         if (level() instanceof ServerLevel sl) {
             IrontombFxServer.ring(sl, IrontombFxServer.dust(IrontombFxServer.RED, 2.4f), c, r, (int) (r * 6), 0.0);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) r / 3f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, c.add(0, 2, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.VIOLET, 3f);
         }
     }
 
@@ -1263,8 +1100,6 @@ public class IrontombEntity extends Mob {
         sound(SoundEvents.GENERIC_EXPLODE, 5f, 0.6f);
         soundAt(a, IrontombSounds.IMPACT, 7f, 1.0f);
         IrontombFxServer.burst(sl, a.add(0, 1, 0), color, 90, 1.6, 0.35);
-        com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, a.add(0, 1, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, 3.5f);
-        com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, a, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.CRIMSON, (float) radius * 2f / 6f);
         for (LivingEntity p : foes(90)) {
             double dx = p.getX() - a.x, dz = p.getZ() - a.z;
             if (dx * dx + dz * dz <= radius * radius && Math.abs(p.getY() - a.y) < 4) {
@@ -1457,35 +1292,9 @@ public class IrontombEntity extends Mob {
     }
 
     // ------------------------------------------------------------------ helpers
-    /** Per-tick scan caches (same radius asked repeatedly within one tick = one scan). */
-    private int scanCacheTick = -1;
-    private final java.util.HashMap<Double, List<Player>> targetCache = new java.util.HashMap<>();
-    private final java.util.HashMap<Double, List<LivingEntity>> foeCache = new java.util.HashMap<>();
-
-    private void rollScanCache() {
-        if (scanCacheTick != tickCount) {
-            targetCache.clear();
-            foeCache.clear();
-            scanCacheTick = tickCount;
-        }
-    }
-
     private List<Player> targets(double r) {
-        rollScanCache();
-        List<Player> hit = targetCache.get(r);
-        if (hit == null) {
-            hit = level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(r, 140, r),
-                    p -> p.isAlive() && !p.isSpectator() && p.distanceToSqr(this) <= r * r + 140 * 140);
-            targetCache.put(r, hit);
-            return new java.util.ArrayList<>(hit);
-        }
-        java.util.ArrayList<Player> out = new java.util.ArrayList<>(hit.size());
-        for (Player p : hit) {
-            if (p.isAlive() && !p.isSpectator()) {
-                out.add(p);
-            }
-        }
-        return out;
+        return level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(r, 140, r),
+                p -> p.isAlive() && !p.isSpectator() && p.distanceToSqr(this) <= r * r + 140 * 140);
     }
 
     /** Can this entity be fought? Players, plus (if enabled) other mobs such as the ones from Mob Battle. */
@@ -1499,21 +1308,8 @@ public class IrontombEntity extends Mob {
 
     /** Players and (if enabled) mobs within r blocks, everything the boss can attack. */
     private List<LivingEntity> foes(double r) {
-        rollScanCache();
-        List<LivingEntity> hit = foeCache.get(r);
-        if (hit == null) {
-            hit = level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(r, 140, r),
-                    e -> isFoe(e) && e.distanceToSqr(this) <= r * r + 140 * 140);
-            foeCache.put(r, hit);
-            return new java.util.ArrayList<>(hit);
-        }
-        java.util.ArrayList<LivingEntity> out = new java.util.ArrayList<>(hit.size());
-        for (LivingEntity e : hit) {
-            if (isFoe(e)) {
-                out.add(e);
-            }
-        }
-        return out;
+        return level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(r, 140, r),
+                e -> isFoe(e) && e.distanceToSqr(this) <= r * r + 140 * 140);
     }
 
     private static String fmt(double v) {

@@ -195,9 +195,6 @@ public class DefensiveMagicEntity extends Entity {
         level().playSound(null, getX(), getY(), getZ(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.0f, 0.9f + random.nextFloat() * 0.4f);
         level().playSound(null, getX(), getY(), getZ(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 0.8f, 1.4f + random.nextFloat() * 0.4f);
 
-        if (level() instanceof net.minecraft.server.level.ServerLevel fsl) {
-            com.example.jjkspells.vfx.sprite.SpriteFx.impact(fsl, center().add(dir.scale(DefensiveMagicSpell.RADIUS)), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 0.8f);
-        }
         if (durability <= 0.01f) pendingShatter = true;
         return amount - blocked;
     }
@@ -243,7 +240,6 @@ public class DefensiveMagicEntity extends Entity {
 
         if (tickCount == ACTIVE_FROM) {
             sl.playSound(null, getX(), getY(), getZ(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 0.6f, 1.8f);
-            com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(getX(), getY() - CENTER_Y, getZ()), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 0.9f);
         }
         if (pendingShatter && !shattered) {
             shattered = true;
@@ -267,8 +263,6 @@ public class DefensiveMagicEntity extends Entity {
         sl.playSound(null, c.x, c.y, c.z, SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1.4f, 1.3f);
         sl.playSound(null, c.x, c.y, c.z, SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.PLAYERS, 1.6f, 1.2f);
         sl.playSound(null, c.x, c.y, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 0.5f, 1.8f);
-        com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, c, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 2.5f);
-        com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, new Vec3(c.x, c.y - CENTER_Y, c.z), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, DefensiveMagicSpell.PULSE_RADIUS * 2f / 6f);
         double r = DefensiveMagicSpell.PULSE_RADIUS;
         DamageSource src = FrierenRegistry.DEFENSIVE_SPELL.getDamageSource(this, owner);
         for (Entity e : sl.getEntities(this, new AABB(c, c).inflate(r + 1), t -> ZoltraakEntity.isFoe(owner, t))) {

@@ -268,7 +268,6 @@ public class LastBreathEntity extends Entity {
                 Entity e = sl.getEntity(id);
                 if (e != null) {
                     noGrav.put(id, e.isNoGravity());
-                    com.example.jjkspells.vfx.sprite.SpriteFx.vortex(sl, e.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1f, T0);
                 }
             }
             level().playSound(null, c.x, c.y + 1, c.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 4.0f, 0.6f);
@@ -335,10 +334,6 @@ public class LastBreathEntity extends Entity {
         level().playSound(null, end.x, end.y + 1, end.z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 3.0f, 1.5f);
         level().playSound(null, end.x, end.y + 1, end.z, SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 2.5f, 1.2f);
         level().playSound(null, start.x, start.y + 1, start.z, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 2.0f, 1.7f);
-        Vec3 blinkSeg = end.subtract(start);
-        com.example.jjkspells.vfx.sprite.SpriteFx.slash(sl, start.add(end).scale(0.5).add(0, 1.0, 0), new Vec3(-nd.z, 0, nd.x), 0f, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, (float) Math.max(2.5, blinkSeg.length() * 0.8));
-        com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, end.add(0, 1.0, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 1.8f);
-        com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, target.position().add(0, target.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.8f);
         dashLog.add((int) Math.round(start.x * 10));
         dashLog.add((int) Math.round(start.y * 10));
         dashLog.add((int) Math.round(start.z * 10));
@@ -367,8 +362,6 @@ public class LastBreathEntity extends Entity {
                 t.hurtMarked = true;
                 t.fallDistance = 0;
                 level().playSound(null, t.getX(), t.getY() + 1, t.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 2.0f, 1.5f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.impact(sl, t.position().add(0, t.getBbHeight() * 0.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.2f);
-                com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, t.position(), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 1.2f);
             }
         }
         owner.setNoGravity(ownerNoGrav);
@@ -383,8 +376,6 @@ public class LastBreathEntity extends Entity {
         owner.fallDistance = 0;
         level().playSound(null, back.x, back.y + 2, back.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0f, 1.8f);
         level().playSound(null, back.x, back.y + 2, back.z, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 3.0f, 1.0f);
-        com.example.jjkspells.vfx.sprite.SpriteFx.ring(sl, back, com.example.jjkspells.vfx.sprite.SpriteFx.Palette.AZURE, 2.2f);
-        com.example.jjkspells.vfx.sprite.SpriteFx.burst(sl, back.add(0, 1.5, 0), com.example.jjkspells.vfx.sprite.SpriteFx.Palette.WHITE, 3.5f);
     }
 
     // ------------------------------------------------------------------ client

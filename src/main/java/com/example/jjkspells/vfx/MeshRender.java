@@ -98,12 +98,13 @@ public final class MeshRender {
         int r = (int) (Math.min(1f, rgb[0]) * 255), g = (int) (Math.min(1f, rgb[1]) * 255), b = (int) (Math.min(1f, rgb[2]) * 255);
         int a = (int) (Math.max(0f, Math.min(1f, alpha)) * 255);
         float[] p = m.pos, n = m.nrm, uv = m.uv;
-        int[] q = m.quads;
-        // one quad per two triangles (see Mesh.quads): half the vertices of the old triangle-per-quad loop
-        for (int k = 0; k < q.length; k++) {
-            int v = q[k], v3 = v * 3, v2 = v * 2;
-            vc.vertex(pm, p[v3], p[v3 + 1], p[v3 + 2]).color(r, g, b, a).uv(uv[v2] + uOff, uv[v2 + 1] + vOff)
-                    .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(nm, n[v3], n[v3 + 1], n[v3 + 2]).endVertex();
+        int[] ix = m.idx;
+        for (int t = 0; t < ix.length; t += 3) {
+            for (int c = 0; c < 4; c++) {
+                int v = ix[t + Math.min(c, 2)];
+                vc.vertex(pm, p[v * 3], p[v * 3 + 1], p[v * 3 + 2]).color(r, g, b, a).uv(uv[v * 2] + uOff, uv[v * 2 + 1] + vOff)
+                        .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(nm, n[v * 3], n[v * 3 + 1], n[v * 3 + 2]).endVertex();
+            }
         }
     }
 }
