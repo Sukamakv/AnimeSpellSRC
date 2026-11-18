@@ -13,7 +13,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Map;
@@ -175,9 +174,6 @@ public class ObsidianEntity extends ZegEntityBase {
         if (age < FORM) {
             owner.setDeltaMovement(0, Math.min(0, owner.getDeltaMovement().y), 0);
             owner.hurtMarked = true;
-            if (age % 8 == 0) {
-                SpriteFx.shards(sv(), p.add(0, 0.5, 0), SpriteFx.Palette.VIOLET, 1.4f);
-            }
             if (age % 2 == 0) {
                 Util.fx(level(), ModParticles.SHARD.get(), p.x, p.y + 0.3, p.z, 3, 1.1, 0.3, 1.1, 0.05);
                 Util.fx(level(), ModParticles.VOID.get(), p.x, p.y + 1.0, p.z, 1, 0.7, 0.8, 0.7, 0.01);
@@ -190,10 +186,6 @@ public class ObsidianEntity extends ZegEntityBase {
             Util.sound(level(), p.x, p.y, p.z, ModSounds.SHATTER.get(), 1.0f, 1.2f);
             Util.blast(level(), p.x, p.y + 0.4, p.z, 3.5, 40);
             Util.fxDir(level(), ModParticles.RING.get(), p.x, p.y + 0.1, p.z, 0, 0, 0);
-            SpriteFx.cracks(sv(), p, SpriteFx.Palette.VIOLET, 0.9f);
-            SpriteFx.ring(sv(), p, SpriteFx.Palette.VIOLET, 0.8f);
-            SpriteFx.fracture(sv(), p.add(0, 1.2, 0), SpriteFx.Palette.VIOLET, 3.5f);
-            SpriteFx.shards(sv(), p.add(0, 1.2, 0), SpriteFx.Palette.WHITE, 2.4f);
             for (LivingEntity e : Util.enemies(level(), p, 6.0, owner)) {
                 Util.knock(e, p, 3.0, 0.15);
             }
@@ -203,8 +195,6 @@ public class ObsidianEntity extends ZegEntityBase {
             entityData.set(DATA_STORE, (float) Math.min(1.0, steps() * c.perPreventedBonus.get() / Math.max(1.0, c.maxBonus.get())));
             if (state.prevented != lastPrevented) {
                 lastPrevented = state.prevented;
-                SpriteFx.fracture(sv(), p.add(0, 1.2, 0), SpriteFx.Palette.WHITE, 1.8f);
-                SpriteFx.shards(sv(), p.add(0, 1.2, 0), SpriteFx.Palette.VIOLET, 1.2f);
                 entityData.set(DATA_HIT, age);
                 entityData.set(DATA_HIT_YAW, random.nextFloat() * 360f);
             }
@@ -220,9 +210,6 @@ public class ObsidianEntity extends ZegEntityBase {
         int w = getWindupAt();
         if (w >= 0) {
             Util.kbImmune(owner, 4);
-            if (age == w) {
-                SpriteFx.tendrils(sv(), p.add(0, 1.1, 0), SpriteFx.Palette.VIOLET, 2.6f);
-            }
             if ((age - w) % 2 == 0) {
                 double k = (age - w) / (double) WINDUP;
                 for (int i = 0; i < 4; i++) {
@@ -250,14 +237,6 @@ public class ObsidianEntity extends ZegEntityBase {
         Util.fxDir(level(), ModParticles.RING.get(), at.x, at.y + 0.1, at.z, 0, 0, 0);
         Util.ring(level(), ModParticles.MIST.get(), at.add(0, 0.3, 0), 36, 0.9, 0.04);
         Util.ring(level(), ModParticles.SHARD.get(), at.add(0, 0.6, 0), 30, 0.7, 0.2);
-        float orad = f(c.radius.get());
-        SpriteFx.cracks(sv(), at, SpriteFx.Palette.VIOLET, orad * 2f / 7f);
-        SpriteFx.ring(sv(), at, SpriteFx.Palette.VIOLET, orad / 3f);
-        SpriteFx.fracture(sv(), at.add(0, 1.2, 0), SpriteFx.Palette.WHITE, 6.0f);
-        SpriteFx.shards(sv(), at.add(0, 1.2, 0), SpriteFx.Palette.VIOLET, 4.0f);
-        SpriteFx.shards(sv(), at.add(0, 1.2, 0), SpriteFx.Palette.WHITE, 3.0f);
-        SpriteFx.impact(sv(), at.add(0, 1.0, 0), SpriteFx.Palette.VIOLET, 2.6f);
-        SpriteFx.smoke(sv(), at.add(0, 1.0, 0), SpriteFx.Smoke.VOID, 4.0f);
         for (LivingEntity e : Util.enemies(level(), at, c.radius.get(), owner)) {
             Util.hurt(owner, e, flat, c.finalPercent.get());
             if (e.isAlive()) {

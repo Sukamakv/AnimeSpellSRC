@@ -11,7 +11,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.HashSet;
@@ -140,8 +139,6 @@ public class ImpactEntity extends ZegEntityBase {
             }
             if (age == COMPRESS) {
                 Util.sound(level(), owner.getX(), owner.getY(), owner.getZ(), ModSounds.CHARGE.get(), 1.4f, 1.0f);
-                SpriteFx.tendrils(sv(), owner.position().add(0, 1.1, 0), SpriteFx.Palette.VIOLET, 2.0f);
-                SpriteFx.cracks(sv(), owner.position(), SpriteFx.Palette.VIOLET, 0.8f);
             }
             if (age >= COMPRESS && age % 2 == 0) {
                 Vec3 p = owner.position();
@@ -168,9 +165,6 @@ public class ImpactEntity extends ZegEntityBase {
             double a = random.nextDouble() * Math.PI * 2, rr = Math.sqrt(random.nextDouble()) * r;
             double x = at.x + Math.cos(a) * rr, z = at.z + Math.sin(a) * rr;
             Util.tear(level(), x, at.y + 1 + random.nextDouble() * 6, z, 0.8);
-            if (age % 6 == 0) {
-                SpriteFx.fracture(sv(), new Vec3(x, at.y + 1.5 + random.nextDouble() * 5, z), SpriteFx.Palette.VIOLET, 2.5f + random.nextFloat() * 2f);
-            }
             Util.fx(level(), ModParticles.SPARK.get(), at.x, at.y + 0.5, at.z, 3, r * 0.3, 1.5, r * 0.3, 0.15);
             if (age % 6 == 0) {
                 Util.sound(level(), at.x, at.y, at.z, ModSounds.RIFT.get(), 0.9f, 0.8f + random.nextFloat() * 0.5f);
@@ -194,9 +188,6 @@ public class ImpactEntity extends ZegEntityBase {
         Util.blast(level(), from.x, from.y + 0.2, from.z, 2.0, 24);
         Util.arc(level(), ModParticles.VOID.get(), from.add(0, 1, 0), dest.add(0, 1, 0), 0.3);
         Util.arc(level(), ModParticles.SPARK.get(), from.add(0, 1, 0), dest.add(0, 1, 0), 0.5);
-        SpriteFx.beam(sv(), from.add(0, 1, 0), dest.add(0, 1, 0), SpriteFx.Palette.VIOLET, 0.5f, 6);
-        SpriteFx.fracture(sv(), from.add(0, 1.1, 0), SpriteFx.Palette.VIOLET, 2.2f);
-        SpriteFx.shards(sv(), from.add(0, 1.1, 0), SpriteFx.Palette.WHITE, 1.4f);
         Vec3 at = position();
         float yaw = Util.yawTo(dest, at);
         if (!Util.moveTo(owner, dest, yaw, 0f)) {
@@ -215,11 +206,6 @@ public class ImpactEntity extends ZegEntityBase {
         Util.sound(level(), at.x, at.y, at.z, ModSounds.SHATTER.get(), 1.8f, 0.8f);
         Util.blast(level(), at.x, at.y + 0.5, at.z, 4.0, 70);
         Util.fx(level(), ModParticles.CRACK.get(), at.x, at.y + 1.2, at.z, 10, 2.5, 2.0, 2.5, 0.0);
-        SpriteFx.impact(sv(), at.add(0, 1.2, 0), SpriteFx.Palette.VIOLET, 2.4f);
-        SpriteFx.fracture(sv(), at.add(0, 1.2, 0), SpriteFx.Palette.WHITE, 5.5f);
-        SpriteFx.shards(sv(), at.add(0, 1.2, 0), SpriteFx.Palette.VIOLET, 3.6f);
-        SpriteFx.shards(sv(), at.add(0, 1.2, 0), SpriteFx.Palette.WHITE, 2.4f);
-        SpriteFx.cracks(sv(), at, SpriteFx.Palette.VIOLET, 1.1f);
         for (int i = 0; i < 6; i++) {
             double a = random.nextDouble() * Math.PI * 2;
             Vec3 e = at.add(Math.cos(a) * (5 + random.nextDouble() * 6), 2 + random.nextDouble() * 6, Math.sin(a) * (5 + random.nextDouble() * 6));
@@ -252,14 +238,6 @@ public class ImpactEntity extends ZegEntityBase {
                 }
             }
         }
-        float sr = f(c.shockRadius.get());
-        if (age == PUNCH + 2 || age == PUNCH + 14) {
-            SpriteFx.ring(sv(), at, SpriteFx.Palette.VIOLET, (age == PUNCH + 2 ? 0.55f : 1.0f) * sr / 3f);
-        }
-        if (age == PUNCH + 2) {
-            SpriteFx.cracks(sv(), at, SpriteFx.Palette.VIOLET, sr * 2f / 7f);
-            SpriteFx.smoke(sv(), at.add(0, 1.0, 0), SpriteFx.Smoke.VOID, 4.0f);
-        }
         int n = 20 + (int) (r);
         for (int i = 0; i < n; i++) {
             double a = i * Math.PI * 2 / n + age * 0.15;
@@ -284,12 +262,6 @@ public class ImpactEntity extends ZegEntityBase {
         Util.blast(level(), at.x, at.y + 1.0, at.z, r * 0.5, 110);
         Util.ring(level(), ModParticles.MIST.get(), at.add(0, 0.4, 0), 36, 0.8, 0.04);
         Util.ring(level(), ModParticles.SHARD.get(), at.add(0, 0.6, 0), 30, 0.7, 0.2);
-        SpriteFx.ring(sv(), at, SpriteFx.Palette.VIOLET, (float) r / 3f);
-        SpriteFx.cracks(sv(), at, SpriteFx.Palette.VIOLET, (float) r * 2f / 7f);
-        SpriteFx.fracture(sv(), at.add(0, 2.5, 0), SpriteFx.Palette.WHITE, 8.0f);
-        SpriteFx.shards(sv(), at.add(0, 1.5, 0), SpriteFx.Palette.VIOLET, 5.0f);
-        SpriteFx.shards(sv(), at.add(0, 1.5, 0), SpriteFx.Palette.WHITE, 3.5f);
-        SpriteFx.smoke(sv(), at.add(0, 1.2, 0), SpriteFx.Smoke.VOID, 6.0f);
         for (LivingEntity e : Util.enemies(level(), at, r, owner)) {
             Util.hurt(owner, e, c.ruptureFlat.get(), c.rupturePercent.get());
             if (e.isAlive()) {

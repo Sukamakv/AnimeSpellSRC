@@ -13,7 +13,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.HashMap;
@@ -160,8 +159,6 @@ public class AssaultEntity extends ZegEntityBase {
             Util.LOCKED.remove(owner.getUUID());
             Util.sound(level(), owner.getX(), owner.getY(), owner.getZ(), ModSounds.BLINK.get(), 1.8f, 1.0f);
             Util.blast(level(), owner.getX(), owner.getY() + 0.3, owner.getZ(), 2.5, 40);
-            SpriteFx.impact(sv(), owner.position().add(0, 1.0, 0), SpriteFx.Palette.VIOLET, 2.0f);
-            SpriteFx.shards(sv(), owner.position().add(0, 1.0, 0), SpriteFx.Palette.WHITE, 2.0f);
             if (!owner.isInvisible()) {
                 owner.setInvisible(true);
                 hid = true;
@@ -194,8 +191,6 @@ public class AssaultEntity extends ZegEntityBase {
         if (age == GATHER) {
             Util.sound(level(), at.x, at.y, at.z, ModSounds.BLINK.get(), 1.8f, 1.4f);
             Vec3 above = at.add(0, 6.0, 0);
-            SpriteFx.fracture(sv(), above.add(0, 1.0, 0), SpriteFx.Palette.VIOLET, 3.5f);
-            SpriteFx.shards(sv(), above.add(0, 1.0, 0), SpriteFx.Palette.WHITE, 2.0f);
             if (Util.moveTo(owner, above, owner.getYRot(), 90f)) {
                 owner.setNoGravity(true);
             }
@@ -259,11 +254,6 @@ public class AssaultEntity extends ZegEntityBase {
         }
         Util.swing(owner);
         Util.arc(level(), ModParticles.VOID.get(), from, tp, 0.2);
-        Vec3 sa = new Vec3(tp.x - from.x, 0, tp.z - from.z);
-        sa = sa.lengthSqr() < 1.0E-4 ? new Vec3(0, 0, 1) : sa.normalize();
-        SpriteFx.beam(sv(), from, tp, SpriteFx.Palette.VIOLET, 0.25f, 4);
-        SpriteFx.streak(sv(), tp, sa, (strikeIdx * 47) % 180 - 90f, strikeIdx % 2 == 0 ? SpriteFx.Palette.WHITE : SpriteFx.Palette.VIOLET, 3.2f);
-        SpriteFx.impact(sv(), tp, SpriteFx.Palette.VIOLET, 1.2f);
         Util.fx(level(), ModParticles.FLASH.get(), tp.x, tp.y, tp.z, 1, 0, 0, 0, 0);
         Util.fx(level(), ModParticles.SHARD.get(), tp.x, tp.y, tp.z, 4, 0.3, 0.3, 0.3, 0.25);
         Util.fx(level(), ModParticles.STAR.get(), tp.x, tp.y, tp.z, 2, 0.3, 0.3, 0.3, 0.15);
@@ -292,11 +282,6 @@ public class AssaultEntity extends ZegEntityBase {
         Util.sound(level(), at.x, at.y, at.z, ModSounds.SHATTER.get(), 1.8f, 0.7f);
         Util.blast(level(), at.x, at.y + 0.5, at.z, 6, 100);
         Util.fx(level(), ModParticles.CRACK.get(), at.x, at.y + 1, at.z, 12, 3, 2, 3, 0.0);
-        SpriteFx.beam(sv(), at.add(0, 6.5, 0), at.add(0, 0.2, 0), SpriteFx.Palette.WHITE, 1.0f, 6);
-        SpriteFx.fracture(sv(), at.add(0, 1.2, 0), SpriteFx.Palette.WHITE, 6.0f);
-        SpriteFx.cracks(sv(), at, SpriteFx.Palette.VIOLET, 1.5f);
-        SpriteFx.shards(sv(), at.add(0, 1.2, 0), SpriteFx.Palette.VIOLET, 3.5f);
-        SpriteFx.ring(sv(), at, SpriteFx.Palette.VIOLET, 1.1f);
         if (primary != null && primary.isAlive()) {
             double mult = 1.0;
             if (connected >= c.perfectStrikes.get()) {
@@ -326,12 +311,6 @@ public class AssaultEntity extends ZegEntityBase {
         Util.blast(level(), at.x, at.y + 1.0, at.z, r * 0.5, 110);
         Util.ring(level(), ModParticles.MIST.get(), at.add(0, 0.4, 0), 36, 0.9, 0.04);
         Util.ring(level(), ModParticles.MIRROR.get(), at.add(0, 0.8, 0), 30, 0.7, 0.2);
-        SpriteFx.ring(sv(), at, SpriteFx.Palette.VIOLET, (float) r / 3f);
-        SpriteFx.cracks(sv(), at, SpriteFx.Palette.VIOLET, (float) r * 2f / 7f);
-        SpriteFx.fracture(sv(), at.add(0, 2.5, 0), SpriteFx.Palette.WHITE, 8.0f);
-        SpriteFx.shards(sv(), at.add(0, 1.5, 0), SpriteFx.Palette.VIOLET, 5.0f);
-        SpriteFx.smoke(sv(), at.add(0, 1.2, 0), SpriteFx.Smoke.VOID, 6.0f);
-        SpriteFx.tendrils(sv(), at.add(0, 1.2, 0), SpriteFx.Palette.VIOLET, 5.0f);
         for (LivingEntity e : Util.enemies(level(), at, r, owner)) {
             Util.hurt(owner, e, c.detonationFlat.get(), c.detonationPercent.get());
             if (e.isAlive()) {
