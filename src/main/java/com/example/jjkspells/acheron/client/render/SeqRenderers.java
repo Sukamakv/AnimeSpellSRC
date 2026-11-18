@@ -125,7 +125,6 @@ public final class SeqRenderers {
 
     private static void blackSun(MultiBufferSource buf, PoseStack ps, Vec3 c, float size, float a) {
         Fx.soft(buf, ps, tex("acheron_black_sun"), c, size, 0f, WHITE, a);
-        Fx.glow(buf, ps, tex("acheron_black_sun"), c, size, 0f, WHITE, a * 0.45f);
     }
 
     private static void groundMirror(MultiBufferSource buf, PoseStack ps, float radius, float a) {
@@ -190,8 +189,6 @@ public final class SeqRenderers {
                 }
                 float a = flick(t, CUT[i], 10f);
                 Vec3 d = dir(y0 + i * Math.PI * 2 / 3 + 0.3, (i % 2 == 0 ? 1 : -1) * 0.45).normalize();
-                bigSlash(buf, ps, true, c, d, 17f, 2.8f, i % 2 == 0 ? 0.3f : -0.3f, a, c01(lt / 3f), cam);
-                Fx.glow(buf, ps, tex("acheron_cross_impact"), c, 4.0f * c01(lt / 4f), 0f, WHITE, a * 0.8f);
                 Fx.glow(buf, ps, tex("acheron_lightning_spark"), c.add(d.scale((hash(i, 3) * 2 - 1) * 4)), 1.8f, lt * 20f, VIOHI, a);
                 // the edge of the triangle stays a little while
                 float edge = fade(t, CUT[i] + 2f, 42f);
@@ -203,9 +200,6 @@ public final class SeqRenderers {
                 float a = 1f - ct / 16f;
                 Vec3 p = new Vec3(-cam.z, 0, cam.x);
                 p = p.lengthSqr() < 1e-6 ? new Vec3(1, 0, 0) : p.normalize();
-                bigSlash(buf, ps, true, c, p.scale(0.75).add(0, 0.66, 0).normalize(), 24f, 3.6f, 0.22f, a, c01(ct / 3f), cam);
-                bigSlash(buf, ps, true, c, p.scale(0.75).add(0, -0.66, 0).normalize(), 24f, 3.6f, -0.22f, a, c01(ct / 3f), cam);
-                Fx.glow(buf, ps, tex("acheron_cross_impact"), c, 8.0f * (0.5f + ct / 16f), 0f, WHITE, a);
                 Fx.ring(buf, ps, tex("acheron_line"), new Vec3(0, 0.08, 0), rad * ct / 16f, rad * ct / 16f + 0.5f, 40, 6f, 0f, VIO, a * 0.8f);
                 for (int i = 0; i < 5; i++) {
                     Fx.glow(buf, ps, tex("acheron_lightning_spark"), c.add((hash(i, 5) - 0.5) * 8, (hash(i, 6) - 0.5) * 5, (hash(i, 7) - 0.5) * 8), 1.4f, ct * 30f + i * 50f, VIOHI, a);
@@ -237,7 +231,6 @@ public final class SeqRenderers {
                     float a = fade(lt, 0f, 14f);
                     Fx.ribbon(buf, ps, tex("acheron_octobolt_lightning"), true, from, to, cam, 1.7f, VIO, a);
                     Fx.ribbon(buf, ps, tex("acheron_octobolt_lightning"), true, from, to, cam, 0.7f, VIOHI, a);
-                    Fx.glow(buf, ps, GLOW, from, 2.0f, 0f, VIO, fade(lt, 0f, 8f));
                     Ghost.draw(buf, ps, owner, rel(d[2], d[3], d[4], base), e.yaw(), VIO, 0.5f * fade(lt, 0f, 12f), Ghost.DASH);
                     for (int i = 0; i < 5; i++) {
                         float lh = t - HIT[i];
@@ -246,8 +239,6 @@ public final class SeqRenderers {
                         }
                         float ah = flick(t, HIT[i], 9f);
                         Vec3 dd = dir(i * 1.2566 + 0.4, (i % 2 == 0 ? 0.55 : -0.55)).normalize();
-                        bigSlash(buf, ps, true, c, dd, 15f, 2.6f, i % 2 == 0 ? 0.3f : -0.3f, ah, c01(lh / 3f), cam);
-                        Fx.glow(buf, ps, tex("acheron_cross_impact"), c, 3.5f * c01(lh / 3f), 0f, WHITE, ah * 0.7f);
                         Fx.glow(buf, ps, tex("acheron_lightning_spark"), c.add(dd.scale((hash(i, 8) * 2 - 1) * 3)), 1.8f, lh * 25f, VIOHI, ah);
                     }
                 } else if (type == 2) {
@@ -259,7 +250,6 @@ public final class SeqRenderers {
                 } else if (type == 3 && lt < 26f) {
                     Vec3 g = rel(d[2], d[3] + 1.0, d[4], base);
                     knotGlyph(buf, ps, g, 2.4f - 1.0f * Math.min(1f, lt / 12f), lt * 6f, fade(lt, 0f, 26f));
-                    Fx.glow(buf, ps, tex("acheron_final_flash"), g, 3.0f * (0.4f + lt / 26f), 0f, WHITE, fade(lt, 0f, 12f));
                     Fx.glow(buf, ps, tex("acheron_crimson_knot_shatter"), g, 2.2f * (0.5f + lt / 26f), lt * 4f, WHITE, fade(lt, 0f, 18f));
                 }
             }
@@ -299,7 +289,6 @@ public final class SeqRenderers {
                 }
                 if (type == 2) {
                     Vec3 from = rel(d[2], d[3] + 1.0, d[4], base), to = rel(d[5], d[6] + 1.0, d[7], base);
-                    bigSlash(buf, ps, false, from.add(to).scale(0.5), to.subtract(from).normalize(), (float) from.distanceTo(to) + 12f, 3.2f, 0.14f, fade(lt, 0f, 14f), c01(lt / 2.5f), cam);
                     Ghost.draw(buf, ps, owner, rel(d[2], d[3], d[4], base), e.yaw(), CRIM, 0.45f * fade(lt, 0f, 14f), Ghost.DASH);
                 } else if (type == 3 && lt < 22f) {
                     Vec3 g = rel(d[2], d[3], d[4], base);
@@ -310,7 +299,6 @@ public final class SeqRenderers {
                     Vec3 top = new Vec3(0, 26, 0);
                     Fx.ribbon(buf, ps, tex("acheron_rainblade_slash"), true, top, new Vec3(0, 0.1, 0), cam, 4.5f * (0.4f + a), WHITE, a);
                     Fx.ribbon(buf, ps, tex("acheron_rainblade_cut"), true, top, new Vec3(0, 0.1, 0), cam, 1.4f, WHITE, a);
-                    Fx.glow(buf, ps, tex("acheron_final_flash"), new Vec3(0, 1.0, 0), 13.0f * (0.5f + lt / 26f), 0f, WHITE, a);
                     Fx.ring(buf, ps, tex("acheron_line"), new Vec3(0, 0.08, 0), e.r1() * lt / 26f, e.r1() * lt / 26f + 0.9f, 64, 10f, 0f, CRIM, a);
                     fracturePlate(buf, ps, e.r1() * 0.9f, a * 0.8f, 0f);
                 }
@@ -318,7 +306,6 @@ public final class SeqRenderers {
             // the ascent: a glow gathers under the caster
             float asc = env(t, 50f, 56f, 62f, 70f);
             if (asc > 0.01f && owner != null) {
-                Fx.glow(buf, ps, GLOW, ownerP.add(0, 1.0, 0), 2.4f * asc, 0f, CRIMHI, 0.8f * asc);
             }
         }
     }
@@ -364,17 +351,14 @@ public final class SeqRenderers {
                     Vec3 head = a.lerp(b, f), tail = a.lerp(b, Math.max(0f, f - 0.35f));
                     Fx.ribbon(buf, ps, tex("acheron_crimson_thread"), true, tail, head, cam, 0.35f, WHITE, 1f - lt / 14f);
                     Fx.glow(buf, ps, tex("acheron_crimson_knot_shatter"), head, 1.4f, lt * 20f, WHITE, 1f - lt / 14f);
-                    Fx.glow(buf, ps, GLOW, b, 2.2f * f, 0f, CRIMHI, fade(lt, 8f, 6f));
                 } else if (type == 4 && lt < 24f && mc.level != null) {
                     Entity en = mc.level.getEntity((int) d[2]);
                     if (en != null) {
                         Vec3 c = en.getPosition(pt).subtract(base).add(0, en.getBbHeight() * 0.5, 0);
-                        Fx.glow(buf, ps, tex("acheron_final_flash"), c, 3.0f * (0.4f + lt / 24f), 0f, WHITE, fade(lt, 0f, 24f));
                     }
                 }
             }
             if (t < 24f && owner != null) {
-                Fx.glow(buf, ps, GLOW, hand, 1.8f * env(t, 0f, 12f, 16f, 24f), 0f, CRIMHI, 0.9f);
             }
         }
     }
@@ -397,32 +381,12 @@ public final class SeqRenderers {
             float grown = t < WAVE[0] ? 0.2f : t < WAVE[1] ? 0.45f : t < WAVE[2] ? 0.7f : 1f;
             fracturePlate(buf, ps, rad * grown, 0.7f * gl, t * 0.1f);
             Vec3 hand = owner != null ? handRel(owner, pt, base) : Vec3.ZERO;
-            // thin cuts between the waves
-            if (t > 16f && t < 112f) {
-                int k0 = (int) (t / 3f);
-                for (int k = k0 - 2; k <= k0; k++) {
-                    float lt = t - k * 3f;
-                    float a = fade(lt, 0f, 7f);
-                    Vec3 c = new Vec3((hash(k, 21) - 0.5) * rad * 1.3, 1.0 + hash(k, 22) * 9.0, (hash(k, 23) - 0.5) * rad * 1.3);
-                    Vec3 d = dir(hash(k, 24) * 6.28, (hash(k, 25) - 0.5) * 1.6).normalize();
-                    swoosh(buf, ps, "acheron_rainblade_cut", c, d, 16f + hash(k, 26) * 18f, 0.9f, hash(k, 27) > 0.5f ? 0.25f : -0.25f, WHITE, a, c01((t - k * 3f) / 2f), cam);
-                }
-            }
             for (int i = 0; i < 3; i++) {
                 float lt = t - WAVE[i];
                 if (lt < 0) {
                     continue;
                 }
                 float a = fade(t, WAVE[i], 18f);
-                int n = i == 2 ? 11 : 8;
-                for (int k = 0; k < n; k++) {
-                    int s = i * 20 + k;
-                    Vec3 c = new Vec3((hash(s, 31) - 0.5) * rad * 1.1, 1.5 + hash(s, 32) * 8.0, (hash(s, 33) - 0.5) * rad * 1.1);
-                    Vec3 d = dir(hash(s, 34) * 6.28, (hash(s, 35) - 0.5) * 1.8).normalize();
-                    float grow = c01(lt / 3f);
-                    bigSlash(buf, ps, false, c, d, 30f + hash(s, 36) * 30f, 3.4f + 0.6f * i, hash(s, 37) > 0.5f ? 0.3f : -0.3f, a, grow, cam);
-                }
-                Fx.glow(buf, ps, tex("acheron_final_flash"), new Vec3(0, 3.0, 0), (15f + 6f * i) * (0.5f + lt / 18f), 0f, WHITE, a * (i == 2 ? 1f : 0.6f));
                 Fx.ring(buf, ps, tex("acheron_line"), new Vec3(0, 0.08, 0), rad * c01(lt / 14f), rad * c01(lt / 14f) + 0.8f, 72, 12f, 0f, CRIM, a);
             }
             // the swing at the caster's hand before each wave
@@ -437,7 +401,6 @@ public final class SeqRenderers {
                 float lt = t - (float) d[1];
                 if ((int) d[0] == 3 && lt >= 0 && lt < 16f) {
                     Vec3 g = rel(d[2], d[3], d[4], base);
-                    Fx.glow(buf, ps, tex("acheron_final_flash"), g, 3.6f * (0.5f + lt / 16f), 0f, CRIMHI, fade(lt, 0f, 16f));
                     if (d[5] > 0) {
                         Fx.glow(buf, ps, tex("acheron_crimson_knot_shatter"), g, 1.6f + 0.3f * (float) d[5], lt * 5f, WHITE, fade(lt, 0f, 16f));
                     }
@@ -481,7 +444,6 @@ public final class SeqRenderers {
             }
             float it = t - impact;
             if (it >= 0) {
-                Fx.glow(buf, ps, tex("acheron_final_flash"), new Vec3(0, 3, 0), 26f * (0.4f + it / 30f), 0f, WHITE, fade(t, impact, 20f));
                 crescent(buf, ps, rad * c01(it / 20f), 9f + 12f * c01(it / 20f), fade(t, impact, 34f), t);
                 crescent(buf, ps, rad * 0.7f * c01(it / 18f), 6f, fade(t, impact + 2f, 28f), t + 40f);
                 fracturePlate(buf, ps, rad * 0.9f * c01(it / 12f), 0.9f * fade(t, impact, 60f), 0f);
@@ -522,7 +484,6 @@ public final class SeqRenderers {
                     pulse = Math.max(pulse, flick(t, s0 + gap * i, 8f));
                 }
                 blackSun(buf, ps, hole, size * (1f + 0.15f * pulse), c01(t / 20f));
-                Fx.glow(buf, ps, GLOW, hole, size * 1.5f, 0f, CRIMDEEP, 0.5f * c01(t / 30f));
             }
             // 3. everything streams in: spiralling streaks and rings shrinking along the ground
             float inA = env(t, open, open + 12f, fa - 12f, fa);
@@ -553,7 +514,6 @@ public final class SeqRenderers {
                     Vec3 d = screenDir(hole, cam, phi);
                     bigSlash(buf, ps, false, hole.add(d.scale(hash(i, 102) * 4f - 2f)), d, 90f, 8.5f, i % 2 == 0 ? 0.28f : -0.28f, a, c01(lt / 2.5f), cam);
                     swoosh(buf, ps, "acheron_rainblade_cut", hole, d, 130f, 2.0f, i % 2 == 0 ? -0.2f : 0.2f, WHITE, a, c01(lt / 2.5f), cam);
-                    Fx.glow(buf, ps, tex("acheron_cross_impact"), hole, 20f * c01(lt / 3f), phi * 40f, WHITE, a);
                     Fx.glow(buf, ps, tex("rainblade_spatial_fracture"), hole, 12f + 1.5f * i, i * 37f, WHITE, a * 0.8f);
                 }
                 float sw = t - (s - 3f);
@@ -578,7 +538,6 @@ public final class SeqRenderers {
             petals(buf, ps, t, 70, rad * 0.9f, 24f, env(t, tk(10.5), tk(12.5), tk(16.5), tk(18.0)));
             float ch = env(t, tk(11.6), fa, fa + 2f, fa + 8f);
             if (ch > 0.01f && owner != null) {
-                Fx.glow(buf, ps, GLOW, hand, 5.0f * ch, 0f, CRIMHI, 0.9f * ch);
                 for (int i = 0; i < 10; i++) {
                     float a = hash(i, 81) * 6.28f + t * 0.1f;
                     Vec3 from = hand.add(Mth.cos(a) * 9f * (1f - ch), 1.0 + hash(i, 82) * 7f * (1f - ch), Mth.sin(a) * 9f * (1f - ch));
@@ -595,8 +554,6 @@ public final class SeqRenderers {
                 Vec3 d1 = screenDir(hole, cam, 0.5), d2 = screenDir(hole, cam, -0.55);
                 bigSlash(buf, ps, false, hole, d1, 260f, 24f, 0.2f, fade(t, fa, 34f), c01(it / 3f), cam);
                 bigSlash(buf, ps, false, hole, d2, 220f, 16f, -0.2f, fade(t, fa + 3f, 30f), c01((it - 3f) / 3f), cam);
-                Fx.glow(buf, ps, tex("acheron_final_flash"), hole, 75f * (0.4f + it / 40f), 0f, WHITE, a);
-                Fx.glow(buf, ps, tex("acheron_cross_impact"), hole, 60f * c01(it / 6f), 0f, WHITE, a);
                 for (int i = 0; i < 7; i++) {
                     Fx.glow(buf, ps, tex("rainblade_spatial_fracture"), hole, 16f + it * (1.4f + 0.2f * i), i * 53f + it * 0.5f, WHITE, fade(t, fa + i, 70f) * 0.9f);
                 }

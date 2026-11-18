@@ -7,6 +7,7 @@ import com.example.jjkspells.acheron.util.Util;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
@@ -79,6 +80,8 @@ public class RainleafEntity extends SeqEntity {
         mark(o, best, k);
         pushFx(3, a.x, a.y, a.z, b.x, b.y, b.z);
         Util.arc(level(), ModParticles.ARC_R.get(), a, b, 0.5);
+        SpriteFx.beam(sv(), a, b, SpriteFx.Palette.CRIMSON, 0.3f, 8);
+        SpriteFx.tendrils(sv(), b, SpriteFx.Palette.CRIMSON, 1.4f);
         Util.sound(level(), b.x, b.y, b.z, ModSounds.RAINLEAF_TRANSFER.get(), 1.2f, 1.0f);
     }
 
@@ -96,6 +99,8 @@ public class RainleafEntity extends SeqEntity {
             Util.sound(level(), o.getX(), o.getY(), o.getZ(), ModSounds.RAINLEAF_CAST.get(), 1.4f, 1.0f);
             pushFx(1, p.x, p.y, p.z, yaw());
             Util.swing(o);
+            SpriteFx.petals(sv(), p.add(0, 2.5, 0), SpriteFx.Palette.CRIMSON, Math.min(6f, r1() / 2f));
+            SpriteFx.cracks(sv(), p, SpriteFx.Palette.CRIMSON, Math.min(6f, r1() * 2f / 7f));
         }
         if (at(age, 1.5)) {
             award(o, c.dreams.get());
@@ -127,12 +132,17 @@ public class RainleafEntity extends SeqEntity {
                 if (k >= c.maxKnots.get() && !full) {
                     full = true;
                     pushFx(4, e.getId());
+                    SpriteFx.fracture(sv(), e.position().add(0, e.getBbHeight() * 0.5, 0), SpriteFx.Palette.CRIMSON, 3.0f);
+                    SpriteFx.shards(sv(), e.position().add(0, e.getBbHeight() * 0.5, 0), SpriteFx.Palette.CRIMSON, 1.8f);
                 }
             }
             if (age % 20 == 10 && k > 0) {
                 Util.sound(level(), e.getX(), e.getY(), e.getZ(), ModSounds.RAINLEAF_TICK.get(), 0.5f, 0.8f + 0.06f * k);
                 strike(o, e, c.tickFlat.get() * k, c.tickPercent.get() * k, 1.0, 0, 0);
                 Util.fx(level(), ModParticles.PETAL.get(), e.getX(), e.getY() + e.getBbHeight() * 0.6, e.getZ(), 2 + k / 2, 0.3, 0.5, 0.3, 0.03);
+                if (age % 40 == 10) {
+                    SpriteFx.petals(sv(), e.position().add(0, e.getBbHeight() * 0.6, 0), SpriteFx.Palette.CRIMSON, 0.7f + 0.1f * k);
+                }
                 track(e);
             }
         }

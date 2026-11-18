@@ -7,6 +7,7 @@ import com.example.jjkspells.acheron.util.Util;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
@@ -54,6 +55,10 @@ public class WiltEntity extends SeqEntity {
             }
             if (at(age, CUTS[i])) {
                 Util.sound(level(), p.x, p.y, p.z, ModSounds.ACHERON_VIOLET_IMPACT.get(), 1.0f, 0.9f + 0.1f * i);
+                Vec3 fc = faceCaster(o, p), hc = p.add(0, 1.2, 0);
+                SpriteFx.streak(sv(), hc, fc, 60f * i - 30f, SpriteFx.Palette.VIOLET, 4.4f);
+                SpriteFx.streak(sv(), hc, fc, 60f * i - 30f, SpriteFx.Palette.WHITE, 3.6f);
+                SpriteFx.shards(sv(), hc, SpriteFx.Palette.VIOLET, 1.6f);
                 for (LivingEntity e : foes(o, c.radius.get())) {
                     strike(o, e, c.cutFlat.get(), c.cutPercent.get(), 1.0, 0, 0);
                     track(e);
@@ -74,6 +79,13 @@ public class WiltEntity extends SeqEntity {
                 track(e);
             }
             Util.sparkBurst(level(), p.x, p.y + 1.0, p.z, 2.0, (int) (14 * density()));
+            Vec3 fc = faceCaster(o, p), hc = p.add(0, 1.2, 0);
+            SpriteFx.streak(sv(), hc, fc, 40f, SpriteFx.Palette.WHITE, 6.0f);
+            SpriteFx.streak(sv(), hc, fc, -40f, SpriteFx.Palette.WHITE, 6.0f);
+            SpriteFx.fracture(sv(), hc, SpriteFx.Palette.VIOLET, 4.5f);
+            SpriteFx.shards(sv(), hc, SpriteFx.Palette.VIOLET, 2.6f);
+            SpriteFx.ring(sv(), p, SpriteFx.Palette.VIOLET, 1.0f);
+            SpriteFx.cracks(sv(), p, SpriteFx.Palette.VIOLET, 1.0f);
             award(o, c.dreams.get());
         }
     }

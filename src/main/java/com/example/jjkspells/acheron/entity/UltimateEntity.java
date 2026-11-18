@@ -7,6 +7,7 @@ import com.example.jjkspells.acheron.util.Util;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
@@ -146,6 +147,19 @@ public class UltimateEntity extends SeqEntity {
                 }
                 pushFx(2, i, n);
                 Util.voidBurst(level(), h.x, h.y, h.z, 3.0, (int) (14 * density()));
+                java.util.Random ur = new java.util.Random(i * 7919L + 13);
+                Vec3 fc = faceCaster(o, h);
+                float roll = i * 52f + ur.nextFloat() * 30f;
+                SpriteFx.streak(sv(), h.add((ur.nextDouble() - 0.5) * 8, (ur.nextDouble() - 0.5) * 6, (ur.nextDouble() - 0.5) * 8), fc, roll, SpriteFx.Palette.WHITE, 14f);
+                SpriteFx.streak(sv(), h, fc, roll + 12f, SpriteFx.Palette.CRIMSON, 10f);
+                if (i % 2 == 0) {
+                    SpriteFx.claws(sv(), h, fc, roll - 20f, SpriteFx.Palette.CRIMSON, 9f);
+                }
+                SpriteFx.fracture(sv(), h, SpriteFx.Palette.WHITE, 6f + i * 0.6f);
+                SpriteFx.shards(sv(), h, SpriteFx.Palette.WHITE, 4.0f);
+                if (i % 3 == 0) {
+                    SpriteFx.cracks(sv(), p, SpriteFx.Palette.CRIMSON, (float) (c.radius.get() * 2.0 / 7.0) * (0.35f + 0.05f * i));
+                }
             }
         }
         if (at(age, 11.0)) {
@@ -172,6 +186,15 @@ public class UltimateEntity extends SeqEntity {
             }
             releaseSucked();
             Util.voidBurst(level(), h.x, h.y, h.z, 10.0, (int) (60 * density()));
+            Vec3 ffc = faceCaster(o, h);
+            SpriteFx.streak(sv(), h, ffc, 32f, SpriteFx.Palette.WHITE, 40f);
+            SpriteFx.streak(sv(), h, ffc, -34f, SpriteFx.Palette.CRIMSON, 34f);
+            SpriteFx.fracture(sv(), h, SpriteFx.Palette.WHITE, 28f);
+            SpriteFx.shards(sv(), h, SpriteFx.Palette.CRIMSON, 22f);
+            SpriteFx.shards(sv(), h, SpriteFx.Palette.WHITE, 30f);
+            SpriteFx.ring(sv(), p, SpriteFx.Palette.CRIMSON, r2() / 3f);
+            SpriteFx.cracks(sv(), p, SpriteFx.Palette.CRIMSON, r2() * 2f / 7f);
+            SpriteFx.petals(sv(), h.add(0, -2, 0), SpriteFx.Palette.CRIMSON, 12f);
         }
         if (at(age, 15.0)) {
             Util.sound(level(), p.x, p.y, p.z, ModSounds.ACHERON_ULTIMATE_AFTERMATH.get(), 2.0f, 1.0f);

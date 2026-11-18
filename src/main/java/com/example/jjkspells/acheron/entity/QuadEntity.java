@@ -7,6 +7,7 @@ import com.example.jjkspells.acheron.util.Util;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
@@ -105,6 +106,10 @@ public class QuadEntity extends SeqEntity {
                     to = last != null ? last : o.position();
                 }
                 pushFx(2, i, last.x, last.y, last.z, to.x, to.y, to.z);
+                SpriteFx.beam(sv(), last.add(0, 1.0, 0), to.add(0, 1.0, 0), SpriteFx.Palette.CRIMSON, 0.35f, 6);
+                SpriteFx.streak(sv(), last.add(to).scale(0.5).add(0, 1.1, 0), faceCaster(o, p), 18f * i - 25f, SpriteFx.Palette.WHITE, 3.0f);
+                SpriteFx.impact(sv(), to.add(0, 1.0, 0), SpriteFx.Palette.CRIMSON, 1.4f);
+                SpriteFx.shards(sv(), to.add(0, 1.0, 0), SpriteFx.Palette.CRIMSON, 1.0f);
                 Util.snapTo(o, to, Util.yawTo(to, p), 0);
                 Util.swing(o);
                 Util.sound(level(), to.x, to.y, to.z, ModSounds.QUADRIVALENT_DASH.get(), 1.3f, 1.0f + 0.1f * i);
@@ -135,6 +140,8 @@ public class QuadEntity extends SeqEntity {
                     executed++;
                     if (shown++ < 12) {
                         pushFx(3, e.getX(), e.getY() + e.getBbHeight() * 0.5, e.getZ());
+                        SpriteFx.tendrils(sv(), e.position().add(0, e.getBbHeight() * 0.5, 0), SpriteFx.Palette.CRIMSON, 1.6f);
+                        SpriteFx.shards(sv(), e.position().add(0, e.getBbHeight() * 0.5, 0), SpriteFx.Palette.WHITE, 1.2f);
                     }
                 } else {
                     strike(o, e, c.ordinaryFlat.get(), c.ordinaryPercent.get(), 1.0, 0, 0);
@@ -145,6 +152,11 @@ public class QuadEntity extends SeqEntity {
                 track(e);
             }
             Util.voidBurst(level(), p.x, p.y + 1, p.z, 3.0, (int) (20 * density()));
+            SpriteFx.beam(sv(), p.add(0, 26, 0), p.add(0, 0.1, 0), SpriteFx.Palette.WHITE, 1.0f, 5);
+            SpriteFx.fracture(sv(), p.add(0, 1.2, 0), SpriteFx.Palette.CRIMSON, 5.0f);
+            SpriteFx.cracks(sv(), p, SpriteFx.Palette.CRIMSON, r1() * 2f / 7f);
+            SpriteFx.ring(sv(), p, SpriteFx.Palette.CRIMSON, r1() / 3f);
+            SpriteFx.shards(sv(), p.add(0, 1.2, 0), SpriteFx.Palette.WHITE, 2.5f);
             award(o, c.dreams.get());
         }
         if (at(age, 3.4)) {

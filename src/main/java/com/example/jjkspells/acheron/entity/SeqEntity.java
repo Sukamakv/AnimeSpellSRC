@@ -9,6 +9,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.HashSet;
@@ -301,5 +302,16 @@ public abstract class SeqEntity extends AchEntityBase {
 
     protected double density() {
         return AcheronConfig.G.particleDensity.get();
+    }
+
+    /** Server level for sprite effects (the sequence only ever runs on the server). */
+    protected net.minecraft.server.level.ServerLevel sv() {
+        return (net.minecraft.server.level.ServerLevel) level();
+    }
+
+    /** Horizontal unit vector from p towards the caster: the plane normal that makes a flat cut face the player who cast it. */
+    protected static Vec3 faceCaster(LivingEntity o, Vec3 p) {
+        Vec3 d = new Vec3(o.getX() - p.x, 0, o.getZ() - p.z);
+        return d.lengthSqr() < 1.0e-4 ? new Vec3(0, 0, 1) : d.normalize();
     }
 }

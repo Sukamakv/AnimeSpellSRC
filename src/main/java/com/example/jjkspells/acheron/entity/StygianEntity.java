@@ -7,6 +7,7 @@ import com.example.jjkspells.acheron.util.Util;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import com.example.jjkspells.vfx.sprite.SpriteFx;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
@@ -54,6 +55,7 @@ public class StygianEntity extends SeqEntity {
         }
         if (at(age, 3.4)) {
             Util.sound(level(), p.x, p.y, p.z, ModSounds.STYGIAN_DESCENT.get(), 2.0f, 1.0f);
+            SpriteFx.beam(sv(), p.add(0, 30, 0), p.add(0, 0.1, 0), SpriteFx.Palette.WHITE, 1.6f, 14);
         }
         if (at(age, 4.2)) {
             Util.swing(o);
@@ -69,10 +71,22 @@ public class StygianEntity extends SeqEntity {
                 track(e);
             }
             Util.voidBurst(level(), p.x, p.y + 1, p.z, 6.0, (int) (40 * density()));
+            java.util.Random sr = new java.util.Random(tickCount * 13L);
+            SpriteFx.cracks(sv(), p, SpriteFx.Palette.CRIMSON, r1() * 2f / 7f);
+            SpriteFx.ring(sv(), p, SpriteFx.Palette.CRIMSON, r1() / 3f);
+            SpriteFx.fracture(sv(), p.add(0, 3.0, 0), SpriteFx.Palette.WHITE, 8.0f);
+            SpriteFx.smoke(sv(), p.add(0, 1.5, 0), SpriteFx.Smoke.VOID, 5.0f);
+            for (int k = 0; k < 6; k++) {
+                double ang = sr.nextDouble() * Math.PI * 2, rr = 2.0 + sr.nextDouble() * r1() * 0.5;
+                Vec3 sp = p.add(Math.cos(ang) * rr, 0.8, Math.sin(ang) * rr);
+                SpriteFx.shards(sv(), sp, k % 2 == 0 ? SpriteFx.Palette.CRIMSON : SpriteFx.Palette.WHITE, 2.0f);
+            }
         }
         if (at(age, 4.6)) {
             Util.sound(level(), p.x, p.y, p.z, ModSounds.STYGIAN_SHOCKWAVE.get(), 3.0f, 1.0f);
             pushFx(3, p.x, p.y, p.z);
+            SpriteFx.ring(sv(), p, SpriteFx.Palette.WHITE, r2() / 3f);
+            SpriteFx.cracks(sv(), p, SpriteFx.Palette.CRIMSON, r2() * 2f / 7f);
             double inner = c.radius.get();
             for (LivingEntity e : foes(o, c.shockRadius.get())) {
                 if (e.distanceToSqr(p.x, p.y, p.z) <= inner * inner) {
@@ -86,6 +100,7 @@ public class StygianEntity extends SeqEntity {
             }
         }
         if (at(age, 5.0)) {
+            SpriteFx.petals(sv(), p.add(0, 4.0, 0), SpriteFx.Palette.CRIMSON, 6.0f);
             award(o, c.dreams.get());
         }
         if (at(age, 5.6)) {
