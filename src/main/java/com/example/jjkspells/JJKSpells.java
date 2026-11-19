@@ -33,11 +33,9 @@ public class JJKSpells {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.afterlife.config.AfterlifeConfig.SPEC, MODID + "-afterlife.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.pantheon.config.PanConfig.SPEC, MODID + "-pantheon.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.malphite.config.MalConfig.SPEC, MODID + "-malphite.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.malenia.config.MelConfig.SPEC, MODID + "-malenia.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.learner.LearnerConfig.SPEC, MODID + "-skill_learner.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.relic.RelicConfig.SPEC, MODID + "-relics.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.enchant.FlameSlashConfig.SPEC, MODID + "-flame_slash.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.acheron.config.AcheronConfig.SPEC, MODID + "-acheron.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.prime.PrimeConfig.SPEC, MODID + "-prime.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.example.jjkspells.garou.config.GarConfig.SPEC, MODID + "-garou.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BalanceConfig.SPEC, MODID + "-balance.toml");
@@ -65,13 +63,6 @@ public class JJKSpells {
         com.example.jjkspells.afterlife.registry.ModEffects.register(bus);
         com.example.jjkspells.afterlife.registry.ModEntities.register(bus);
 
-        // Acheron: Trilateral Wiltcross, Octobolt Flash, Quadrivalent Ascendance, Atop Rainleaf Hangs Oneness, Rainblade, Stygian Resurge, Slashed Dream Cries in Red
-        com.example.jjkspells.acheron.registry.ModSpells.init();
-        com.example.jjkspells.acheron.registry.ModSounds.register(bus);
-        com.example.jjkspells.acheron.registry.ModParticles.register(bus);
-        com.example.jjkspells.acheron.registry.ModEffects.register(bus);
-        com.example.jjkspells.acheron.registry.ModEntities.register(bus);
-        com.example.jjkspells.acheron.registry.ModItems.register(bus);
         // Pantheon: Comet Spear, Shield Vault, Aegis Storm, Starfall Execution, Grand Starfall
         com.example.jjkspells.pantheon.registry.ModSpells.init();
         com.example.jjkspells.pantheon.registry.ModSounds.register(bus);
@@ -85,13 +76,6 @@ public class JJKSpells {
         com.example.jjkspells.malphite.registry.ModParticles.register(bus);
         com.example.jjkspells.malphite.registry.ModEffects.register(bus);
         com.example.jjkspells.malphite.registry.ModEntities.register(bus);
-        // Malenia
-        com.example.jjkspells.malenia.registry.ModSpells.init();
-        com.example.jjkspells.malenia.registry.ModSounds.register(bus);
-        com.example.jjkspells.malenia.registry.ModParticles.register(bus);
-        com.example.jjkspells.malenia.registry.ModEffects.register(bus);
-        com.example.jjkspells.malenia.registry.ModEntities.register(bus);
-        com.example.jjkspells.malenia.registry.ModItems.register(bus);
         com.example.jjkspells.learner.LearnerRegistry.register(bus);
         // Rimuru: Predator, Black Lightning, Megiddo, Absolute Defense, Spatial Domination, Beelzebuth, Imaginary Collapse, Void God Azathoth
         com.example.jjkspells.rimuru.registry.ModSpells.init();

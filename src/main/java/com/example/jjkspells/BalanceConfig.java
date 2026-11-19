@@ -74,16 +74,12 @@ public final class BalanceConfig {
             "shadows_garden,8,0,10", "nameless_king,8,0,8", "slime_armament,6,0,8", "perfect_counter,6,0,4", "i_am_atomic,12,0,14",
             // Ronova
             "death_wraiths,5,0,8", "crimson_wrath,8,0,6", "crimson_ray,8,0,4", "true_dragon_ascension,6,0,20",
-            // Acheron
-            "octobolt_flash,4,0,3", "slashed_dream_cries_in_red,10,0,8",
             // Laevatain
             "smouldering_fire,4,0,4", "seethe,5,0,5", "sviga_laevi,6,0,4", "twilight_world_in_flames,10,0,8",
             // Pantheon
             "comet_spear,5,0,4", "shield_vault,5,0,4", "aegis_storm,6,0,6", "starfall_execution,8,0,5", "grand_starfall,10,0,8",
             // Malphite
             "seismic_shard,4,0,4", "thunderclap,6,0,4", "brutal_strikes,6,0,5", "granite_shield,4,0,4", "unstoppable_force,10,0,6",
-            // Malenia
-            "waterfowl_dance,6,0,5", "phantom_blossom,6,0,4", "scarlet_bloom,6,0,5", "miquellas_blade,8,0,5", "goddess_of_rot,10,0,8",
     };
 
     static {
